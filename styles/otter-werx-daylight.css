@@ -1,0 +1,97 @@
+/* ═══════════════════════════════════════════════════════════
+   OTTER WERX — DAYLIGHT COCKPIT THEME
+   Clean, high-contrast light theme
+   Usage: <link rel="stylesheet" href="styles/otter-werx-daylight.css">
+   Apply: <body data-theme="daylight"> or toggle via JS
+   v2.0 — March 2026: Aligned to CI Dashboard naming convention
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="daylight"] {
+  /* ── Backgrounds (CI Dashboard naming) ── */
+  --bg0:            #edf0f5;
+  --bg1:            #ffffff;
+  --bg2:            #f5f6fa;
+  --bg3:            #eceef4;
+  --bg4:            #e4e6ee;
+  --bg-panel:       #ffffff;
+  --bg-card:        #f5f6fa;
+  --bg-card-hover:  #eceef4;
+  --bg-tile:        #f0f2f6;
+  --bg-tile-h:      #e8eaf0;
+  --bg-input:       #ffffff;
+
+  /* ── Borders ── */
+  --border:         #cdd2e0;
+  --borderHi:       #b0b8d0;
+  --border-bright:  #b0b8d0;
+  --border-focus:   #b87a0866;
+  --dim:            #dde0e8;
+  --rule:           #d0d4e0;
+
+  /* ── Text (CI Dashboard naming) ── */
+  --text0:          #1a1f30;
+  --text1:          #5a6480;
+  --text2:          #8892a8;
+  --text-inverse:   #ffffff;
+
+  /* ── Primary accent ── */
+  --amber:          #b87a08;
+  --amber2:         #c88a18;
+  --amber-dim:      #b87a0844;
+  --amber-glow:     #b87a0812;
+  --amber-line:     rgba(184,122,8,0.18);
+  --amberDim:       #b87a0844;
+  --amberBg:        #b87a0812;
+
+  /* ── Status ── */
+  --red:            #d03030;
+  --red-dim:        #d0303044;
+  --red-bg:         #d0303010;
+  --redDim:         #d0303044;
+  --redBg:          #d0303010;
+  --green:          #1a8a26;
+  --green-dim:      #1a8a2644;
+  --green-bg:       #1a8a2610;
+  --greenDim:       #1a8a2644;
+  --greenBg:        #1a8a260a;
+
+  /* ── Accents ── */
+  --blue:           #2a70c0;
+  --blue-dim:       #2a70c044;
+  --blue-bg:        #2a70c010;
+  --blueDim:        #2a70c044;
+  --blueBg:         #2a70c010;
+  --cyan:           #188a7a;
+  --cyan-dim:       #188a7a44;
+  --cyanDim:        #188a7a44;
+  --cyanBg:         #188a7a0a;
+  --purple:         #6a40b0;
+  --purple-dim:     #6a40b044;
+  --purpleDim:      #6a40b044;
+  --yellow:         #b89020;
+  --teal:           #187a6a;
+
+  /* ── Logo ── */
+  --logo-bg:        rgba(42,112,192,0.06);
+  --logo-border:    rgba(42,112,192,0.2);
+  --blue-corner:    #4a80c0;
+
+  /* ── Charts ── */
+  --chart-grid:     #cdd2e044;
+  --chart-text:     #5a6480;
+
+  /* ── Scrollbar ── */
+  --scrollbar-track: #edf0f5;
+  --scrollbar-thumb: #b0b8d0;
+
+  /* ── Effects (disabled in daylight) ── */
+  --scanline:       transparent;
+  --dotgrid:        transparent;
+  --overlay-scanline: transparent;
+  --overlay-dot:    transparent;
+
+  /* ── Shadows ── */
+  --shadow:         0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg:      0 8px 32px rgba(0,0,0,0.12);
+  --glow:           0 0 20px #b87a0808;
+}

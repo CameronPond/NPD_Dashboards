@@ -1,0 +1,98 @@
+/* ═══════════════════════════════════════════════════════════
+   OTTER WERX — TWILIGHT COCKPIT THEME
+   Mid-point between Dark and Daylight — dark slate, lit up
+   Usage: <link rel="stylesheet" href="styles/otter-werx-twilight.css">
+   Apply: <body data-theme="twilight"> or toggle via JS
+   v3.0 — March 2026: Redesigned as dark slate mid-point
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="twilight"] {
+  /* ── Backgrounds ── */
+  --bg0:            #2a3040;
+  --bg1:            #30384a;
+  --bg2:            #364056;
+  --bg3:            #3c4862;
+  --bg4:            #445270;
+  --bg-tile:        #30384a;
+  --bg-tile-h:      #364056;
+  --bg-panel:       #30384a;
+  --bg-card:        #364056;
+  --bg-card-hover:  #3c4862;
+  --bg-input:       #364056;
+
+  /* ── Borders ── */
+  --border:         #2e3a52;
+  --borderHi:       #3e4e6a;
+  --border-bright:  #4a5a7a;
+  --border-focus:   rgba(232,164,42,0.4);
+  --dim:            #2e3a52;
+  --rule:           #2e3a52;
+
+  /* ── Text ── */
+  --text0:          #d8dce8;
+  --text1:          #9099b8;
+  --text2:          #6a7490;
+  --text-inverse:   #181e2e;
+
+  /* ── Primary accent ── */
+  --amber:          #e8a42a;
+  --amber2:         #f0b440;
+  --amber-dim:      rgba(232,164,42,0.5);
+  --amber-glow:     rgba(232,164,42,0.10);
+  --amber-line:     rgba(232,164,42,0.2);
+  --amberDim:       rgba(232,164,42,0.5);
+  --amberBg:        rgba(232,164,42,0.08);
+
+  /* ── Status ── */
+  --red:            #e84040;
+  --red-dim:        rgba(232,64,64,0.4);
+  --red-bg:         rgba(232,64,64,0.08);
+  --redDim:         rgba(232,64,64,0.4);
+  --redBg:          rgba(232,64,64,0.08);
+  --green:          #3de84a;
+  --green-dim:      rgba(61,232,74,0.35);
+  --green-bg:       rgba(61,232,74,0.06);
+  --greenDim:       rgba(61,232,74,0.35);
+  --greenBg:        rgba(61,232,74,0.06);
+
+  /* ── Accents ── */
+  --blue:           #4a9de8;
+  --blue-dim:       rgba(74,157,232,0.4);
+  --blue-bg:        rgba(74,157,232,0.08);
+  --blueDim:        rgba(74,157,232,0.4);
+  --blueBg:         rgba(74,157,232,0.08);
+  --cyan:           #40e8d0;
+  --cyan-dim:       rgba(64,232,208,0.35);
+  --cyanDim:        rgba(64,232,208,0.35);
+  --cyanBg:         rgba(64,232,208,0.06);
+  --purple:         #a06ee8;
+  --purple-dim:     rgba(160,110,232,0.4);
+  --purpleDim:      rgba(160,110,232,0.4);
+  --yellow:         #ffd644;
+  --teal:           #00cca8;
+  --orange:         #e87040;
+
+  /* ── Logo ── */
+  --logo-bg:        rgba(74,157,232,0.08);
+  --logo-border:    rgba(74,157,232,0.25);
+  --blue-corner:    #5a8ec8;
+
+  /* ── Charts ── */
+  --chart-grid:     rgba(46,58,82,0.8);
+  --chart-text:     #9099b8;
+
+  /* ── Scrollbar ── */
+  --scrollbar-track: #1e2638;
+  --scrollbar-thumb: #3e4e6a;
+
+  /* ── Effects (disabled in twilight) ── */
+  --scanline:       transparent;
+  --dotgrid:        transparent;
+  --overlay-scanline: transparent;
+  --overlay-dot:    transparent;
+
+  /* ── Shadows ── */
+  --shadow:         0 2px 12px rgba(0,0,0,0.4);
+  --shadow-lg:      0 8px 32px rgba(0,0,0,0.5);
+  --glow:           0 0 20px rgba(232,164,42,0.15);
+}
