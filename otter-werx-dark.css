@@ -1,0 +1,78 @@
+/* ═══════════════════════════════════════════════════════════
+   OTTER WERX — DARK COCKPIT THEME
+   SpaceX/AEGIS ops console aesthetic
+   Usage: <link rel="stylesheet" href="styles/otter-werx-dark.css">
+   Apply: default (no data-theme attribute) or <body> with no theme
+   v1.0 — March 2026
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Backgrounds ── */
+  --bg0:            #06080e;
+  --bg1:            #0c0f18;
+  --bg2:            #111522;
+  --bg3:            #161b2a;
+  --bg4:            #1e2a3c;
+  --bg-tile:        #111522;
+  --bg-tile-h:      #161b2a;
+
+  /* ── Borders ── */
+  --border:         #1a1f30;
+  --borderHi:       #2a3050;
+  --dim:            #1a1f30;
+
+  /* ── Text
+       text0: primary body text    → 15.7:1 on bg0 ✅
+       text1: secondary/label text →  6.4:1 on bg0 ✅
+       text2: dim/metadata text    →  4.5:1 on bg0 ✅ (was #4a5268 = 2.6:1 ❌)
+  ── */
+  --text0:          #e0e4ef;
+  --text1:          #8891a8;
+  --text2:          #707888;
+
+  /* ── Primary accent ── */
+  --amber:          #e8a42a;
+  --amberDim:       #e8a42a55;
+  --amberBg:        #e8a42a12;
+
+  /* ── Status ── */
+  --red:            #e84040;
+  --redDim:         #3d0f14;
+  --redBg:          #e8404012;
+  --green:          #3de84a;
+  --greenDim:       #003d22;
+  --greenBg:        #3de84a0a;
+
+  /* ── Accents ── */
+  --blue:           #4a9de8;
+  --blueDim:        #112244;
+  --blueBg:         #4a9de812;
+  --cyan:           #40e8d0;
+  --cyanDim:        #003d4d;
+  --cyanBg:         #40e8d00a;
+  --purple:         #a06ee8;
+  --purpleDim:      #2a1a44;
+  --yellow:         #ffd644;
+  --teal:           #00cca8;
+  --orange:         #e87040;
+
+  /* ── Fonts ── */
+  --mono:   'Share Tech Mono', 'JetBrains Mono', monospace;
+  --sans:   'Barlow Condensed', 'DM Sans', sans-serif;
+  --orbit:  'Orbitron', 'Rajdhani', sans-serif;
+  --bebas:  'Bebas Neue', 'Rajdhani', sans-serif;
+  --body:   'Inter', 'Barlow Condensed', -apple-system, sans-serif;
+
+  /* ── Effects ── */
+  --scanline:   rgba(255,255,255,0.012);
+  --dotgrid:    #ffffff06;
+
+  /* ── Logo / chrome ── */
+  --logo-bg:      rgba(74,159,232,0.09);
+  --logo-border:  rgba(74,159,232,0.28);
+  --blue-corner:  #7ac0f8;
+
+  /* ── Shadows ── */
+  --shadow:   0 2px 12px rgba(0,0,0,0.5);
+  --glow:     0 0 20px #e8a42a22;
+}
