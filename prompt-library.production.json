@@ -79,7 +79,7 @@
           "example": "12"
         }
       ],
-      "expected_output": "A complete capability matrix with scored criteria, evidence-linked gaps, and prioritized action list by time horizon.",
+      "expected_output": "A complete capability matrix with scored criteria, evidence-linked gaps, and prioritized action list by time horizon. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Favor quantified comparisons over narrative claims. Flag weak evidence as confidence risks and avoid unsupported certainty.",
       "failure_modes": [
         "Scores are assigned without evidence references.",
@@ -140,7 +140,7 @@
           "example": "Last 6 months"
         }
       ],
-      "expected_output": "A signal-driven risk register with reliability-weighted launch probability, timing window, and escalation thresholds.",
+      "expected_output": "A signal-driven risk register with reliability-weighted launch probability, timing window, and escalation thresholds. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Avoid binary launch/no-launch conclusions. Use probabilities, uncertainty notes, and explicit trigger logic.",
       "failure_modes": [
         "Signals are reported without reliability scoring.",
@@ -201,7 +201,7 @@
           "example": "Faster commissioning, field service, lifecycle support"
         }
       ],
-      "expected_output": "A segment-level pricing pressure decision memo with quantified risk, response strategy, and margin guardrails.",
+      "expected_output": "A segment-level pricing pressure decision memo with quantified risk, response strategy, and margin guardrails. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Keep recommendations executable and approval-aware. Use concrete guardrails to prevent uncontrolled discounting.",
       "failure_modes": [
         "Recommendations violate stated margin constraints.",
@@ -262,7 +262,7 @@
           "example": "0-24 months"
         }
       ],
-      "expected_output": "A patent signal brief with commercialization probability, impact mapping, and response options with confidence notes.",
+      "expected_output": "A patent signal brief with commercialization probability, impact mapping, and response options with confidence notes. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Use disciplined uncertainty language. Avoid overreacting to single filings without corroborating signals.",
       "failure_modes": [
         "Patents are interpreted as confirmed product launches.",
@@ -323,7 +323,7 @@
           "example": "Qualify, scope, propose, negotiate, close"
         }
       ],
-      "expected_output": "A forensic pattern report with confidence-ranked causes and a 90-day corrective action plan tied to metrics.",
+      "expected_output": "A forensic pattern report with confidence-ranked causes and a 90-day corrective action plan tied to metrics. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Do not output generic sales advice. Keep actions tied to specific stages, owners, and measurable outcomes.",
       "failure_modes": [
         "Findings are anecdotal and not frequency-backed.",
@@ -384,7 +384,7 @@
           "example": "48 hours"
         }
       ],
-      "expected_output": "A claim-level verdict table with evidence strength and a safe, factual response package for customer-facing teams.",
+      "expected_output": "A claim-level verdict table with evidence strength and a safe, factual response package for customer-facing teams. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "When uncertain, classify as unverified. Preserve legal and reputational safety by avoiding speculative accusations.",
       "failure_modes": [
         "Unverified claims are treated as true or false without evidence.",
@@ -399,7 +399,7 @@
       ]
     },
     {
-      "id": "prm_crm_dormant_account_reactivation_playbook",
+      "id": "prm_cr_dormant_account_reactivation_playbook",
       "title": "Dormant Account Reactivation Playbook",
       "category": "Customer Reactivation",
       "subcategory": "Customer Reactivation",
@@ -445,7 +445,7 @@
           "example": "850000"
         }
       ],
-      "expected_output": "A prioritized dormant-account action plan with outreach sequence, offer strategy, and KPI framework.",
+      "expected_output": "A prioritized dormant-account action plan with outreach sequence, offer strategy, and KPI framework. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Make outreach specific and account-contextual. Avoid generic campaigns disconnected from technical or operational value.",
       "failure_modes": [
         "Accounts are not prioritized by potential and risk.",
@@ -460,7 +460,7 @@
       ]
     },
     {
-      "id": "prm_crm_lost_quote_recovery_strategy",
+      "id": "prm_cr_lost_quote_recovery_strategy",
       "title": "Lost Quote Recovery Strategy Builder",
       "category": "Customer Reactivation",
       "subcategory": "Customer Reactivation",
@@ -506,7 +506,7 @@
           "example": "45"
         }
       ],
-      "expected_output": "A quote-level recoverability strategy memo with re-entry actions and margin-safe offer adjustments.",
+      "expected_output": "A quote-level recoverability strategy memo with re-entry actions and margin-safe offer adjustments. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Prioritize recoverability, not volume. High-confidence, high-value opportunities should receive concentrated attention.",
       "failure_modes": [
         "Recovery plans ignore documented loss causes.",
@@ -521,7 +521,7 @@
       ]
     },
     {
-      "id": "prm_crm_churn_risk_intervention_plan",
+      "id": "prm_cr_churn_risk_intervention_plan",
       "title": "Churn Risk Intervention Plan",
       "category": "Customer Reactivation",
       "subcategory": "Customer Reactivation",
@@ -567,7 +567,7 @@
           "example": "Two account managers and one applications engineer weekly"
         }
       ],
-      "expected_output": "An account-level churn risk register with intervention ownership, deadlines, and capacity-aware execution plan.",
+      "expected_output": "An account-level churn risk register with intervention ownership, deadlines, and capacity-aware execution plan. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Keep interventions realistic given capacity. Prioritize high-value, high-risk accounts with clear save economics.",
       "failure_modes": [
         "High-risk accounts lack owners or deadlines.",
@@ -582,7 +582,7 @@
       ]
     },
     {
-      "id": "prm_crm_inactive_distributor_reactivation",
+      "id": "prm_cr_inactive_distributor_reactivation",
       "title": "Inactive Distributor Reactivation Strategy",
       "category": "Customer Reactivation",
       "subcategory": "Customer Reactivation",
@@ -628,7 +628,7 @@
           "example": "Max 5 percent introductory rebate with 90-day review"
         }
       ],
-      "expected_output": "A distributor reactivation plan with prioritized targets, tiered offers, and KPI-driven 60-day activation sequence.",
+      "expected_output": "A distributor reactivation plan with prioritized targets, tiered offers, and KPI-driven 60-day activation sequence. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Balance growth and channel health. Avoid short-term incentives that create long-term margin erosion or conflict.",
       "failure_modes": [
         "Distributor selection is not potential-based.",
@@ -643,7 +643,7 @@
       ]
     },
     {
-      "id": "prm_crm_service_contract_renewal_rescue",
+      "id": "prm_cr_service_contract_renewal_rescue",
       "title": "Service Contract Renewal Rescue Plan",
       "category": "Customer Reactivation",
       "subcategory": "Customer Reactivation",
@@ -689,7 +689,7 @@
           "example": "92"
         }
       ],
-      "expected_output": "A renewal rescue plan with risk-ranked contracts, remediation actions, structured concessions, and tracking board design.",
+      "expected_output": "A renewal rescue plan with risk-ranked contracts, remediation actions, structured concessions, and tracking board design. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Anchor rescue proposals in demonstrated service outcomes, not discounting alone.",
       "failure_modes": [
         "High-risk contracts lack clear owner and action date.",
@@ -704,7 +704,7 @@
       ]
     },
     {
-      "id": "prm_crm_high_value_account_reentry_brief",
+      "id": "prm_cr_high_value_account_reentry_brief",
       "title": "High-Value Account Re-entry Brief",
       "category": "Customer Reactivation",
       "subcategory": "Customer Reactivation",
@@ -750,7 +750,7 @@
           "example": "Executive meeting secured, technical pilot approved, forecasted pipeline > 1.5M"
         }
       ],
-      "expected_output": "An executive decision memo with account-level re-entry strategy, governance model, and success/stop-loss criteria.",
+      "expected_output": "An executive decision memo with account-level re-entry strategy, governance model, and success/stop-loss criteria. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Treat this as portfolio governance, not generic account planning. Include explicit decision gates and exit conditions.",
       "failure_modes": [
         "Brief lacks account-specific strategy differentiation.",
@@ -765,7 +765,7 @@
       ]
     },
     {
-      "id": "prm_mx_adjacent_market_entry_scorecard",
+      "id": "prm_me_adjacent_market_entry_scorecard",
       "title": "Adjacent Market Entry Scorecard",
       "category": "Market Expansion",
       "subcategory": "Market Expansion",
@@ -811,7 +811,7 @@
           "example": "Applications engineering bandwidth capped at three major launches"
         }
       ],
-      "expected_output": "A ranked adjacent-market scorecard with go/no-go rationale and candidate-specific entry strategies.",
+      "expected_output": "A ranked adjacent-market scorecard with go/no-go rationale and candidate-specific entry strategies. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Use explicit tradeoffs rather than optimistic narrative. Deprioritize markets that exceed current execution capacity.",
       "failure_modes": [
         "Scoring criteria are inconsistent across markets.",
@@ -826,7 +826,7 @@
       ]
     },
     {
-      "id": "prm_mx_territory_white_space_ranker",
+      "id": "prm_me_territory_white_space_ranker",
       "title": "Territory White-Space Opportunity Ranker",
       "category": "Market Expansion",
       "subcategory": "Market Expansion",
@@ -872,7 +872,7 @@
           "example": "Q3 2026"
         }
       ],
-      "expected_output": "A territory ranking and 90-day activation plan with coverage adjustments and KPI tracking structure.",
+      "expected_output": "A territory ranking and 90-day activation plan with coverage adjustments and KPI tracking structure. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Keep activation scope realistic. Prioritize territories where speed-to-impact is highest.",
       "failure_modes": [
         "Ranking is based only on potential without feasibility.",
@@ -887,7 +887,7 @@
       ]
     },
     {
-      "id": "prm_mx_channel_partner_expansion_shortlist",
+      "id": "prm_me_channel_partner_expansion_shortlist",
       "title": "Channel Partner Expansion Shortlist Generator",
       "category": "Market Expansion",
       "subcategory": "Market Expansion",
@@ -933,7 +933,7 @@
           "example": "4"
         }
       ],
-      "expected_output": "A priority-ranked partner shortlist with engagement narratives, wave onboarding plan, and channel risk controls.",
+      "expected_output": "A priority-ranked partner shortlist with engagement narratives, wave onboarding plan, and channel risk controls. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Do not optimize for quantity. Prioritize partner quality, technical credibility, and manageable onboarding waves.",
       "failure_modes": [
         "Shortlist ignores capability-fit requirements.",
@@ -948,7 +948,7 @@
       ]
     },
     {
-      "id": "prm_mx_international_market_readiness_assessment",
+      "id": "prm_me_international_market_readiness_assessment",
       "title": "International Market Readiness Assessment",
       "category": "Market Expansion",
       "subcategory": "Market Expansion",
@@ -994,7 +994,7 @@
           "example": "Initial pilot within 9 months"
         }
       ],
-      "expected_output": "A readiness assessment memo with blocker analysis, entry scenario comparison, and prerequisite checklist.",
+      "expected_output": "A readiness assessment memo with blocker analysis, entry scenario comparison, and prerequisite checklist. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Bias toward execution realism. A delayed viable entry is better than a fast non-compliant launch.",
       "failure_modes": [
         "Mandatory compliance gaps are treated as optional.",
@@ -1009,7 +1009,7 @@
       ]
     },
     {
-      "id": "prm_mx_product_line_extension_opportunity_map",
+      "id": "prm_me_product_line_extension_opportunity_map",
       "title": "Product Line Extension Opportunity Map",
       "category": "Market Expansion",
       "subcategory": "Market Expansion",
@@ -1055,7 +1055,7 @@
           "example": "Two extension programs per year maximum"
         }
       ],
-      "expected_output": "A prioritized opportunity map with extension concepts, minimal viable specs, and pre-launch validation milestones.",
+      "expected_output": "A prioritized opportunity map with extension concepts, minimal viable specs, and pre-launch validation milestones. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Prioritize leverage of existing assets. Avoid extension concepts that become de facto net-new platform builds.",
       "failure_modes": [
         "Prioritization ignores engineering reuse potential.",
@@ -1070,7 +1070,7 @@
       ]
     },
     {
-      "id": "prm_mx_market_priority_decision_memo",
+      "id": "prm_me_market_priority_decision_memo",
       "title": "Market Priority Decision Memo Builder",
       "category": "Market Expansion",
       "subcategory": "Market Expansion",
@@ -1116,7 +1116,7 @@
           "example": "2026-05-15"
         }
       ],
-      "expected_output": "A leadership-ready memo with ranked options, portfolio mix recommendation, and explicit decision asks.",
+      "expected_output": "A leadership-ready memo with ranked options, portfolio mix recommendation, and explicit decision asks. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Optimize for decision clarity, not analysis volume. Highlight tradeoffs and required commitments.",
       "failure_modes": [
         "Memo lacks explicit recommendation ranking.",
@@ -1177,7 +1177,7 @@
           "example": "14 business days"
         }
       ],
-      "expected_output": "A current-state and future-state process sheet with delay-ranked bottlenecks and KPI framework.",
+      "expected_output": "A current-state and future-state process sheet with delay-ranked bottlenecks and KPI framework. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Make bottlenecks specific and measurable. Avoid abstract workflow diagrams without timing data.",
       "failure_modes": [
         "Map omits critical handoffs or owners.",
@@ -1238,7 +1238,7 @@
           "example": "Incorrect revision release created assembly mismatch"
         }
       ],
-      "expected_output": "A bottleneck-mapped engineering change process with root-cause-linked corrective actions and governance recommendations.",
+      "expected_output": "A bottleneck-mapped engineering change process with root-cause-linked corrective actions and governance recommendations. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Distinguish throughput issues from quality-control safeguards. Speed improvements must preserve control integrity.",
       "failure_modes": [
         "Queue time and processing time are conflated.",
@@ -1299,7 +1299,7 @@
           "example": "Only two operators certified for test station"
         }
       ],
-      "expected_output": "A flow-balancing process map with quantified station gaps, rebalance options, and throughput KPI plan.",
+      "expected_output": "A flow-balancing process map with quantified station gaps, rebalance options, and throughput KPI plan. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Avoid one-size recommendations. Balance gains should be tied to station-specific constraints and skill realities.",
       "failure_modes": [
         "Takt gap analysis is incomplete by station.",
@@ -1360,7 +1360,7 @@
           "example": "Expedite allowed only for customer-critical jobs over 100k"
         }
       ],
-      "expected_output": "A procurement value stream map with ranked lead-time drivers and a phased compression action plan.",
+      "expected_output": "A procurement value stream map with ranked lead-time drivers and a phased compression action plan. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Focus on controllable leverage points first. Compression should not compromise incoming quality stability.",
       "failure_modes": [
         "Internal and supplier delays are not separated.",
@@ -1421,7 +1421,7 @@
           "example": "Initial response in 24h, weekly updates for severe cases"
         }
       ],
-      "expected_output": "A complaint-to-corrective-action process map with failure points, improved controls, and recurrence-focused KPIs.",
+      "expected_output": "A complaint-to-corrective-action process map with failure points, improved controls, and recurrence-focused KPIs. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Treat closure as validated prevention, not administrative completion.",
       "failure_modes": [
         "Customer communication checkpoints are missing.",
@@ -1482,7 +1482,7 @@
           "example": "Throughput target met, safety checklist signed, documentation complete"
         }
       ],
-      "expected_output": "A standardized installation/commissioning process map with variation logic, prevention checklist, and KPI framework.",
+      "expected_output": "A standardized installation/commissioning process map with variation logic, prevention checklist, and KPI framework. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Prioritize reproducibility across field teams. Acceptance evidence requirements should be explicit and auditable.",
       "failure_modes": [
         "Site-readiness gate is undefined or weak.",
@@ -1543,7 +1543,7 @@
           "example": "OSHA handling requirements and internal lockout policy"
         }
       ],
-      "expected_output": "A technical fit brief with suitability decision, criterion-level scoring, risk mitigations, and validation data gaps.",
+      "expected_output": "A technical fit brief with suitability decision, criterion-level scoring, risk mitigations, and validation data gaps. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "When uncertain, recommend conditional fit with targeted validation instead of overconfident suitability claims.",
       "failure_modes": [
         "Suitability decision ignores missing safety-critical data.",
@@ -1604,7 +1604,7 @@
           "example": "480V only, no compressed air available"
         }
       ],
-      "expected_output": "A separator configuration recommendation with option comparison, tradeoffs, and commissioning validation checks.",
+      "expected_output": "A separator configuration recommendation with option comparison, tradeoffs, and commissioning validation checks. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Recommendations should be installation-aware. Overlooking footprint or utility limits invalidates technical fit.",
       "failure_modes": [
         "No rejected-option rationale is provided.",
@@ -1665,7 +1665,7 @@
           "example": "Below 180000 installed"
         }
       ],
-      "expected_output": "A weighted tradeoff matrix with primary/fallback concept recommendation and pre-freeze validation requirements.",
+      "expected_output": "A weighted tradeoff matrix with primary/fallback concept recommendation and pre-freeze validation requirements. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Expose weighting assumptions transparently. High score without validated unknowns should be treated as provisional.",
       "failure_modes": [
         "Weighting assumptions are hidden or inconsistent.",
@@ -1726,7 +1726,7 @@
           "example": "No robot replacement; controls software updates allowed"
         }
       ],
-      "expected_output": "A prioritized cycle-time improvement plan with quantified reductions, risk controls, and pilot sequencing.",
+      "expected_output": "A prioritized cycle-time improvement plan with quantified reductions, risk controls, and pilot sequencing. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Throughput gains are only valid if reliability is preserved. Include mitigation whenever risk profile changes.",
       "failure_modes": [
         "Improvements lack quantified time reduction estimates.",
@@ -1787,7 +1787,7 @@
           "example": "No unresolved severity >=8 without executive waiver"
         }
       ],
-      "expected_output": "A compliance-linked FMEA draft with residual risk decision and release readiness recommendation.",
+      "expected_output": "A compliance-linked FMEA draft with residual risk decision and release readiness recommendation. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Treat this as a release gate artifact. Findings must be traceable, standards-linked, and action-owned.",
       "failure_modes": [
         "Findings are not tied to specific standards.",
@@ -1848,7 +1848,7 @@
           "example": "No dropped parts in 10,000 cycle endurance run"
         }
       ],
-      "expected_output": "A requirement-traceable validation test plan with objective pass/fail criteria and failure handling protocol.",
+      "expected_output": "A requirement-traceable validation test plan with objective pass/fail criteria and failure handling protocol. Output must be delivered as structured tables or explicitly labeled sections with no blank required fields.",
       "coaching_notes": "Focus on requirement traceability and objective acceptance logic. Avoid test cases that cannot produce decision-quality evidence.",
       "failure_modes": [
         "Requirements are not fully mapped to test cases.",

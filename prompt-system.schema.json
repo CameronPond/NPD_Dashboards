@@ -44,13 +44,11 @@
       "type": "string",
       "description": "Top-level functional grouping.",
       "enum": [
-        "NPD",
-        "Sales Engineering",
-        "Product Management",
-        "Manufacturing",
-        "Quality",
         "Competitive Intelligence",
-        "Operations"
+        "Customer Reactivation",
+        "Market Expansion",
+        "Process Mapping",
+        "Application Engineering"
       ]
     },
     "subcategory": {
