@@ -311,6 +311,19 @@ textarea.qn:focus{border-color:var(--amberDim)}
   </div>
 
   <div>
+    <div class="section-hd"><span class="section-hd-text">AI &amp; Prompt Systems</span><span class="section-hd-count">01 SYSTEM</span></div>
+    <div class="tile-grid">
+      <div class="tool-tile" style="--tile-accent:#e8a42a" onclick="launchTool('prompts','./IMI_Prompt_Execution_System.html')">
+        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
+        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="8" y1="14" x2="22" y2="14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="8" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M18 22 L24 22 L24 24 L18 24 Z" fill="currentColor" opacity="0.6"/></svg></div>
+        <div class="tile-meta"><div class="tile-cat">AI Systems</div><div class="tile-name">Prompt Execution System</div></div></div>
+        <div class="tile-desc">30 structured prompts &middot; 7 categories &middot; NPD, Sales, Engineering, Manufacturing. Execute with confidence.</div>
+        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-prompts"></span>IMI_Prompt_Execution_System.html</div><div class="tile-launch">LAUNCH</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
     <div class="section-hd"><span class="section-hd-text">Sales &amp; Marketing</span><span class="section-hd-count">01 SYSTEM</span></div>
     <div class="tile-grid">
       <div class="tool-tile" style="--tile-accent:#ffd644" onclick="launchTool('sales','./sales_marketing_reference/IMI_Sales_Marketing_Reference.html')">
@@ -385,6 +398,7 @@ function setTheme(t, btn) {
   });
 })();
 const tools = [
+  {id:'prompts',name:'Prompt Execution System',live:true},
   {id:'ci',name:'CI Dashboard',live:true},
   {id:'npd',name:'NPD Dashboard',live:true},
   {id:'editor',name:'NPD Project Explorer',live:true},

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROMPT EXECUTION SYSTEM — Industrial Magnetics Incorporated</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Rajdhani:wght@700&family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="otter-werx-dark.css">
+<link rel="stylesheet" href="otter-werx-tables.css">
+<link rel="stylesheet" href="otter-werx-twilight.css">
+<link rel="stylesheet" href="otter-werx-daylight.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg0);color:var(--text0);font-family:var(--sans);font-size:15px;line-height:1.5;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+body{background-image:radial-gradient(var(--dotgrid) 1px,transparent 1px);background-size:24px 24px}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scanline) 2px,var(--scanline) 4px);pointer-events:none;z-index:9999}
+
+.top-glow{height:2px;background:linear-gradient(90deg,transparent 0%,var(--amberDim) 15%,var(--amber) 50%,var(--amberDim) 85%,transparent 100%);flex-shrink:0;box-shadow:0 0 20px rgba(232,164,42,0.35),0 0 60px rgba(232,164,42,0.10)}
+
+/* ── HEADER ── */
+.header{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg0) 100%);border-bottom:1px solid var(--border);padding:0 28px;height:68px;display:flex;align-items:center;gap:22px;flex-shrink:0;position:relative;z-index:100}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amberDim) 30%,var(--amberDim) 70%,transparent)}
+.title-block{display:flex;flex-direction:column;gap:1px;flex-shrink:0}
+.title-company{font-family:var(--mono);font-size:9px;letter-spacing:0.24em;color:var(--amber);text-transform:uppercase;opacity:0.7;white-space:nowrap}
+.title-mc{font-family:'Rajdhani','Barlow Condensed',sans-serif;font-size:32px;font-weight:700;letter-spacing:0.10em;line-height:1;text-transform:uppercase;color:var(--text0);white-space:nowrap}
+.title-sub{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--text2);text-transform:uppercase;white-space:nowrap}
+.header-divider{width:1px;height:44px;background:linear-gradient(180deg,transparent,var(--borderHi),transparent);flex-shrink:0}
+.header-status{display:flex;flex-direction:column;gap:3px;border-left:1px solid var(--border);padding-left:18px;flex-shrink:0}
+.status-row{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2.5s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.status-label{color:var(--green);letter-spacing:0.1em}
+.status-sub{color:var(--text2);letter-spacing:0.1em;font-size:9px}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:14px;flex-shrink:0}
+.theme-switcher{display:flex;gap:2px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:2px}
+.theme-btn{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.8px;padding:5px 10px;border:none;border-radius:4px;cursor:pointer;transition:all .25s;text-transform:uppercase;background:transparent;color:var(--text2)}
+.theme-btn:hover{color:var(--text1)}.theme-btn.active{background:var(--amber);color:var(--bg0)}
+
+/* ── TELEMETRY BAR ── */
+.telemetry-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:0 28px;height:28px;display:flex;align-items:center;gap:0;flex-shrink:0;overflow:hidden}
+.telem-item{display:flex;align-items:center;gap:10px;padding:0 16px;height:100%;border-right:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap}
+.telem-item:first-child{padding-left:0}
+.telem-label{color:var(--text2)}.telem-val{color:var(--text1)}.telem-val.go{color:var(--green)}.telem-val.amber{color:var(--amber)}
+.telem-spacer{flex:1}
+.telem-classify{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--text2);text-transform:uppercase}
+
+/* ── MAIN LAYOUT ── */
+.main-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+
+/* ── CATEGORY CARDS ── */
+.cat-strip{padding:10px 20px;display:flex;gap:8px;flex-shrink:0;overflow-x:auto;border-bottom:1px solid var(--border);background:var(--bg1)}
+.cat-card{flex-shrink:0;background:var(--bg2);border:1px solid var(--border);padding:8px 14px;cursor:pointer;transition:all .14s;min-width:140px;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cat-accent,var(--amber));opacity:0.3;transition:opacity .14s}
+.cat-card:hover{background:var(--bg3);border-color:var(--borderHi)}
+.cat-card:hover::before{opacity:0.8}
+.cat-card.active{border-color:var(--cat-accent,var(--amber));background:var(--bg3);box-shadow:0 0 0 1px var(--cat-accent,var(--amber)) inset}
+.cat-card.active::before{opacity:1}
+.cat-name{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text0);letter-spacing:0.02em;white-space:nowrap}
+.cat-count{font-family:var(--mono);font-size:9px;color:var(--cat-accent,var(--amber));letter-spacing:0.1em;margin-top:2px}
+.cat-desc{font-family:var(--mono);font-size:8px;color:var(--text2);letter-spacing:0.06em;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── FILTER STRIP ── */
+.filter-strip{padding:6px 20px;display:flex;align-items:center;gap:8px;flex-shrink:0;border-bottom:1px solid var(--border);background:var(--bg1);flex-wrap:wrap}
+.filter-strip label{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;color:var(--text2);text-transform:uppercase;white-space:nowrap}
+.filter-search{background:var(--bg3);border:1px solid var(--border);color:var(--text0);font-family:var(--mono);font-size:11px;padding:4px 10px;width:180px;outline:none;transition:border-color .14s}
+.filter-search:focus{border-color:var(--amber)}
+.filter-search::placeholder{color:var(--text2);opacity:0.6}
+.filter-select{background:var(--bg3);border:1px solid var(--border);color:var(--text0);font-family:var(--mono);font-size:10px;padding:4px 8px;outline:none;cursor:pointer;min-width:100px}
+.filter-select:focus{border-color:var(--amber)}
+.filter-sep{width:1px;height:20px;background:var(--border);flex-shrink:0}
+.filter-reset{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--text2);background:transparent;border:1px solid var(--border);padding:4px 10px;cursor:pointer;text-transform:uppercase;transition:all .14s}
+.filter-reset:hover{color:var(--amber);border-color:var(--amber)}
+
+/* ── CONTENT AREA ── */
+.content-area{flex:1;display:grid;grid-template-columns:1fr 380px;overflow:hidden;min-height:0}
+
+/* ── PROMPT MATRIX TABLE ── */
+.matrix-wrap{overflow:auto;min-height:0}
+.matrix-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:13px}
+.matrix-table thead th{font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--text2);text-align:left;padding:6px 10px;border-bottom:1px solid var(--borderHi);white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:0;background:var(--bg1);z-index:10}
+.matrix-table thead th:hover{color:var(--amber)}
+.matrix-table thead th .sort-arrow{font-size:8px;margin-left:4px;opacity:0.5}
+.matrix-table thead th.sorted .sort-arrow{opacity:1;color:var(--amber)}
+.matrix-table tbody tr{border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer;height:32px}
+.matrix-table tbody tr:hover{background:var(--bg3)}
+.matrix-table tbody tr.selected{background:var(--bg4);border-left:2px solid var(--amber)}
+.matrix-table tbody td{padding:4px 10px;vertical-align:middle;color:var(--text0);font-size:12px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.matrix-table tbody td.mono{font-family:var(--mono);font-size:11px;letter-spacing:0.03em}
+.matrix-table tbody td.muted{color:var(--text1)}
+.matrix-table tbody td.dim{color:var(--text2);font-size:11px}
+td .complexity-bar{display:inline-flex;gap:2px;align-items:center}
+td .complexity-bar .cb-dot{width:6px;height:6px;border-radius:1px;background:var(--border)}
+td .complexity-bar .cb-dot.filled{background:var(--amber)}
+td .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.06em;padding:1px 6px;border-radius:2px;text-transform:uppercase}
+td .tag.green{background:rgba(61,232,74,.08);color:var(--green)}
+td .tag.amber{background:var(--amberBg);color:var(--amber)}
+td .tag.red{background:rgba(232,64,64,.08);color:var(--red)}
+td .tag.blue{background:rgba(74,157,232,.08);color:var(--blue)}
+td .tag.cyan{background:rgba(64,232,208,.08);color:var(--cyan)}
+td .tag.purple{background:rgba(160,110,232,.08);color:var(--purple)}
+.no-results{padding:40px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--text2);letter-spacing:0.1em}
+
+/* ── DETAIL PANEL ── */
+.detail-panel{background:var(--bg1);border-left:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+.dp-empty{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;opacity:0.4}
+.dp-empty-icon{font-size:36px;color:var(--text2)}
+.dp-empty-text{font-family:var(--mono);font-size:11px;color:var(--text2);letter-spacing:0.1em}
+.dp-header{padding:14px 18px 10px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--bg2),var(--bg1))}
+.dp-title{font-family:var(--sans);font-size:18px;font-weight:700;color:var(--text0);letter-spacing:0.02em;line-height:1.2}
+.dp-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.dp-tag{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;padding:2px 8px;border-radius:2px;text-transform:uppercase;border:1px solid var(--border);color:var(--text1)}
+.dp-tag.cat{border-color:var(--amber);color:var(--amber);background:var(--amberBg)}
+.dp-tag.dept{border-color:var(--blue);color:var(--blue);background:rgba(74,157,232,.06)}
+.dp-tag.stage{border-color:var(--cyan);color:var(--cyan);background:rgba(64,232,208,.06)}
+.dp-section{padding:12px 18px;border-bottom:1px solid var(--border)}
+.dp-section:last-child{border-bottom:none}
+.dp-section-label{font-family:var(--mono);font-size:8px;letter-spacing:0.16em;color:var(--text2);text-transform:uppercase;margin-bottom:6px}
+.dp-section-text{font-family:var(--body);font-size:13px;color:var(--text0);line-height:1.6}
+.dp-prompt-block{background:var(--bg3);border:1px solid var(--border);padding:10px 12px;font-family:var(--mono);font-size:11px;color:var(--text0);line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:220px;overflow-y:auto;position:relative}
+.dp-prompt-block .var-highlight{color:var(--amber);font-weight:600}
+.dp-copy-btn{position:absolute;top:6px;right:6px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:var(--text2);background:var(--bg2);border:1px solid var(--border);padding:3px 8px;cursor:pointer;text-transform:uppercase;transition:all .14s;z-index:2}
+.dp-copy-btn:hover{color:var(--amber);border-color:var(--amber)}
+.dp-var-list{display:flex;flex-direction:column;gap:4px}
+.dp-var-item{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px}
+.dp-var-name{color:var(--amber);min-width:120px}
+.dp-var-desc{color:var(--text1)}
+.dp-output-type{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:0.04em}
+.dp-coaching{font-family:var(--body);font-size:12px;color:var(--text1);line-height:1.6;font-style:italic}
+.dp-failure{font-family:var(--body);font-size:12px;color:var(--red);line-height:1.6}
+.dp-followup-list{display:flex;flex-direction:column;gap:4px}
+.dp-followup{font-family:var(--mono);font-size:11px;color:var(--text1);padding:4px 8px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:all .14s}
+.dp-followup:hover{border-color:var(--amber);color:var(--amber)}
+.dp-execute-btn{display:block;width:100%;margin-top:10px;padding:10px;font-family:var(--orbit);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--amber);color:var(--bg0);border:none;cursor:pointer;transition:all .14s}
+.dp-execute-btn:hover{filter:brightness(1.15);box-shadow:0 0 16px var(--amberDim)}
+
+/* ── FOOTER ── */
+.footer{background:var(--bg3);border-top:1px solid var(--border);padding:0 24px;height:28px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.footer-text{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:0.14em}
+.footer-right{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:0.1em}
+.footer-right span{color:var(--amber)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px;height:3px;background:var(--bg0)}
+::-webkit-scrollbar-thumb{background:var(--borderHi)}
+::-webkit-scrollbar-thumb:hover{background:var(--amberDim)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:var(--bg4);border:1px solid var(--amber);color:var(--amber);font-family:var(--mono);font-size:11px;letter-spacing:0.08em;padding:8px 20px;z-index:10000;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="top-glow"></div>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="title-block">
+    <div class="title-company">Industrial Magnetics Incorporated</div>
+    <div class="title-mc">Prompt Execution System</div>
+    <div class="title-sub">NPD &middot; SALES &middot; ENGINEERING &middot; MANUFACTURING &middot; PRODUCT MGMT</div>
+  </div>
+  <div class="header-divider"></div>
+  <div class="header-status">
+    <div class="status-row"><div class="status-dot"></div><span class="status-label">SYSTEM READY</span></div>
+    <div class="status-row"><span class="status-sub" id="promptCountLabel">0 PROMPTS LOADED</span></div>
+  </div>
+  <div class="header-right">
+    <div class="theme-switcher">
+      <button class="theme-btn active" onclick="setTheme('dark',this)">Dark</button>
+      <button class="theme-btn" onclick="setTheme('twilight',this)">Twilight</button>
+      <button class="theme-btn" onclick="setTheme('daylight',this)">Daylight</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TELEMETRY BAR ═══ -->
+<div class="telemetry-bar">
+  <div class="telem-item"><span class="telem-label">Total Prompts</span><span class="telem-val amber" id="telTotalPrompts">&mdash;</span></div>
+  <div class="telem-item"><span class="telem-label">Categories</span><span class="telem-val" id="telCategories">&mdash;</span></div>
+  <div class="telem-item"><span class="telem-label">Departments</span><span class="telem-val" id="telDepartments">&mdash;</span></div>
+  <div class="telem-item"><span class="telem-label">Visible</span><span class="telem-val go" id="telVisible">&mdash;</span></div>
+  <div class="telem-item"><span class="telem-label">Avg Confidence</span><span class="telem-val" id="telConfidence">&mdash;</span></div>
+  <div class="telem-spacer"></div>
+  <div class="telem-classify">CLASSIFICATION: INTERNAL USE ONLY</div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-wrap">
+
+  <!-- CATEGORY CARDS -->
+  <div class="cat-strip" id="catStrip"></div>
+
+  <!-- FILTER STRIP -->
+  <div class="filter-strip">
+    <label>Search</label>
+    <input type="text" class="filter-search" id="filterSearch" placeholder="title, keyword...">
+    <div class="filter-sep"></div>
+    <label>Department</label>
+    <select class="filter-select" id="filterDept"><option value="">All</option></select>
+    <div class="filter-sep"></div>
+    <label>NPD Stage</label>
+    <select class="filter-select" id="filterStage"><option value="">All</option></select>
+    <div class="filter-sep"></div>
+    <label>Complexity</label>
+    <select class="filter-select" id="filterComplexity">
+      <option value="">All</option>
+      <option value="1">Low</option>
+      <option value="2">Medium</option>
+      <option value="3">High</option>
+      <option value="4">Expert</option>
+    </select>
+    <div class="filter-sep"></div>
+    <label>Value</label>
+    <select class="filter-select" id="filterValue">
+      <option value="">All</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+    <div class="filter-sep"></div>
+    <label>Confidence</label>
+    <select class="filter-select" id="filterConfidence">
+      <option value="">All</option>
+      <option value="90">90%+</option>
+      <option value="80">80%+</option>
+      <option value="70">70%+</option>
+    </select>
+    <div class="filter-sep"></div>
+    <button class="filter-reset" id="filterResetBtn">&#x27F3; Reset</button>
+  </div>
+
+  <!-- CONTENT: TABLE + DETAIL -->
+  <div class="content-area">
+    <div class="matrix-wrap" id="matrixWrap">
+      <table class="matrix-table" id="matrixTable">
+        <thead>
+          <tr>
+            <th data-col="title">Title <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="category">Category <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="department">Dept <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="npdStage">NPD Stage <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="useCase">Use Case <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="outputType">Output <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="complexity">Complexity <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="time">Time <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="confidence">Conf <span class="sort-arrow">&#9650;</span></th>
+            <th data-col="value">Value <span class="sort-arrow">&#9650;</span></th>
+          </tr>
+        </thead>
+        <tbody id="matrixBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults" style="display:none">NO PROMPTS MATCH CURRENT FILTERS</div>
+    </div>
+
+    <div class="detail-panel" id="detailPanel">
+      <div class="dp-empty" id="dpEmpty">
+        <div class="dp-empty-icon">&#9671;</div>
+        <div class="dp-empty-text">Select a prompt to view details</div>
+      </div>
+      <div id="dpContent" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <span class="footer-text">Otter Werx Prompt Execution System &mdash; C. Pond &nbsp;2026 &mdash; Industrial Magnetics, Inc. &nbsp;&middot;&nbsp; Boyne City, MI &nbsp;&middot;&nbsp; Internal Use Only</span>
+  <div class="footer-right">v1.0 &middot; <span id="footerCount">0</span> PROMPTS</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  THEME MANAGEMENT
+// ═══════════════════════════════════════════════════════════
+function setTheme(t, btn) {
+  if (t === 'dark') document.body.removeAttribute('data-theme');
+  else document.body.setAttribute('data-theme', t);
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('otter-werx-theme', t); } catch(e) {}
+}
+(function() {
+  let saved = 'dark';
+  try { saved = localStorage.getItem('otter-werx-theme') || 'dark'; } catch(e) {}
+  if (saved !== 'dark') document.body.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.theme-btn').forEach(b => {
+      if (b.textContent.trim().toLowerCase() === saved) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  DATA MODEL
+// ═══════════════════════════════════════════════════════════
+const CATEGORIES = [
+  { id: 'npd',           name: 'New Product Development', accent: '#4a9fe8', desc: 'Concept through launch prompts' },
+  { id: 'sales',         name: 'Sales Engineering',       accent: '#ffd644', desc: 'Customer specs & quoting' },
+  { id: 'competitive',   name: 'Competitive Intel',       accent: '#e87040', desc: 'Market & competitor analysis' },
+  { id: 'manufacturing', name: 'Manufacturing',           accent: '#3de84a', desc: 'Production & process optimization' },
+  { id: 'product',       name: 'Product Management',      accent: '#a06ee8', desc: 'Roadmap & lifecycle mgmt' },
+  { id: 'quality',       name: 'Quality & Compliance',    accent: '#40e8d0', desc: 'Standards, testing & certification' },
+  { id: 'marketing',     name: 'Marketing & Content',     accent: '#e8a42a', desc: 'Collateral & messaging' }
+];
+
+const PROMPTS = [
+  {
+    id: 1, title: 'Magnetic Circuit Design Review',
+    category: 'npd', department: 'Engineering', npdStage: 'DESIGN',
+    useCase: 'Validate magnetic circuit topology before prototyping',
+    outputType: 'Technical Report',
+    complexity: 3, time: '15 min', confidence: 92, value: 'High',
+    purpose: 'Evaluate a proposed magnetic circuit design against IMI best practices, material properties, and target application requirements. Identifies flux leakage paths, demagnetization risks, and optimization opportunities before committing to prototype tooling.',
+    prompt: 'You are a senior magnetic design engineer at Industrial Magnetics Inc. Review the following magnetic circuit design for a {{APPLICATION_TYPE}} application.\n\nDesign Parameters:\n- Magnet material: {{MAGNET_MATERIAL}}\n- Grade: {{MAGNET_GRADE}}\n- Circuit topology: {{TOPOLOGY}}\n- Air gap: {{AIR_GAP_MM}} mm\n- Target holding force: {{TARGET_FORCE_LBS}} lbs\n- Operating temperature: {{OPERATING_TEMP_F}} °F\n- Environment: {{ENVIRONMENT}}\n\nAnalyze:\n1. Flux density distribution and saturation risk\n2. Demagnetization margin at operating temperature\n3. Holding force estimate vs. target (include safety factor)\n4. Material utilization efficiency\n5. Cost optimization opportunities\n6. Comparison to IMI standard circuit families (Opti-Series)\n\nProvide structured output with PASS/WARN/FAIL ratings per criterion.',
+    variables: [
+      { name: '{{APPLICATION_TYPE}}', desc: 'e.g., sheet separation, conveyance, workholding' },
+      { name: '{{MAGNET_MATERIAL}}', desc: 'NdFeB, SmCo, Ferrite, Alnico' },
+      { name: '{{MAGNET_GRADE}}', desc: 'e.g., N42, N52, Y35, SmCo26' },
+      { name: '{{TOPOLOGY}}', desc: 'e.g., sandwich, cup, Halbach array' },
+      { name: '{{AIR_GAP_MM}}', desc: 'Working distance in millimeters' },
+      { name: '{{TARGET_FORCE_LBS}}', desc: 'Required holding/pulling force' },
+      { name: '{{OPERATING_TEMP_F}}', desc: 'Max continuous operating temperature' },
+      { name: '{{ENVIRONMENT}}', desc: 'Clean room, washdown, outdoor, foundry, etc.' }
+    ],
+    expectedOutput: 'Structured technical report with pass/warn/fail ratings for each criterion, flux density estimates, force calculations, and specific recommendations for design improvements.',
+    coachingNotes: 'Provide as much specificity as possible on the magnet material and grade. If comparing to existing IMI products, include the model number. For custom circuits, include a sketch description or reference drawing number.',
+    failureModes: 'Vague application descriptions yield generic analysis. Missing temperature data leads to unreliable demagnetization assessment. Without target force, the review cannot validate design adequacy.',
+    followUps: ['Generate FEA simulation parameters', 'Create prototype test plan', 'Estimate production cost at volume']
+  },
+  {
+    id: 2, title: 'Competitor Product Teardown',
+    category: 'competitive', department: 'Product Mgmt', npdStage: 'SCOUT',
+    useCase: 'Structured analysis of competitor magnetic products',
+    outputType: 'Analysis Brief',
+    complexity: 2, time: '10 min', confidence: 85, value: 'High',
+    purpose: 'Generate a structured competitive teardown analysis from known specifications, pricing, and positioning of competitor products. Supports battle card development and identifies differentiation opportunities.',
+    prompt: 'You are a competitive intelligence analyst for Industrial Magnetics Inc (IMI), a manufacturer of magnetic material handling, separation, and workholding equipment.\n\nPerform a structured teardown analysis of:\n- Competitor: {{COMPETITOR_NAME}}\n- Product: {{PRODUCT_NAME}}\n- Product Category: {{CATEGORY}}\n\nKnown specifications:\n{{KNOWN_SPECS}}\n\nAnalyze:\n1. Technical positioning (premium / mid / economy)\n2. Likely magnetic material and circuit design\n3. Feature comparison vs. IMI equivalent ({{IMI_EQUIVALENT}})\n4. Pricing intelligence and margin implications\n5. Customer segments targeted\n6. Strengths to counter in sales situations\n7. Weaknesses IMI can exploit\n8. Recommended talk track for sales team\n\nFormat as a battle card with concise, actionable points.',
+    variables: [
+      { name: '{{COMPETITOR_NAME}}', desc: 'e.g., Bunting, Eriez, MPI, Ohio Magnetics' },
+      { name: '{{PRODUCT_NAME}}', desc: 'Specific product or product line' },
+      { name: '{{CATEGORY}}', desc: 'Separation, lifting, workholding, conveying' },
+      { name: '{{KNOWN_SPECS}}', desc: 'Any known technical specs, catalog data' },
+      { name: '{{IMI_EQUIVALENT}}', desc: 'Closest IMI product for comparison' }
+    ],
+    expectedOutput: 'Battle card format: positioning summary, feature comparison table, pricing analysis, sales talk track with objection handling.',
+    coachingNotes: 'Include any pricing data you have, even approximate. Reference specific trade show observations or customer feedback. The more concrete data points, the more actionable the output.',
+    failureModes: 'Without known specs, analysis becomes speculative. Missing IMI equivalent makes comparison impossible. Generic competitor names without specific products yield unfocused output.',
+    followUps: ['Generate customer-facing comparison sheet', 'Draft RFQ response vs. competitor', 'Create sales objection handling guide']
+  },
+  {
+    id: 3, title: 'NPD Business Case Generator',
+    category: 'npd', department: 'Product Mgmt', npdStage: 'INVESTIGATE',
+    useCase: 'Build structured business case for new product investment',
+    outputType: 'Business Case Document',
+    complexity: 4, time: '25 min', confidence: 80, value: 'High',
+    purpose: 'Generate a comprehensive NPD business case with market sizing, financial projections, risk assessment, and go/no-go recommendation aligned to IMI NPD stage-gate process.',
+    prompt: 'You are a senior product manager at Industrial Magnetics Inc preparing a business case for the {{NPD_STAGE}} gate review.\n\nProject: {{PROJECT_NAME}}\nProduct Category: {{PRODUCT_CATEGORY}}\nTarget Market: {{TARGET_MARKET}}\nProblem Statement: {{PROBLEM_STATEMENT}}\n\nMarket Data:\n- Addressable market size: {{TAM}}\n- Target segment: {{TARGET_SEGMENT}}\n- Current IMI share in segment: {{CURRENT_SHARE}}\n- Key competitors: {{COMPETITORS}}\n\nInvestment Estimate:\n- Development cost: {{DEV_COST}}\n- Tooling: {{TOOLING_COST}}\n- Timeline to MVP: {{TIMELINE}}\n\nGenerate a complete business case including:\n1. Executive Summary (2 paragraphs)\n2. Market Opportunity (TAM/SAM/SOM)\n3. Customer Need & Value Proposition\n4. Competitive Landscape & Differentiation\n5. Financial Projections (3-year NPV, IRR, payback period)\n6. Risk Assessment (technical, market, execution)\n7. Resource Requirements\n8. Go/No-Go Recommendation with conditions\n\nUse conservative assumptions. Flag uncertainties explicitly.',
+    variables: [
+      { name: '{{NPD_STAGE}}', desc: 'SCOUT, INVESTIGATE, ITERATE, VALIDATE, LAUNCH' },
+      { name: '{{PROJECT_NAME}}', desc: 'Internal project codename' },
+      { name: '{{PRODUCT_CATEGORY}}', desc: 'Lifting, separation, workholding, custom' },
+      { name: '{{TARGET_MARKET}}', desc: 'Industry vertical or application' },
+      { name: '{{PROBLEM_STATEMENT}}', desc: 'Customer pain point being addressed' },
+      { name: '{{TAM}}', desc: 'Total addressable market estimate' },
+      { name: '{{TARGET_SEGMENT}}', desc: 'Specific sub-segment targeted' },
+      { name: '{{CURRENT_SHARE}}', desc: 'IMI current market share in segment' },
+      { name: '{{COMPETITORS}}', desc: 'Key competitors in this space' },
+      { name: '{{DEV_COST}}', desc: 'Estimated development cost' },
+      { name: '{{TOOLING_COST}}', desc: 'Estimated tooling investment' },
+      { name: '{{TIMELINE}}', desc: 'Estimated months to MVP' }
+    ],
+    expectedOutput: 'Complete business case document with all 8 sections, financial model outputs, risk matrix, and explicit go/no-go recommendation.',
+    coachingNotes: 'Be specific on market sizing data - use industry reports, IMI historical data, or competitor annual reports. The more granular your problem statement, the more compelling the value proposition. Include any voice-of-customer data.',
+    failureModes: 'Vague market sizing leads to unreliable projections. Missing competitive data weakens differentiation argument. Without development cost estimates, financial analysis is meaningless.',
+    followUps: ['Generate financial sensitivity analysis', 'Create Monte Carlo simulation inputs', 'Draft gate review presentation']
+  },
+  {
+    id: 4, title: 'Customer Application Specification',
+    category: 'sales', department: 'Sales Engineering', npdStage: 'N/A',
+    useCase: 'Generate technical specification from customer requirements',
+    outputType: 'Specification Document',
+    complexity: 2, time: '10 min', confidence: 88, value: 'High',
+    purpose: 'Transform customer application requirements into a structured technical specification that engineering can use for quoting and design. Ensures all critical parameters are captured and gaps identified.',
+    prompt: 'You are a sales engineer at Industrial Magnetics Inc. A customer has the following application requirements. Generate a complete technical specification.\n\nCustomer: {{CUSTOMER_NAME}}\nApplication: {{APPLICATION}}\nIndustry: {{INDUSTRY}}\n\nRequirements:\n{{CUSTOMER_REQUIREMENTS}}\n\nMaterial to be handled:\n- Type: {{MATERIAL_TYPE}}\n- Form: {{MATERIAL_FORM}}\n- Weight range: {{WEIGHT_RANGE}}\n- Temperature: {{MATERIAL_TEMP}}\n- Surface condition: {{SURFACE_CONDITION}}\n\nEnvironment:\n- Indoor/Outdoor: {{ENVIRONMENT}}\n- Washdown required: {{WASHDOWN}}\n- Hazardous area: {{HAZARDOUS}}\n\nGenerate:\n1. Formal specification document with all parameters\n2. Recommended IMI product family\n3. Required options and accessories\n4. Items requiring clarification from customer\n5. Safety considerations\n6. Estimated lead time category (standard/custom)',
+    variables: [
+      { name: '{{CUSTOMER_NAME}}', desc: 'Customer or company name' },
+      { name: '{{APPLICATION}}', desc: 'e.g., sheet stacking, part separation, tramp metal removal' },
+      { name: '{{INDUSTRY}}', desc: 'e.g., stamping, food processing, recycling' },
+      { name: '{{CUSTOMER_REQUIREMENTS}}', desc: 'Free-text customer description' },
+      { name: '{{MATERIAL_TYPE}}', desc: 'Steel, stainless, aluminum, etc.' },
+      { name: '{{MATERIAL_FORM}}', desc: 'Sheet, plate, bar, scrap, etc.' },
+      { name: '{{WEIGHT_RANGE}}', desc: 'Min/max piece weight' },
+      { name: '{{MATERIAL_TEMP}}', desc: 'Ambient or elevated temperature' },
+      { name: '{{SURFACE_CONDITION}}', desc: 'Clean, oily, rusty, painted' },
+      { name: '{{ENVIRONMENT}}', desc: 'Operating environment details' },
+      { name: '{{WASHDOWN}}', desc: 'Yes/No and frequency' },
+      { name: '{{HAZARDOUS}}', desc: 'Yes/No and classification' }
+    ],
+    expectedOutput: 'Formal technical specification with product recommendation, required options, clarification items list, and safety notes.',
+    coachingNotes: 'Capture as many environmental details as possible. Missing material type or weight is the #1 cause of specification errors. Always ask about temperature - it significantly affects magnet selection.',
+    failureModes: 'Missing material type makes product selection impossible. Unknown weight range prevents force calculations. Omitting environment data leads to incorrect IP/washdown ratings.',
+    followUps: ['Generate formal quotation', 'Create application drawing request', 'Build ROI analysis for customer']
+  },
+  {
+    id: 5, title: 'Manufacturing Process Optimization',
+    category: 'manufacturing', department: 'Manufacturing', npdStage: 'N/A',
+    useCase: 'Analyze production process for efficiency improvements',
+    outputType: 'Optimization Report',
+    complexity: 3, time: '15 min', confidence: 82, value: 'Medium',
+    purpose: 'Analyze a specific manufacturing process or routing at IMI and identify optimization opportunities including cycle time reduction, waste elimination, and quality improvements.',
+    prompt: 'You are a manufacturing engineer at Industrial Magnetics Inc analyzing a production process for optimization.\n\nProduct/Assembly: {{PRODUCT}}\nValue Stream: {{VALUE_STREAM}}\nCurrent Routing: {{ROUTING}}\n\nCurrent Metrics:\n- Cycle time: {{CYCLE_TIME}}\n- Setup time: {{SETUP_TIME}}\n- First pass yield: {{FPY}}\n- Scrap rate: {{SCRAP_RATE}}\n- Annual volume: {{ANNUAL_VOLUME}}\n\nKnown Issues:\n{{KNOWN_ISSUES}}\n\nAnalyze and recommend:\n1. Bottleneck identification\n2. Cycle time reduction opportunities\n3. Setup time reduction (SMED analysis)\n4. Quality improvement recommendations\n5. Waste elimination (8 wastes framework)\n6. Automation opportunities\n7. Estimated savings (time and cost)\n8. Implementation priority matrix\n\nProvide specific, actionable recommendations with estimated impact.',
+    variables: [
+      { name: '{{PRODUCT}}', desc: 'Product or assembly being analyzed' },
+      { name: '{{VALUE_STREAM}}', desc: 'e.g., Magnets, Separation, Custom' },
+      { name: '{{ROUTING}}', desc: 'Current manufacturing routing steps' },
+      { name: '{{CYCLE_TIME}}', desc: 'Current total cycle time' },
+      { name: '{{SETUP_TIME}}', desc: 'Current changeover/setup time' },
+      { name: '{{FPY}}', desc: 'First pass yield percentage' },
+      { name: '{{SCRAP_RATE}}', desc: 'Current scrap rate' },
+      { name: '{{ANNUAL_VOLUME}}', desc: 'Annual production volume' },
+      { name: '{{KNOWN_ISSUES}}', desc: 'Known pain points or quality issues' }
+    ],
+    expectedOutput: 'Structured optimization report with bottleneck analysis, prioritized recommendations, estimated time and cost savings, and implementation roadmap.',
+    coachingNotes: 'Include actual routing steps with time per operation if available. Historical scrap data by failure mode enables targeted quality improvements. Volume data is essential for ROI calculations.',
+    failureModes: 'Generic routing descriptions produce generic recommendations. Without current metrics, improvement estimates are unreliable. Missing volume data prevents meaningful cost-benefit analysis.',
+    followUps: ['Generate detailed SMED worksheet', 'Create automation feasibility study', 'Draft capital expenditure request']
+  },
+  {
+    id: 6, title: 'Product Roadmap Brief',
+    category: 'product', department: 'Product Mgmt', npdStage: 'SCOUT',
+    useCase: 'Generate product roadmap summary for portfolio review',
+    outputType: 'Strategic Brief',
+    complexity: 2, time: '10 min', confidence: 85, value: 'High',
+    purpose: 'Create a structured product roadmap brief for a specific product line or market segment, incorporating market trends, competitive dynamics, and technology evolution.',
+    prompt: 'You are the product line manager for {{PRODUCT_LINE}} at Industrial Magnetics Inc.\n\nGenerate a 3-year product roadmap brief for executive review.\n\nProduct Line: {{PRODUCT_LINE}}\nCurrent Revenue: {{CURRENT_REVENUE}}\nGrowth Rate (3yr): {{GROWTH_RATE}}\nMarket Position: {{MARKET_POSITION}}\n\nMarket Context:\n{{MARKET_CONTEXT}}\n\nTechnology Trends:\n{{TECH_TRENDS}}\n\nInclude:\n1. Current state assessment (SWOT)\n2. Market drivers and headwinds\n3. 3-year vision statement\n4. Year 1: Quick wins and incremental improvements\n5. Year 2: Platform enhancements and extensions\n6. Year 3: Next-generation development\n7. Investment requirements by year\n8. Key dependencies and risks\n9. Success metrics and KPIs',
+    variables: [
+      { name: '{{PRODUCT_LINE}}', desc: 'e.g., Magnetic Lifters, Separation Systems, Workholding' },
+      { name: '{{CURRENT_REVENUE}}', desc: 'Current annual revenue for product line' },
+      { name: '{{GROWTH_RATE}}', desc: 'Historical 3-year CAGR' },
+      { name: '{{MARKET_POSITION}}', desc: 'Market share or competitive position' },
+      { name: '{{MARKET_CONTEXT}}', desc: 'Key market trends and dynamics' },
+      { name: '{{TECH_TRENDS}}', desc: 'Relevant technology trends' }
+    ],
+    expectedOutput: 'Executive-ready roadmap brief with SWOT, 3-year phased plan, investment requirements, and KPI framework.',
+    coachingNotes: 'Include specific revenue data and growth rates. Reference actual competitor moves and market shifts. The more data-driven the context, the more actionable the roadmap.',
+    failureModes: 'Without revenue data, investment justification is weak. Missing competitive context leads to inward-focused roadmap. Vague market trends produce generic recommendations.',
+    followUps: ['Generate detailed project charters for Year 1', 'Create investment summary for CFO', 'Draft customer advisory board agenda']
+  },
+  {
+    id: 7, title: 'Quality Failure Analysis',
+    category: 'quality', department: 'Quality', npdStage: 'N/A',
+    useCase: 'Structured root cause analysis for quality events',
+    outputType: 'RCA Report',
+    complexity: 3, time: '15 min', confidence: 86, value: 'High',
+    purpose: 'Guide a structured root cause analysis for quality failures, customer complaints, or nonconformances. Produces a formal RCA report with corrective and preventive actions.',
+    prompt: 'You are a quality engineer at Industrial Magnetics Inc conducting a root cause analysis.\n\nEvent: {{EVENT_DESCRIPTION}}\nProduct: {{PRODUCT}}\nCustomer: {{CUSTOMER}}\nDate Reported: {{DATE}}\nSeverity: {{SEVERITY}}\n\nSymptoms:\n{{SYMPTOMS}}\n\nInitial Investigation Data:\n{{INVESTIGATION_DATA}}\n\nConduct a structured RCA:\n1. Problem Statement (5W2H)\n2. Containment Actions (immediate)\n3. Root Cause Analysis (use 5-Why AND Ishikawa/fishbone)\n4. Contributing Factors\n5. Corrective Actions with owners and due dates\n6. Preventive Actions (systemic)\n7. Verification plan\n8. Lessons learned for organization\n\nFormat as formal RCA report suitable for customer response and internal CAPA tracking.',
+    variables: [
+      { name: '{{EVENT_DESCRIPTION}}', desc: 'Brief description of the quality event' },
+      { name: '{{PRODUCT}}', desc: 'Product model/part number involved' },
+      { name: '{{CUSTOMER}}', desc: 'Affected customer name' },
+      { name: '{{DATE}}', desc: 'Date issue was reported' },
+      { name: '{{SEVERITY}}', desc: 'Critical / Major / Minor' },
+      { name: '{{SYMPTOMS}}', desc: 'Observed symptoms or failure mode' },
+      { name: '{{INVESTIGATION_DATA}}', desc: 'Any data gathered so far' }
+    ],
+    expectedOutput: 'Formal RCA report with 5-Why analysis, fishbone diagram structure, corrective/preventive actions, and verification plan.',
+    coachingNotes: 'Be specific about symptoms - "magnet doesn\'t hold" is less useful than "holding force measured at 40% of spec at 150°F." Include lot numbers, production dates, and process data when available.',
+    failureModes: 'Vague event descriptions lead to shallow analysis. Missing investigation data forces speculative root causes. Without severity rating, response urgency is unclear.',
+    followUps: ['Generate customer response letter', 'Create CAPA tracking entry', 'Draft design change request if needed']
+  },
+  {
+    id: 8, title: 'Technical Content Generator',
+    category: 'marketing', department: 'Marketing', npdStage: 'LAUNCH',
+    useCase: 'Create technical marketing content for IMI products',
+    outputType: 'Marketing Content',
+    complexity: 2, time: '12 min', confidence: 88, value: 'Medium',
+    purpose: 'Generate technically accurate marketing content including application stories, technical blog posts, white papers, and product descriptions that balance technical depth with accessibility.',
+    prompt: 'You are a technical content writer for Industrial Magnetics Inc, creating content for {{CONTENT_TYPE}}.\n\nProduct/Topic: {{TOPIC}}\nTarget Audience: {{AUDIENCE}}\nTechnical Level: {{TECH_LEVEL}}\n\nKey Messages:\n{{KEY_MESSAGES}}\n\nTechnical Details:\n{{TECHNICAL_DETAILS}}\n\nGenerate:\n1. {{CONTENT_TYPE}} ({{WORD_COUNT}} words)\n2. SEO-optimized title and meta description\n3. 3 social media snippets (LinkedIn tone)\n4. Email subject line options (3)\n5. Suggested imagery/diagram descriptions\n\nTone: Authoritative, technically credible, solutions-focused.\nAvoid: Marketing fluff, unsubstantiated claims, competitor bashing.',
+    variables: [
+      { name: '{{CONTENT_TYPE}}', desc: 'Blog post, white paper, case study, product brief' },
+      { name: '{{TOPIC}}', desc: 'Product or application topic' },
+      { name: '{{AUDIENCE}}', desc: 'Plant engineers, purchasing, C-suite, etc.' },
+      { name: '{{TECH_LEVEL}}', desc: 'Basic / Intermediate / Advanced' },
+      { name: '{{KEY_MESSAGES}}', desc: 'Core messaging points' },
+      { name: '{{TECHNICAL_DETAILS}}', desc: 'Technical specs and data' },
+      { name: '{{WORD_COUNT}}', desc: 'Target word count' }
+    ],
+    expectedOutput: 'Complete content piece with SEO elements, social media snippets, email subject lines, and imagery suggestions.',
+    coachingNotes: 'Include actual performance data and test results whenever possible. Reference specific IMI case studies or applications. Technical credibility is more persuasive than marketing language.',
+    failureModes: 'Missing technical details produce fluffy content. Without target audience, tone is misaligned. Vague key messages lead to unfocused content.',
+    followUps: ['Generate companion email campaign', 'Create trade show handout version', 'Draft press release if newsworthy']
+  },
+  {
+    id: 9, title: 'RFQ Response Builder',
+    category: 'sales', department: 'Sales Engineering', npdStage: 'N/A',
+    useCase: 'Structure a formal response to customer RFQ',
+    outputType: 'RFQ Response Draft',
+    complexity: 3, time: '20 min', confidence: 84, value: 'High',
+    purpose: 'Generate a structured, professional RFQ response based on customer requirements, IMI product capabilities, and competitive positioning. Ensures all commercial and technical elements are addressed.',
+    prompt: 'You are a sales engineer at Industrial Magnetics Inc preparing an RFQ response.\n\nRFQ Reference: {{RFQ_REF}}\nCustomer: {{CUSTOMER}}\nDue Date: {{DUE_DATE}}\nOpportunity Size: {{OPP_SIZE}}\n\nCustomer Requirements:\n{{REQUIREMENTS}}\n\nIMI Solution:\n- Product(s): {{PRODUCTS}}\n- Configuration: {{CONFIG}}\n- Lead time: {{LEAD_TIME}}\n\nCompetitive Situation:\n{{COMPETITIVE_CONTEXT}}\n\nGenerate a complete RFQ response including:\n1. Executive summary and value proposition\n2. Technical compliance matrix (requirement by requirement)\n3. Proposed solution with justification\n4. Scope of supply (included/excluded)\n5. Commercial terms and conditions highlights\n6. Delivery schedule\n7. Service and support offering\n8. Differentiators vs. likely competitors\n9. Risk mitigation items\n10. Recommended next steps',
+    variables: [
+      { name: '{{RFQ_REF}}', desc: 'Customer RFQ reference number' },
+      { name: '{{CUSTOMER}}', desc: 'Customer name and contact' },
+      { name: '{{DUE_DATE}}', desc: 'Response deadline' },
+      { name: '{{OPP_SIZE}}', desc: 'Estimated opportunity value' },
+      { name: '{{REQUIREMENTS}}', desc: 'Customer technical and commercial requirements' },
+      { name: '{{PRODUCTS}}', desc: 'IMI products being proposed' },
+      { name: '{{CONFIG}}', desc: 'Specific configuration or customization' },
+      { name: '{{LEAD_TIME}}', desc: 'Expected delivery timeline' },
+      { name: '{{COMPETITIVE_CONTEXT}}', desc: 'Known competitors bidding' }
+    ],
+    expectedOutput: 'Complete RFQ response draft with technical compliance matrix, solution description, commercial summary, and competitive differentiators.',
+    coachingNotes: 'Include specific product model numbers and pricing tiers. Reference similar successful installations. Competitive context is crucial for positioning. Flag any requirements that need engineering review.',
+    failureModes: 'Incomplete requirements lead to gaps in compliance matrix. Missing competitive context weakens positioning. Without pricing guidance, commercial section is hollow.',
+    followUps: ['Generate formal quotation document', 'Create solution presentation for customer', 'Draft follow-up email sequence']
+  },
+  {
+    id: 10, title: 'Material Selection Advisor',
+    category: 'npd', department: 'Engineering', npdStage: 'DESIGN',
+    useCase: 'Select optimal magnet material for application constraints',
+    outputType: 'Selection Matrix',
+    complexity: 3, time: '10 min', confidence: 90, value: 'High',
+    purpose: 'Recommend optimal magnet material grade and type based on application constraints including temperature, environment, force requirements, and cost targets. Provides comparative analysis across material families.',
+    prompt: 'You are a magnetics materials engineer at Industrial Magnetics Inc. Recommend the optimal magnet material for the following application.\n\nApplication: {{APPLICATION}}\nRequired Force: {{FORCE}} lbs at {{AIRGAP}} mm air gap\nMax Operating Temperature: {{MAX_TEMP}} °F\nEnvironment: {{ENVIRONMENT}}\nCorrosion Exposure: {{CORROSION}}\nSize Constraints: {{SIZE_LIMITS}}\nCost Sensitivity: {{COST_SENSITIVITY}}\nVolume: {{ANNUAL_QTY}} units/year\n\nEvaluate these material families:\n1. NdFeB (grades N35-N52, various thermal grades)\n2. SmCo (SmCo18-SmCo32)\n3. Ceramic/Ferrite (grades 1-8)\n4. Alnico (grades 2-8)\n\nFor each viable option provide:\n- Recommended grade\n- Energy product (BHmax)\n- Max operating temp with margin\n- Relative cost per unit force\n- Demagnetization risk rating\n- Coating/protection requirements\n- Supply chain risk\n\nRank options and provide final recommendation with justification.',
+    variables: [
+      { name: '{{APPLICATION}}', desc: 'Application type and environment' },
+      { name: '{{FORCE}}', desc: 'Required holding/pulling force in lbs' },
+      { name: '{{AIRGAP}}', desc: 'Working distance in mm' },
+      { name: '{{MAX_TEMP}}', desc: 'Maximum operating temperature' },
+      { name: '{{ENVIRONMENT}}', desc: 'Operating environment (indoor, outdoor, etc.)' },
+      { name: '{{CORROSION}}', desc: 'Exposure to moisture, chemicals, etc.' },
+      { name: '{{SIZE_LIMITS}}', desc: 'Physical size or weight constraints' },
+      { name: '{{COST_SENSITIVITY}}', desc: 'Low / Medium / High' },
+      { name: '{{ANNUAL_QTY}}', desc: 'Expected annual quantity' }
+    ],
+    expectedOutput: 'Material comparison matrix with 4 families evaluated, recommended grade, performance estimates, cost ranking, and final recommendation.',
+    coachingNotes: 'Temperature is the single most important variable - be precise. Include duty cycle if intermittent operation. For cost-sensitive applications, include ferrite as baseline even if performance is lower.',
+    failureModes: 'Missing temperature data makes material selection unreliable. Without force requirements, comparison is abstract. Ignoring environment leads to premature magnet degradation.',
+    followUps: ['Generate detailed magnet specification', 'Request supplier quotation package', 'Create aging/demagnetization test plan']
+  },
+  {
+    id: 11, title: 'Voice of Customer Synthesis',
+    category: 'product', department: 'Product Mgmt', npdStage: 'SCOUT',
+    useCase: 'Synthesize VOC data into actionable product requirements',
+    outputType: 'VOC Summary',
+    complexity: 2, time: '12 min', confidence: 83, value: 'High',
+    purpose: 'Transform raw voice of customer data (interviews, surveys, complaint logs) into structured insights and product requirements using Kano model and jobs-to-be-done frameworks.',
+    prompt: 'You are a product manager at Industrial Magnetics Inc analyzing voice of customer data.\n\nProduct Area: {{PRODUCT_AREA}}\nData Sources: {{DATA_SOURCES}}\nNumber of Customers: {{NUM_CUSTOMERS}}\n\nRaw VOC Data:\n{{VOC_DATA}}\n\nAnalyze and generate:\n1. Theme clustering (group related feedback)\n2. Kano model classification (Must-be / One-dimensional / Attractive / Indifferent)\n3. Jobs-to-be-done mapping\n4. Priority ranking by frequency and impact\n5. Translated product requirements (functional, performance, interface)\n6. Unmet needs and opportunity gaps\n7. Recommended actions (quick wins vs. strategic projects)\n8. Quotes to use in business cases (anonymized)',
+    variables: [
+      { name: '{{PRODUCT_AREA}}', desc: 'Product line or application area' },
+      { name: '{{DATA_SOURCES}}', desc: 'Interviews, surveys, complaints, etc.' },
+      { name: '{{NUM_CUSTOMERS}}', desc: 'Number of customers in sample' },
+      { name: '{{VOC_DATA}}', desc: 'Raw customer feedback data' }
+    ],
+    expectedOutput: 'Structured VOC report with theme clusters, Kano classification, prioritized requirements, and actionable recommendations.',
+    coachingNotes: 'Include direct customer quotes whenever possible. Note customer segment (OEM, end-user, distributor) as needs differ significantly. Sample size matters - note confidence level.',
+    failureModes: 'Small sample sizes lead to biased conclusions. Missing segment data prevents proper prioritization. Raw data without context produces superficial themes.',
+    followUps: ['Generate product requirements document', 'Create customer advisory board presentation', 'Draft concept testing survey']
+  },
+  {
+    id: 12, title: 'Separation System Sizing',
+    category: 'sales', department: 'Sales Engineering', npdStage: 'N/A',
+    useCase: 'Size magnetic separation equipment for customer application',
+    outputType: 'Sizing Calculation',
+    complexity: 3, time: '12 min', confidence: 87, value: 'High',
+    purpose: 'Calculate magnetic separation equipment sizing based on material flow characteristics, contaminant type, and processing requirements. Supports plate magnets, grate magnets, drum separators, and eddy current systems.',
+    prompt: 'You are a separation systems engineer at Industrial Magnetics Inc. Size the appropriate magnetic separation equipment.\n\nApplication: {{APPLICATION}}\nSeparator Type: {{SEPARATOR_TYPE}}\n\nMaterial Flow:\n- Product: {{PRODUCT}}\n- Flow rate: {{FLOW_RATE}}\n- Bulk density: {{BULK_DENSITY}}\n- Particle size range: {{PARTICLE_SIZE}}\n- Moisture content: {{MOISTURE}}\n\nContaminant:\n- Type: {{CONTAMINANT_TYPE}}\n- Size range: {{CONTAMINANT_SIZE}}\n- Expected concentration: {{CONCENTRATION}}\n\nProcess Requirements:\n- Conveyor/chute width: {{WIDTH}}\n- Bed depth: {{BED_DEPTH}}\n- Line speed: {{LINE_SPEED}}\n- Required capture rate: {{CAPTURE_RATE}}\n- Industry standard: {{STANDARD}}\n\nProvide:\n1. Recommended separator model and size\n2. Magnetic field strength requirements\n3. Installation configuration\n4. Expected capture efficiency\n5. Cleaning method and frequency\n6. Maintenance schedule\n7. Alternative solutions for comparison',
+    variables: [
+      { name: '{{APPLICATION}}', desc: 'Food processing, recycling, mining, etc.' },
+      { name: '{{SEPARATOR_TYPE}}', desc: 'Plate, grate, drum, eddy current, etc.' },
+      { name: '{{PRODUCT}}', desc: 'Material being processed' },
+      { name: '{{FLOW_RATE}}', desc: 'TPH or volume flow rate' },
+      { name: '{{BULK_DENSITY}}', desc: 'Material bulk density' },
+      { name: '{{PARTICLE_SIZE}}', desc: 'Product particle size range' },
+      { name: '{{MOISTURE}}', desc: 'Moisture content percentage' },
+      { name: '{{CONTAMINANT_TYPE}}', desc: 'Ferrous, stainless, non-ferrous' },
+      { name: '{{CONTAMINANT_SIZE}}', desc: 'Expected contaminant size range' },
+      { name: '{{CONCENTRATION}}', desc: 'Expected contamination level' },
+      { name: '{{WIDTH}}', desc: 'Conveyor or chute width' },
+      { name: '{{BED_DEPTH}}', desc: 'Material bed depth on conveyor' },
+      { name: '{{LINE_SPEED}}', desc: 'Conveyor speed' },
+      { name: '{{CAPTURE_RATE}}', desc: 'Required capture efficiency' },
+      { name: '{{STANDARD}}', desc: 'HACCP, GFSI, etc. if applicable' }
+    ],
+    expectedOutput: 'Complete sizing recommendation with model selection, installation details, performance estimates, and maintenance requirements.',
+    coachingNotes: 'Flow rate and contaminant size are the two most critical parameters. For food applications, always reference relevant HACCP/GFSI requirements. Include photos of current installation if replacing existing equipment.',
+    failureModes: 'Missing flow rate makes sizing impossible. Unknown contaminant type prevents proper separator selection. Ignoring industry standards risks non-compliance.',
+    followUps: ['Generate installation drawing', 'Create validation test protocol', 'Build ROI calculator for customer']
+  },
+  {
+    id: 13, title: 'Patent Landscape Analysis',
+    category: 'competitive', department: 'Engineering', npdStage: 'SCOUT',
+    useCase: 'Map patent landscape for new product development area',
+    outputType: 'Patent Landscape',
+    complexity: 4, time: '20 min', confidence: 75, value: 'Medium',
+    purpose: 'Analyze the patent landscape around a specific technology area to identify freedom-to-operate risks, white space opportunities, and competitor IP strategies.',
+    prompt: 'You are a patent analyst supporting IMI new product development.\n\nTechnology Area: {{TECH_AREA}}\nSpecific Innovation: {{INNOVATION}}\nKey Competitors: {{COMPETITORS}}\n\nPerform a patent landscape analysis:\n1. Key patent clusters in this technology area\n2. Major patent holders and their filing strategies\n3. Freedom-to-operate considerations for {{INNOVATION}}\n4. Expiring patents that create opportunities\n5. White space analysis (un-patented areas)\n6. IMI prior art that may be relevant\n7. Recommended patenting strategy\n8. Risk assessment and recommended next steps\n\nNote: This is a preliminary screen. Flag any areas requiring formal freedom-to-operate opinion from patent counsel.',
+    variables: [
+      { name: '{{TECH_AREA}}', desc: 'Broad technology area (e.g., Halbach arrays, eddy current separation)' },
+      { name: '{{INNOVATION}}', desc: 'Specific innovation being evaluated' },
+      { name: '{{COMPETITORS}}', desc: 'Competitors to analyze for IP' }
+    ],
+    expectedOutput: 'Patent landscape summary with key clusters, FTO risk areas, white space opportunities, and recommended strategy.',
+    coachingNotes: 'This is a screening tool only - not a substitute for formal patent counsel review. Include as much technical detail about the innovation as possible. Reference specific patent numbers if known.',
+    failureModes: 'Vague technology descriptions produce unfocused analysis. Missing competitor list leads to incomplete landscape. Over-reliance on AI for legal conclusions is dangerous - always flag for counsel review.',
+    followUps: ['Request formal FTO opinion from patent counsel', 'Draft provisional patent application outline', 'Create IP strategy presentation']
+  },
+  {
+    id: 14, title: 'Production Cost Estimator',
+    category: 'manufacturing', department: 'Manufacturing', npdStage: 'ITERATE',
+    useCase: 'Estimate production costs for new or modified product',
+    outputType: 'Cost Estimate',
+    complexity: 3, time: '15 min', confidence: 78, value: 'High',
+    purpose: 'Generate a detailed production cost estimate for a new or modified product, including material, labor, overhead, and tooling amortization. Supports NPD gate decisions and pricing strategy.',
+    prompt: 'You are a cost engineer at Industrial Magnetics Inc estimating production costs.\n\nProduct: {{PRODUCT}}\nBased on: {{BASE_PRODUCT}} (if modification)\nAnnual Volume: {{VOLUME}}\n\nBill of Materials:\n{{BOM}}\n\nManufacturing Process:\n{{PROCESS_STEPS}}\n\nGenerate a detailed cost estimate:\n1. Material costs (itemized BOM with current pricing)\n2. Direct labor (by operation, include learning curve)\n3. Manufacturing overhead allocation\n4. Tooling amortization (at stated volume)\n5. Quality/testing costs\n6. Packaging and shipping estimate\n7. Total unit cost at {{VOLUME}} units/year\n8. Cost breakdown pie chart data\n9. Sensitivity analysis (volume, material price)\n10. Target margin analysis at suggested price points',
+    variables: [
+      { name: '{{PRODUCT}}', desc: 'Product name or description' },
+      { name: '{{BASE_PRODUCT}}', desc: 'Existing product if this is a modification' },
+      { name: '{{VOLUME}}', desc: 'Annual production volume' },
+      { name: '{{BOM}}', desc: 'Bill of materials with quantities' },
+      { name: '{{PROCESS_STEPS}}', desc: 'Manufacturing process steps' }
+    ],
+    expectedOutput: 'Detailed cost breakdown with material, labor, overhead, tooling amortization, sensitivity analysis, and margin analysis.',
+    coachingNotes: 'Include actual material prices if available. Reference existing similar products for labor time estimation. Volume assumptions significantly affect tooling amortization - provide range if uncertain.',
+    failureModes: 'Missing BOM makes material cost estimation impossible. Without process steps, labor estimates are unreliable. Single-volume analysis misses economies of scale.',
+    followUps: ['Generate make vs. buy analysis', 'Create pricing recommendation', 'Build volume discount schedule']
+  },
+  {
+    id: 15, title: 'Design for Manufacturing Review',
+    category: 'npd', department: 'Engineering', npdStage: 'ITERATE',
+    useCase: 'DFM review of new product design before release',
+    outputType: 'DFM Checklist',
+    complexity: 3, time: '15 min', confidence: 85, value: 'High',
+    purpose: 'Conduct a Design for Manufacturing (DFM) review of a new product design, identifying potential manufacturing challenges, cost drivers, and improvement opportunities before design release.',
+    prompt: 'You are a manufacturing engineer at Industrial Magnetics Inc performing a DFM review.\n\nProduct: {{PRODUCT}}\nDesign Stage: {{DESIGN_STAGE}}\nTarget Volume: {{VOLUME}}\n\nDesign Description:\n{{DESIGN_DESCRIPTION}}\n\nKey Components:\n{{COMPONENTS}}\n\nAssembly Process:\n{{ASSEMBLY_PROCESS}}\n\nConduct DFM review:\n1. Material selection review (availability, cost, processability)\n2. Tolerance analysis (can we hold specs with standard processes?)\n3. Assembly complexity assessment\n4. Fastener and joining method review\n5. Standardization opportunities (common parts, existing tooling)\n6. Testing and inspection requirements\n7. Packaging considerations\n8. Supplier risk assessment\n9. DFM score (1-10) with justification\n10. Top 5 improvement recommendations with estimated impact\n\nFlag any showstoppers that require design changes before release.',
+    variables: [
+      { name: '{{PRODUCT}}', desc: 'Product name and description' },
+      { name: '{{DESIGN_STAGE}}', desc: 'Concept / Detailed / Pre-production' },
+      { name: '{{VOLUME}}', desc: 'Target annual volume' },
+      { name: '{{DESIGN_DESCRIPTION}}', desc: 'Design overview and key features' },
+      { name: '{{COMPONENTS}}', desc: 'Key component list with materials' },
+      { name: '{{ASSEMBLY_PROCESS}}', desc: 'Proposed assembly sequence' }
+    ],
+    expectedOutput: 'DFM review report with scored checklist, identified risks, improvement recommendations, and showstopper flags.',
+    coachingNotes: 'Include drawings or detailed dimensional data for tolerance analysis. Reference IMI standard manufacturing capabilities. Volume drives decisions on custom vs. standard tooling.',
+    failureModes: 'Without design details, review is superficial. Missing volume targets prevent appropriate process selection. Incomplete component list leads to missed DFM issues.',
+    followUps: ['Generate detailed tolerance stackup', 'Create prototype build plan', 'Draft supplier qualification requirements']
+  },
+  {
+    id: 16, title: 'Trade Show Lead Qualifier',
+    category: 'sales', department: 'Sales', npdStage: 'N/A',
+    useCase: 'Qualify and route trade show leads with follow-up plan',
+    outputType: 'Lead Qualification',
+    complexity: 1, time: '5 min', confidence: 90, value: 'Medium',
+    purpose: 'Rapidly qualify trade show leads based on captured information, assign priority, route to appropriate sales resource, and generate personalized follow-up content.',
+    prompt: 'You are a sales operations specialist at Industrial Magnetics Inc processing trade show leads.\n\nShow: {{SHOW_NAME}}\nLead:\n- Name: {{CONTACT_NAME}}\n- Title: {{TITLE}}\n- Company: {{COMPANY}}\n- Industry: {{INDUSTRY}}\n- Booth Notes: {{BOOTH_NOTES}}\n- Products Discussed: {{PRODUCTS_DISCUSSED}}\n- Timeline: {{TIMELINE}}\n- Budget Authority: {{BUDGET}}\n\nGenerate:\n1. Lead score (1-100) with reasoning\n2. Priority tier (Hot / Warm / Nurture)\n3. Recommended sales resource/territory assignment\n4. Key qualification gaps to fill\n5. Personalized follow-up email (under 150 words)\n6. Recommended next action with timeline\n7. CRM entry summary',
+    variables: [
+      { name: '{{SHOW_NAME}}', desc: 'Trade show name and date' },
+      { name: '{{CONTACT_NAME}}', desc: 'Lead contact name' },
+      { name: '{{TITLE}}', desc: 'Contact job title' },
+      { name: '{{COMPANY}}', desc: 'Company name' },
+      { name: '{{INDUSTRY}}', desc: 'Industry vertical' },
+      { name: '{{BOOTH_NOTES}}', desc: 'Notes from booth conversation' },
+      { name: '{{PRODUCTS_DISCUSSED}}', desc: 'Products or solutions discussed' },
+      { name: '{{TIMELINE}}', desc: 'Purchase timeline if mentioned' },
+      { name: '{{BUDGET}}', desc: 'Budget authority level' }
+    ],
+    expectedOutput: 'Lead qualification with score, routing recommendation, follow-up email draft, and CRM entry.',
+    coachingNotes: 'More booth conversation detail = better qualification. Include specific pain points mentioned. Budget and timeline are the strongest qualification signals.',
+    failureModes: 'Minimal booth notes produce generic follow-up. Missing company info prevents territory routing. No timeline or budget data leads to inaccurate scoring.',
+    followUps: ['Generate proposal for qualified leads', 'Create nurture email sequence for warm leads', 'Build trade show ROI report']
+  },
+  {
+    id: 17, title: 'Supplier Qualification Brief',
+    category: 'manufacturing', department: 'Supply Chain', npdStage: 'ITERATE',
+    useCase: 'Evaluate potential new supplier for component sourcing',
+    outputType: 'Supplier Assessment',
+    complexity: 2, time: '10 min', confidence: 82, value: 'Medium',
+    purpose: 'Generate a structured supplier qualification assessment based on available information to support sourcing decisions and risk management.',
+    prompt: 'You are a supply chain analyst at Industrial Magnetics Inc evaluating a potential supplier.\n\nSupplier: {{SUPPLIER_NAME}}\nLocation: {{LOCATION}}\nCommodity: {{COMMODITY}}\nCurrent Source: {{CURRENT_SOURCE}}\n\nKnown Information:\n{{SUPPLIER_INFO}}\n\nRequirements:\n- Annual spend: {{ANNUAL_SPEND}}\n- Quality requirement: {{QUALITY_REQ}}\n- Lead time requirement: {{LT_REQ}}\n- Certifications needed: {{CERTS}}\n\nGenerate supplier qualification assessment:\n1. Capability assessment (technical, capacity, quality systems)\n2. Financial stability indicators\n3. Geographic risk analysis\n4. Quality system evaluation\n5. Supply chain risk score (1-10)\n6. Comparison vs. current source\n7. Recommended qualification activities\n8. Decision: Approve / Conditional / Reject with rationale',
+    variables: [
+      { name: '{{SUPPLIER_NAME}}', desc: 'Supplier company name' },
+      { name: '{{LOCATION}}', desc: 'Supplier location(s)' },
+      { name: '{{COMMODITY}}', desc: 'Component or material type' },
+      { name: '{{CURRENT_SOURCE}}', desc: 'Current supplier for comparison' },
+      { name: '{{SUPPLIER_INFO}}', desc: 'Known info about supplier' },
+      { name: '{{ANNUAL_SPEND}}', desc: 'Expected annual spend' },
+      { name: '{{QUALITY_REQ}}', desc: 'Quality requirements' },
+      { name: '{{LT_REQ}}', desc: 'Lead time requirements' },
+      { name: '{{CERTS}}', desc: 'Required certifications (ISO, etc.)' }
+    ],
+    expectedOutput: 'Supplier qualification assessment with risk scoring, capability analysis, comparison to current source, and approval recommendation.',
+    coachingNotes: 'Include any audit reports, sample test results, or reference customers. Geographic diversification strategy should factor into the analysis.',
+    failureModes: 'Minimal supplier info produces speculative assessment. Missing quality requirements prevent proper evaluation. Without current source comparison, benefit is unclear.',
+    followUps: ['Generate supplier audit checklist', 'Create qualification test plan', 'Draft supplier agreement template']
+  },
+  {
+    id: 18, title: 'Installation & Commissioning Guide',
+    category: 'sales', department: 'Service', npdStage: 'LAUNCH',
+    useCase: 'Generate product-specific installation instructions',
+    outputType: 'Installation Guide',
+    complexity: 2, time: '12 min', confidence: 86, value: 'Medium',
+    purpose: 'Create product-specific installation and commissioning documentation for field service or customer self-install scenarios. Ensures safe, correct installation and optimal performance.',
+    prompt: 'You are a field service engineer at Industrial Magnetics Inc creating installation documentation.\n\nProduct: {{PRODUCT}}\nModel: {{MODEL}}\nInstallation Type: {{INSTALL_TYPE}}\nCustomer Skill Level: {{SKILL_LEVEL}}\n\nInstallation Context:\n{{INSTALL_CONTEXT}}\n\nGenerate comprehensive installation guide:\n1. Safety warnings and precautions (magnetic field hazards)\n2. Required tools and equipment\n3. Pre-installation checklist\n4. Step-by-step installation procedure (numbered)\n5. Alignment and adjustment procedures\n6. Commissioning and verification tests\n7. Performance validation criteria\n8. Troubleshooting common issues\n9. Maintenance schedule\n10. Emergency procedures\n\nFormat for field use: clear, concise steps with safety callouts.',
+    variables: [
+      { name: '{{PRODUCT}}', desc: 'Product type (lifter, separator, etc.)' },
+      { name: '{{MODEL}}', desc: 'Specific model number' },
+      { name: '{{INSTALL_TYPE}}', desc: 'New install, retrofit, replacement' },
+      { name: '{{SKILL_LEVEL}}', desc: 'Technician / Maintenance / Operator' },
+      { name: '{{INSTALL_CONTEXT}}', desc: 'Where and how it is being installed' }
+    ],
+    expectedOutput: 'Complete installation guide with safety warnings, step-by-step procedures, commissioning tests, and troubleshooting.',
+    coachingNotes: 'Always lead with safety. Include specific magnetic field hazard warnings. Reference relevant OSHA and ANSI standards. Photos or diagram descriptions significantly improve clarity.',
+    failureModes: 'Missing model number prevents specific instructions. Unknown skill level leads to wrong detail level. Ignoring installation context misses site-specific considerations.',
+    followUps: ['Generate maintenance schedule document', 'Create operator training outline', 'Build field service checklist']
+  },
+  {
+    id: 19, title: 'NPD Gate Review Presentation',
+    category: 'npd', department: 'Product Mgmt', npdStage: 'VALIDATE',
+    useCase: 'Generate gate review presentation for NPD milestone',
+    outputType: 'Presentation Outline',
+    complexity: 3, time: '18 min', confidence: 84, value: 'High',
+    purpose: 'Generate a structured gate review presentation covering all required elements for IMI NPD stage-gate process. Ensures consistent, thorough gate reviews across the portfolio.',
+    prompt: 'You are a project leader at Industrial Magnetics Inc preparing for a {{GATE}} gate review.\n\nProject: {{PROJECT_NAME}}\nProject Code: {{PROJECT_CODE}}\nGate: {{GATE}}\nGate Date: {{GATE_DATE}}\n\nProject Status:\n{{STATUS_SUMMARY}}\n\nGenerate a complete gate review presentation:\n1. Executive Summary (project health: Green/Yellow/Red)\n2. Phase deliverables checklist (complete/incomplete)\n3. Technical progress and results\n4. Market validation update\n5. Financial update (vs. business case)\n6. Risk register update (top 5 risks)\n7. Schedule status (milestone chart)\n8. Resource status\n9. Key decisions needed from gate committee\n10. Go/Kill/Hold/Recycle recommendation with evidence\n11. Next phase plan and resource request\n\nFormat as slide-by-slide outline with key points per slide.',
+    variables: [
+      { name: '{{GATE}}', desc: 'SCOUT→INVESTIGATE, INVESTIGATE→ITERATE, etc.' },
+      { name: '{{PROJECT_NAME}}', desc: 'Project name' },
+      { name: '{{PROJECT_CODE}}', desc: 'Internal project code' },
+      { name: '{{GATE_DATE}}', desc: 'Scheduled gate review date' },
+      { name: '{{STATUS_SUMMARY}}', desc: 'Current project status and progress' }
+    ],
+    expectedOutput: 'Slide-by-slide presentation outline with key points, data requirements, and visual suggestions for each slide.',
+    coachingNotes: 'Include actual test data and financial figures. Reference specific risks with probability and impact ratings. Be candid about issues - gate reviews are decision points, not marketing exercises.',
+    failureModes: 'Missing status data produces a template, not a presentation. Without financial update, gate committee cannot make informed decisions. Sugarcoating risks undermines the gate process.',
+    followUps: ['Generate detailed risk register', 'Create financial model update', 'Draft next phase project plan']
+  },
+  {
+    id: 20, title: 'Regulatory Compliance Checker',
+    category: 'quality', department: 'Quality', npdStage: 'VALIDATE',
+    useCase: 'Identify applicable regulations and compliance requirements',
+    outputType: 'Compliance Matrix',
+    complexity: 3, time: '15 min', confidence: 79, value: 'High',
+    purpose: 'Identify all applicable regulations, standards, and certifications for a product entering a specific market or application. Creates a compliance requirements matrix for design and testing.',
+    prompt: 'You are a regulatory compliance specialist at Industrial Magnetics Inc.\n\nProduct: {{PRODUCT}}\nTarget Market: {{MARKET}}\nTarget Industries: {{INDUSTRIES}}\nExport Markets: {{EXPORT_MARKETS}}\n\nProduct Characteristics:\n{{PRODUCT_CHARS}}\n\nIdentify all applicable:\n1. Safety standards (OSHA, ANSI, CE, etc.)\n2. Industry-specific standards (HACCP, GFSI for food; ATEX for hazardous)\n3. Electromagnetic compatibility requirements\n4. Environmental regulations (RoHS, REACH, etc.)\n5. Export control considerations\n6. Certification requirements by market\n7. Testing requirements for each standard\n8. Estimated certification timeline and cost\n9. Required documentation\n10. Compliance gap analysis vs. current product\n\nFormat as actionable compliance matrix with priority ratings.',
+    variables: [
+      { name: '{{PRODUCT}}', desc: 'Product type and description' },
+      { name: '{{MARKET}}', desc: 'Primary target market' },
+      { name: '{{INDUSTRIES}}', desc: 'Target industry verticals' },
+      { name: '{{EXPORT_MARKETS}}', desc: 'International markets (EU, Asia, etc.)' },
+      { name: '{{PRODUCT_CHARS}}', desc: 'Key product characteristics (voltage, pressure, etc.)' }
+    ],
+    expectedOutput: 'Compliance requirements matrix with applicable standards, testing requirements, timelines, and gap analysis.',
+    coachingNotes: 'Be specific about product characteristics - voltage, pressure, moving parts all trigger different standards. Export market identification is critical for CE/UKCA/other markings. Always flag ATEX/hazardous area requirements.',
+    failureModes: 'Missing export markets leads to incomplete standards list. Vague product description prevents proper standard identification. Ignoring industry-specific standards creates compliance risk.',
+    followUps: ['Generate test plan for each standard', 'Create compliance documentation checklist', 'Draft declaration of conformity template']
+  },
+  {
+    id: 21, title: 'Customer ROI Calculator',
+    category: 'sales', department: 'Sales', npdStage: 'N/A',
+    useCase: 'Build customer-specific ROI justification',
+    outputType: 'ROI Analysis',
+    complexity: 2, time: '10 min', confidence: 87, value: 'High',
+    purpose: 'Generate a compelling, customer-specific ROI analysis to justify magnetic equipment investment. Quantifies labor savings, quality improvements, safety benefits, and downtime reduction.',
+    prompt: 'You are a value engineer at Industrial Magnetics Inc building an ROI justification.\n\nCustomer: {{CUSTOMER}}\nProduct: {{PRODUCT}}\nInvestment: {{INVESTMENT}}\n\nCurrent State:\n{{CURRENT_STATE}}\n\nProposed Solution Benefits:\n{{BENEFITS}}\n\nGenerate customer ROI analysis:\n1. Investment summary\n2. Labor savings calculation\n3. Quality/scrap improvement value\n4. Safety incident reduction value\n5. Downtime reduction value\n6. Energy savings (if applicable)\n7. Total annual savings\n8. Simple payback period\n9. 3-year NPV and IRR\n10. Intangible benefits summary\n11. Risk-adjusted ROI (conservative/expected/optimistic)\n\nFormat for customer presentation - compelling but credible.',
+    variables: [
+      { name: '{{CUSTOMER}}', desc: 'Customer name' },
+      { name: '{{PRODUCT}}', desc: 'IMI product being proposed' },
+      { name: '{{INVESTMENT}}', desc: 'Total investment amount' },
+      { name: '{{CURRENT_STATE}}', desc: 'Current process and pain points' },
+      { name: '{{BENEFITS}}', desc: 'Expected benefits from IMI solution' }
+    ],
+    expectedOutput: 'Customer-ready ROI analysis with payback period, NPV, IRR, and scenario analysis.',
+    coachingNotes: 'Use customer-specific labor rates and operating data whenever possible. Conservative assumptions are more credible than optimistic ones. Include both tangible and intangible benefits.',
+    failureModes: 'Missing investment amount makes ROI impossible. Without current state data, savings cannot be quantified. Generic benefit claims reduce credibility.',
+    followUps: ['Generate formal proposal with ROI section', 'Create executive summary for C-suite', 'Build comparison vs. competitive alternatives']
+  },
+  {
+    id: 22, title: 'Stamping Application Optimizer',
+    category: 'sales', department: 'Sales Engineering', npdStage: 'N/A',
+    useCase: 'Optimize magnetic tooling for stamping operations',
+    outputType: 'Application Solution',
+    complexity: 3, time: '12 min', confidence: 88, value: 'High',
+    purpose: 'Recommend optimal magnetic sheet handling solution for metal stamping operations including sheet fanners, separators, conveyors, and stackers.',
+    prompt: 'You are a stamping applications specialist at Industrial Magnetics Inc.\n\nCustomer Application:\n- Press type: {{PRESS_TYPE}}\n- Tonnage: {{TONNAGE}}\n- Stroke rate: {{STROKE_RATE}} SPM\n- Material: {{MATERIAL}}\n- Thickness range: {{THICKNESS}}\n- Sheet size: {{SHEET_SIZE}}\n- Blank weight: {{BLANK_WEIGHT}}\n- Current handling method: {{CURRENT_METHOD}}\n\nProblem:\n{{PROBLEM}}\n\nRecommend:\n1. Sheet separation solution (fanner/separator type)\n2. Sheet detection system\n3. Conveyance/feeding system\n4. End-of-arm tooling (if applicable)\n5. Scrap handling magnetics\n6. Part stacking solution\n7. Complete system layout description\n8. Estimated cycle time impact\n9. Safety improvements\n10. ROI estimate vs. current method',
+    variables: [
+      { name: '{{PRESS_TYPE}}', desc: 'Mechanical, hydraulic, servo' },
+      { name: '{{TONNAGE}}', desc: 'Press tonnage' },
+      { name: '{{STROKE_RATE}}', desc: 'Strokes per minute' },
+      { name: '{{MATERIAL}}', desc: 'Steel, stainless, aluminum, etc.' },
+      { name: '{{THICKNESS}}', desc: 'Material thickness range' },
+      { name: '{{SHEET_SIZE}}', desc: 'Sheet dimensions' },
+      { name: '{{BLANK_WEIGHT}}', desc: 'Individual blank weight' },
+      { name: '{{CURRENT_METHOD}}', desc: 'Current sheet handling approach' },
+      { name: '{{PROBLEM}}', desc: 'Specific problems or requirements' }
+    ],
+    expectedOutput: 'Complete stamping application solution with product recommendations, system layout, performance estimates, and ROI projection.',
+    coachingNotes: 'Material type determines magnet selection - stainless and aluminum require special handling. Stroke rate is critical for timing. Include information about double-sheet detection requirements.',
+    failureModes: 'Missing material type makes separation solution impossible. Without thickness, magnetic force calculations fail. Unknown stroke rate prevents timing analysis.',
+    followUps: ['Generate detailed quotation', 'Create system layout drawing', 'Schedule application demo']
+  },
+  {
+    id: 23, title: 'Market Segment Analysis',
+    category: 'competitive', department: 'Product Mgmt', npdStage: 'SCOUT',
+    useCase: 'Deep analysis of a market segment for strategic planning',
+    outputType: 'Market Analysis',
+    complexity: 3, time: '18 min', confidence: 78, value: 'High',
+    purpose: 'Generate a comprehensive market segment analysis to support strategic planning, new market entry, or product line expansion decisions.',
+    prompt: 'You are a market analyst at Industrial Magnetics Inc analyzing a market segment.\n\nSegment: {{SEGMENT}}\nGeographic Focus: {{GEOGRAPHY}}\n\nCurrent IMI Presence:\n{{IMI_PRESENCE}}\n\nGenerate comprehensive analysis:\n1. Segment definition and boundaries\n2. Market size and growth trajectory (5-year)\n3. Customer segmentation within the segment\n4. Buying behavior and decision criteria\n5. Competitive landscape (market share, positioning)\n6. Technology trends affecting the segment\n7. Regulatory landscape\n8. Distribution channel analysis\n9. Pricing dynamics\n10. Opportunities for IMI (ranked)\n11. Threats to address\n12. Strategic recommendations (enter/expand/defend/exit)\n\nSupport conclusions with data points where available.',
+    variables: [
+      { name: '{{SEGMENT}}', desc: 'Target market segment (e.g., food safety separation, automotive stamping)' },
+      { name: '{{GEOGRAPHY}}', desc: 'Geographic focus (NA, EU, Global)' },
+      { name: '{{IMI_PRESENCE}}', desc: 'Current IMI position in this segment' }
+    ],
+    expectedOutput: 'Comprehensive market segment analysis with size/growth data, competitive mapping, and strategic recommendations.',
+    coachingNotes: 'Include any available market research data or industry reports. Reference specific customers and competitors. The more data-driven, the more actionable.',
+    failureModes: 'Vague segment definition leads to unfocused analysis. Missing competitive data weakens strategic recommendations. Without current IMI presence context, recommendations lack foundation.',
+    followUps: ['Generate market entry business case', 'Create competitive positioning map', 'Draft customer target list']
+  },
+  {
+    id: 24, title: 'Test Protocol Generator',
+    category: 'quality', department: 'Engineering', npdStage: 'ITERATE',
+    useCase: 'Generate structured test protocol for product validation',
+    outputType: 'Test Protocol',
+    complexity: 3, time: '15 min', confidence: 86, value: 'Medium',
+    purpose: 'Create a structured test protocol for validating magnetic product performance, including test setup, measurement procedures, acceptance criteria, and data collection requirements.',
+    prompt: 'You are a test engineer at Industrial Magnetics Inc creating a validation protocol.\n\nProduct: {{PRODUCT}}\nTest Objective: {{OBJECTIVE}}\nApplicable Standards: {{STANDARDS}}\n\nPerformance Requirements:\n{{REQUIREMENTS}}\n\nGenerate complete test protocol:\n1. Test objective and scope\n2. Test equipment required (with calibration requirements)\n3. Test setup and configuration\n4. Environmental conditions\n5. Test procedure (step-by-step)\n6. Measurement points and data collection\n7. Acceptance criteria (pass/fail for each parameter)\n8. Sample size and statistical basis\n9. Safety precautions\n10. Data recording format\n11. Report template outline',
+    variables: [
+      { name: '{{PRODUCT}}', desc: 'Product under test' },
+      { name: '{{OBJECTIVE}}', desc: 'What are we validating?' },
+      { name: '{{STANDARDS}}', desc: 'Applicable test standards' },
+      { name: '{{REQUIREMENTS}}', desc: 'Performance specifications to validate' }
+    ],
+    expectedOutput: 'Complete test protocol with procedures, equipment list, acceptance criteria, and data collection requirements.',
+    coachingNotes: 'Reference specific measurement equipment available at IMI. Include environmental test requirements (temperature cycling, vibration). Define statistical confidence level for sample sizing.',
+    failureModes: 'Vague objectives produce unfocused protocols. Missing acceptance criteria make results uninterpretable. Inadequate sample size leads to unreliable conclusions.',
+    followUps: ['Create test fixture design request', 'Generate test report template', 'Plan prototype build for testing']
+  },
+  {
+    id: 25, title: 'Workholding Solution Designer',
+    category: 'sales', department: 'Sales Engineering', npdStage: 'N/A',
+    useCase: 'Design magnetic workholding solution for machining',
+    outputType: 'Application Solution',
+    complexity: 3, time: '12 min', confidence: 85, value: 'High',
+    purpose: 'Design a magnetic workholding solution for CNC machining, grinding, or EDM applications based on workpiece characteristics and machining requirements.',
+    prompt: 'You are a workholding applications engineer at Industrial Magnetics Inc.\n\nApplication:\n- Machine type: {{MACHINE_TYPE}}\n- Operation: {{OPERATION}}\n- Workpiece material: {{WP_MATERIAL}}\n- Workpiece dimensions: {{WP_DIMS}}\n- Workpiece weight: {{WP_WEIGHT}}\n- Surface finish req: {{SURFACE_FINISH}}\n- Tolerances: {{TOLERANCES}}\n- Cutting forces: {{CUTTING_FORCES}}\n- Quantity per setup: {{QTY_PER_SETUP}}\n\nCurrent fixturing:\n{{CURRENT_FIX}}\n\nDesign workholding solution:\n1. Recommended magnetic chuck/workholding type\n2. Pole pitch selection and justification\n3. Holding force calculation with safety factor\n4. Workpiece contact area analysis\n5. Demagnetization considerations for workpiece\n6. Setup time comparison vs. current method\n7. Five-sided access analysis\n8. Recommended accessories (end stops, shims, etc.)\n9. Limitations and precautions\n10. ROI estimate',
+    variables: [
+      { name: '{{MACHINE_TYPE}}', desc: 'CNC mill, surface grinder, EDM, etc.' },
+      { name: '{{OPERATION}}', desc: 'Milling, grinding, EDM, inspection' },
+      { name: '{{WP_MATERIAL}}', desc: 'Ferromagnetic, para/dia-magnetic' },
+      { name: '{{WP_DIMS}}', desc: 'Workpiece dimensions' },
+      { name: '{{WP_WEIGHT}}', desc: 'Workpiece weight' },
+      { name: '{{SURFACE_FINISH}}', desc: 'Required surface finish (Ra)' },
+      { name: '{{TOLERANCES}}', desc: 'Critical tolerances' },
+      { name: '{{CUTTING_FORCES}}', desc: 'Estimated cutting forces' },
+      { name: '{{QTY_PER_SETUP}}', desc: 'Parts per setup' },
+      { name: '{{CURRENT_FIX}}', desc: 'Current fixturing method' }
+    ],
+    expectedOutput: 'Complete workholding solution with product selection, force analysis, setup comparison, and ROI estimate.',
+    coachingNotes: 'Material permeability is critical - stainless steel and hardened materials require electro-permanent or special pole configurations. Always calculate safety factor against cutting forces.',
+    failureModes: 'Non-ferromagnetic workpieces cannot be held magnetically. Missing cutting force data prevents safety factor calculation. Ignoring tolerances risks accuracy issues.',
+    followUps: ['Generate detailed quotation', 'Create application test protocol', 'Schedule demo with customer']
+  },
+  {
+    id: 26, title: 'Eddy Current Separator Sizing',
+    category: 'sales', department: 'Sales Engineering', npdStage: 'N/A',
+    useCase: 'Size eddy current separator for non-ferrous recovery',
+    outputType: 'Sizing Document',
+    complexity: 4, time: '15 min', confidence: 82, value: 'High',
+    purpose: 'Size an eddy current separator (ECS) system for non-ferrous metal recovery applications in recycling, waste processing, or material recovery facilities.',
+    prompt: 'You are an eddy current separation specialist at Industrial Magnetics Inc.\n\nApplication: {{APPLICATION}}\nFacility Type: {{FACILITY_TYPE}}\n\nFeed Material:\n- Description: {{FEED_MATERIAL}}\n- Feed rate: {{FEED_RATE}} TPH\n- Particle size range: {{PARTICLE_SIZE}}\n- Moisture content: {{MOISTURE}}\n- Non-ferrous content: {{NF_CONTENT}}\n- Non-ferrous metals present: {{NF_TYPES}}\n\nPre-processing:\n- Ferrous removal: {{FERROUS_REMOVAL}}\n- Screening: {{SCREENING}}\n- Other: {{OTHER_PREP}}\n\nPerformance Requirements:\n- Recovery rate target: {{RECOVERY_TARGET}}\n- Purity target: {{PURITY_TARGET}}\n\nSize the ECS system:\n1. Recommended ECS model and belt width\n2. Rotor type and speed selection\n3. Splitter position recommendation\n4. Feed conveyor requirements\n5. Expected recovery rate by metal type\n6. Expected purity grade\n7. Pre-processing recommendations\n8. Installation requirements (footprint, utilities)\n9. Maintenance schedule\n10. Expected throughput economics',
+    variables: [
+      { name: '{{APPLICATION}}', desc: 'MRF, e-waste, IBA, auto shredder, etc.' },
+      { name: '{{FACILITY_TYPE}}', desc: 'Type of processing facility' },
+      { name: '{{FEED_MATERIAL}}', desc: 'Description of input material' },
+      { name: '{{FEED_RATE}}', desc: 'Feed rate in tons per hour' },
+      { name: '{{PARTICLE_SIZE}}', desc: 'Particle size range' },
+      { name: '{{MOISTURE}}', desc: 'Moisture content' },
+      { name: '{{NF_CONTENT}}', desc: 'Non-ferrous content percentage' },
+      { name: '{{NF_TYPES}}', desc: 'Aluminum, copper, brass, etc.' },
+      { name: '{{FERROUS_REMOVAL}}', desc: 'Upstream ferrous removal present?' },
+      { name: '{{SCREENING}}', desc: 'Screening/sizing equipment present?' },
+      { name: '{{OTHER_PREP}}', desc: 'Other pre-processing' },
+      { name: '{{RECOVERY_TARGET}}', desc: 'Target recovery percentage' },
+      { name: '{{PURITY_TARGET}}', desc: 'Target product purity' }
+    ],
+    expectedOutput: 'Complete ECS sizing with model selection, rotor configuration, performance estimates, and installation requirements.',
+    coachingNotes: 'Particle size is the #1 sizing parameter - small particles need higher rotor speeds. Upstream ferrous removal is essential for ECS performance. Moisture significantly affects separation efficiency.',
+    failureModes: 'Missing particle size prevents rotor selection. Unknown non-ferrous types prevent performance estimation. No upstream processing data leads to optimistic performance claims.',
+    followUps: ['Generate material flow diagram', 'Create performance guarantee terms', 'Build ROI model for customer']
+  },
+  {
+    id: 27, title: 'Application Case Study Writer',
+    category: 'marketing', department: 'Marketing', npdStage: 'LAUNCH',
+    useCase: 'Generate application case study from project data',
+    outputType: 'Case Study',
+    complexity: 2, time: '12 min', confidence: 88, value: 'Medium',
+    purpose: 'Transform a successful customer application into a compelling case study for marketing, sales support, and website content.',
+    prompt: 'You are a technical writer at Industrial Magnetics Inc creating an application case study.\n\nCustomer: {{CUSTOMER}} (use {{CUSTOMER_ALIAS}} for publication)\nIndustry: {{INDUSTRY}}\nApplication: {{APPLICATION}}\nProduct Used: {{PRODUCT}}\n\nProject Details:\n{{PROJECT_DETAILS}}\n\nResults:\n{{RESULTS}}\n\nGenerate case study:\n1. Headline (attention-grabbing, benefit-focused)\n2. Challenge section (customer pain point)\n3. Solution section (IMI product and approach)\n4. Results section (quantified outcomes)\n5. Customer quote (fabricate realistic but mark for approval)\n6. Technical sidebar (key specs)\n7. Call to action\n8. SEO metadata\n9. Suggested photography list\n10. Social media teasers (3 versions)\n\nTone: Professional, data-driven, solutions-focused. 600-800 words.',
+    variables: [
+      { name: '{{CUSTOMER}}', desc: 'Customer name (internal use)' },
+      { name: '{{CUSTOMER_ALIAS}}', desc: 'How to reference customer publicly' },
+      { name: '{{INDUSTRY}}', desc: 'Customer industry' },
+      { name: '{{APPLICATION}}', desc: 'Application description' },
+      { name: '{{PRODUCT}}', desc: 'IMI product(s) used' },
+      { name: '{{PROJECT_DETAILS}}', desc: 'Detailed project information' },
+      { name: '{{RESULTS}}', desc: 'Measured outcomes and improvements' }
+    ],
+    expectedOutput: 'Complete case study with all sections, SEO elements, social media content, and photography suggestions.',
+    coachingNotes: 'Quantified results are the most powerful element. Include before/after metrics whenever possible. Mark fabricated quotes clearly for customer approval before publication.',
+    failureModes: 'Without quantified results, the case study lacks impact. Missing application details produce generic content. No product information prevents technical credibility.',
+    followUps: ['Generate companion blog post', 'Create trade show poster version', 'Draft customer approval request']
+  },
+  {
+    id: 28, title: 'Lifting Magnet Safety Assessment',
+    category: 'quality', department: 'Engineering', npdStage: 'VALIDATE',
+    useCase: 'Safety assessment for magnetic lifting application',
+    outputType: 'Safety Assessment',
+    complexity: 4, time: '20 min', confidence: 83, value: 'High',
+    purpose: 'Conduct a comprehensive safety assessment for a magnetic lifting application, identifying hazards, calculating safety factors, and generating required safety documentation.',
+    prompt: 'You are a safety engineer at Industrial Magnetics Inc evaluating a magnetic lifting application.\n\nLifting Magnet: {{MAGNET_MODEL}}\nRated Capacity: {{RATED_CAPACITY}}\n\nApplication:\n- Load type: {{LOAD_TYPE}}\n- Load weight: {{LOAD_WEIGHT}}\n- Load dimensions: {{LOAD_DIMS}}\n- Load material: {{LOAD_MATERIAL}}\n- Surface condition: {{SURFACE}}\n- Lift height: {{LIFT_HEIGHT}}\n- Cycle frequency: {{CYCLE_FREQ}}\n- Environment: {{ENVIRONMENT}}\n\nConduct safety assessment:\n1. Hazard identification (FMEA approach)\n2. Safety factor calculation (actual vs. rated)\n3. Air gap analysis (surface condition impact)\n4. Temperature derating if applicable\n5. Dynamic load considerations\n6. Failure mode analysis (magnet, operator, load)\n7. Required safety measures (backup, warning systems)\n8. OSHA/ANSI compliance check\n9. Operator training requirements\n10. Inspection and maintenance schedule\n11. Risk rating matrix\n12. Approval/conditional/reject recommendation',
+    variables: [
+      { name: '{{MAGNET_MODEL}}', desc: 'IMI lifting magnet model number' },
+      { name: '{{RATED_CAPACITY}}', desc: 'Magnet rated lifting capacity' },
+      { name: '{{LOAD_TYPE}}', desc: 'Plate, round, structural, etc.' },
+      { name: '{{LOAD_WEIGHT}}', desc: 'Actual load weight' },
+      { name: '{{LOAD_DIMS}}', desc: 'Load dimensions and thickness' },
+      { name: '{{LOAD_MATERIAL}}', desc: 'Material type and grade' },
+      { name: '{{SURFACE}}', desc: 'Surface condition (clean, rusty, painted, oily)' },
+      { name: '{{LIFT_HEIGHT}}', desc: 'Maximum lift height' },
+      { name: '{{CYCLE_FREQ}}', desc: 'Lifts per hour/shift' },
+      { name: '{{ENVIRONMENT}}', desc: 'Operating environment' }
+    ],
+    expectedOutput: 'Comprehensive safety assessment with hazard analysis, safety factor calculations, compliance check, and approval recommendation.',
+    coachingNotes: 'Safety factor must be >= 3:1 for overhead lifting per ASME B30.20. Surface condition can reduce capacity by 50% or more. Always include operator training and inspection requirements.',
+    failureModes: 'Missing load weight makes safety factor calculation impossible. Unknown surface condition leads to dangerous over-rating. Ignoring environment misses temperature or contamination risks.',
+    followUps: ['Generate operator safety card', 'Create inspection checklist', 'Draft safety certification documentation']
+  },
+  {
+    id: 29, title: 'Automation Integration Spec',
+    category: 'npd', department: 'Engineering', npdStage: 'DESIGN',
+    useCase: 'Specify magnetic tool integration with automation system',
+    outputType: 'Integration Specification',
+    complexity: 3, time: '15 min', confidence: 84, value: 'Medium',
+    purpose: 'Generate a detailed integration specification for incorporating IMI magnetic products into automated systems including robots, conveyors, and PLC-controlled lines.',
+    prompt: 'You are an automation engineer at Industrial Magnetics Inc specifying a magnetic tool integration.\n\nMagnetic Device: {{DEVICE}}\nAutomation System: {{AUTOMATION_SYSTEM}}\nController: {{CONTROLLER}}\n\nApplication:\n{{APPLICATION_DESC}}\n\nInterface Requirements:\n- Control signals: {{CONTROL_SIGNALS}}\n- Feedback signals: {{FEEDBACK_SIGNALS}}\n- Communication protocol: {{PROTOCOL}}\n- Cycle time requirement: {{CYCLE_TIME}}\n\nGenerate integration specification:\n1. System architecture overview\n2. Electrical interface specification\n3. Control signal mapping\n4. Feedback and monitoring signals\n5. PLC/robot program logic (pseudocode)\n6. Safety interlock requirements\n7. Response time specifications\n8. Power supply requirements\n9. Mounting and mechanical interface\n10. Commissioning procedure\n11. Diagnostic and troubleshooting guide',
+    variables: [
+      { name: '{{DEVICE}}', desc: 'IMI magnetic device model' },
+      { name: '{{AUTOMATION_SYSTEM}}', desc: 'Robot, conveyor, custom machine' },
+      { name: '{{CONTROLLER}}', desc: 'PLC, robot controller type' },
+      { name: '{{APPLICATION_DESC}}', desc: 'What the system does' },
+      { name: '{{CONTROL_SIGNALS}}', desc: 'Required control inputs' },
+      { name: '{{FEEDBACK_SIGNALS}}', desc: 'Required status outputs' },
+      { name: '{{PROTOCOL}}', desc: 'EtherNet/IP, Profinet, discrete I/O' },
+      { name: '{{CYCLE_TIME}}', desc: 'Required cycle time' }
+    ],
+    expectedOutput: 'Complete integration specification with electrical, control, safety, and commissioning details.',
+    coachingNotes: 'Include specific I/O addressing and signal timing. Safety interlocks are critical for overhead magnetic applications. Reference the automation system documentation for compatible interfaces.',
+    failureModes: 'Missing controller type prevents protocol specification. Unknown cycle time leads to inadequate response specifications. Ignoring safety interlocks creates hazardous conditions.',
+    followUps: ['Generate electrical schematic', 'Create PLC program template', 'Draft integration test plan']
+  },
+  {
+    id: 30, title: 'Value Stream Mapping Assistant',
+    category: 'manufacturing', department: 'Manufacturing', npdStage: 'N/A',
+    useCase: 'Guide value stream mapping exercise for process improvement',
+    outputType: 'VSM Document',
+    complexity: 3, time: '20 min', confidence: 81, value: 'Medium',
+    purpose: 'Guide a value stream mapping exercise for an IMI production process, identifying waste, bottlenecks, and improvement opportunities in both current and future state maps.',
+    prompt: 'You are a lean manufacturing consultant at Industrial Magnetics Inc facilitating a value stream map.\n\nValue Stream: {{VALUE_STREAM}}\nProduct Family: {{PRODUCT_FAMILY}}\nScope: {{SCOPE}}\n\nCurrent State Data:\n{{CURRENT_STATE}}\n\nGenerate VSM analysis:\n1. Current state map description (text-based flowchart)\n2. Process metrics by station (CT, C/O, uptime, FPY)\n3. Inventory locations and quantities (WIP)\n4. Information flow mapping\n5. Lead time ladder (process time vs. lead time)\n6. Waste identification (8 wastes by station)\n7. Takt time calculation\n8. Bottleneck identification\n9. Future state vision\n10. Kaizen burst identification (prioritized)\n11. Implementation roadmap\n12. Expected improvements (lead time, WIP, productivity)',
+    variables: [
+      { name: '{{VALUE_STREAM}}', desc: 'Value stream name' },
+      { name: '{{PRODUCT_FAMILY}}', desc: 'Product family or representative product' },
+      { name: '{{SCOPE}}', desc: 'Start and end points of the value stream' },
+      { name: '{{CURRENT_STATE}}', desc: 'Current process steps with available metrics' }
+    ],
+    expectedOutput: 'Value stream analysis with current state metrics, waste identification, future state vision, and prioritized improvement plan.',
+    coachingNotes: 'Include actual cycle times and changeover times per station. WIP inventory counts between stations reveal flow issues. Customer demand data enables takt time calculation.',
+    failureModes: 'Missing station metrics make analysis speculative. Without demand data, takt time is unknowable. Incomplete process steps lead to gaps in waste identification.',
+    followUps: ['Generate kaizen event plan for top priority', 'Create standard work documentation', 'Build visual management board design']
+  }
+];
+
+// ═══════════════════════════════════════════════════════════
+//  APPLICATION STATE
+// ═══════════════════════════════════════════════════════════
+let state = {
+  activeCategory: null,
+  selectedPrompt: null,
+  searchTerm: '',
+  filters: { department: '', npdStage: '', complexity: '', value: '', confidence: '' },
+  sortCol: 'title',
+  sortAsc: true
+};
+
+// ═══════════════════════════════════════════════════════════
+//  INITIALIZATION
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildCategoryCards();
+  buildFilterDropdowns();
+  renderMatrix();
+  updateTelemetry();
+  bindEvents();
+});
+
+function buildCategoryCards() {
+  const strip = document.getElementById('catStrip');
+  const allCard = document.createElement('div');
+  allCard.className = 'cat-card active';
+  allCard.style.setProperty('--cat-accent', '#e8a42a');
+  allCard.innerHTML = `<div class="cat-name">All Categories</div><div class="cat-count">${PROMPTS.length} PROMPTS</div><div class="cat-desc">Complete prompt library</div>`;
+  allCard.onclick = () => {
+    state.activeCategory = null;
+    document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+    allCard.classList.add('active');
+    renderMatrix();
+    updateTelemetry();
+  };
+  strip.appendChild(allCard);
+
+  CATEGORIES.forEach(cat => {
+    const count = PROMPTS.filter(p => p.category === cat.id).length;
+    if (count === 0) return;
+    const el = document.createElement('div');
+    el.className = 'cat-card';
+    el.style.setProperty('--cat-accent', cat.accent);
+    el.innerHTML = `<div class="cat-name">${cat.name}</div><div class="cat-count">${String(count).padStart(2,'0')} PROMPTS</div><div class="cat-desc">${cat.desc}</div>`;
+    el.onclick = () => {
+      state.activeCategory = cat.id;
+      document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      renderMatrix();
+      updateTelemetry();
+    };
+    strip.appendChild(el);
+  });
+}
+
+function buildFilterDropdowns() {
+  const depts = [...new Set(PROMPTS.map(p => p.department))].sort();
+  const stages = [...new Set(PROMPTS.map(p => p.npdStage))].sort();
+  const deptSel = document.getElementById('filterDept');
+  depts.forEach(d => { const o = document.createElement('option'); o.value = d; o.textContent = d; deptSel.appendChild(o); });
+  const stageSel = document.getElementById('filterStage');
+  stages.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; stageSel.appendChild(o); });
+}
+
+function bindEvents() {
+  document.getElementById('filterSearch').addEventListener('input', e => { state.searchTerm = e.target.value.toLowerCase(); renderMatrix(); updateTelemetry(); });
+  document.getElementById('filterDept').addEventListener('change', e => { state.filters.department = e.target.value; renderMatrix(); updateTelemetry(); });
+  document.getElementById('filterStage').addEventListener('change', e => { state.filters.npdStage = e.target.value; renderMatrix(); updateTelemetry(); });
+  document.getElementById('filterComplexity').addEventListener('change', e => { state.filters.complexity = e.target.value; renderMatrix(); updateTelemetry(); });
+  document.getElementById('filterValue').addEventListener('change', e => { state.filters.value = e.target.value; renderMatrix(); updateTelemetry(); });
+  document.getElementById('filterConfidence').addEventListener('change', e => { state.filters.confidence = e.target.value; renderMatrix(); updateTelemetry(); });
+  document.getElementById('filterResetBtn').addEventListener('click', resetFilters);
+
+  document.querySelectorAll('.matrix-table thead th').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (!col) return;
+      if (state.sortCol === col) state.sortAsc = !state.sortAsc;
+      else { state.sortCol = col; state.sortAsc = true; }
+      document.querySelectorAll('.matrix-table thead th').forEach(h => h.classList.remove('sorted'));
+      th.classList.add('sorted');
+      th.querySelector('.sort-arrow').innerHTML = state.sortAsc ? '&#9650;' : '&#9660;';
+      renderMatrix();
+    });
+  });
+}
+
+function resetFilters() {
+  state.searchTerm = '';
+  state.filters = { department: '', npdStage: '', complexity: '', value: '', confidence: '' };
+  state.activeCategory = null;
+  document.getElementById('filterSearch').value = '';
+  document.getElementById('filterDept').value = '';
+  document.getElementById('filterStage').value = '';
+  document.getElementById('filterComplexity').value = '';
+  document.getElementById('filterValue').value = '';
+  document.getElementById('filterConfidence').value = '';
+  document.querySelectorAll('.cat-card').forEach((c, i) => c.classList.toggle('active', i === 0));
+  renderMatrix();
+  updateTelemetry();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  FILTERING + SORTING
+// ═══════════════════════════════════════════════════════════
+function getFilteredPrompts() {
+  let list = [...PROMPTS];
+  if (state.activeCategory) list = list.filter(p => p.category === state.activeCategory);
+  if (state.searchTerm) {
+    list = list.filter(p =>
+      p.title.toLowerCase().includes(state.searchTerm) ||
+      p.useCase.toLowerCase().includes(state.searchTerm) ||
+      p.purpose.toLowerCase().includes(state.searchTerm) ||
+      p.department.toLowerCase().includes(state.searchTerm) ||
+      p.outputType.toLowerCase().includes(state.searchTerm)
+    );
+  }
+  if (state.filters.department) list = list.filter(p => p.department === state.filters.department);
+  if (state.filters.npdStage) list = list.filter(p => p.npdStage === state.filters.npdStage);
+  if (state.filters.complexity) list = list.filter(p => p.complexity === parseInt(state.filters.complexity));
+  if (state.filters.value) list = list.filter(p => p.value === state.filters.value);
+  if (state.filters.confidence) list = list.filter(p => p.confidence >= parseInt(state.filters.confidence));
+
+  list.sort((a, b) => {
+    let av = a[state.sortCol], bv = b[state.sortCol];
+    if (typeof av === 'string') av = av.toLowerCase();
+    if (typeof bv === 'string') bv = bv.toLowerCase();
+    if (av < bv) return state.sortAsc ? -1 : 1;
+    if (av > bv) return state.sortAsc ? 1 : -1;
+    return 0;
+  });
+  return list;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  MATRIX RENDERING
+// ═══════════════════════════════════════════════════════════
+function renderMatrix() {
+  const body = document.getElementById('matrixBody');
+  const noRes = document.getElementById('noResults');
+  const filtered = getFilteredPrompts();
+
+  if (filtered.length === 0) {
+    body.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  body.innerHTML = filtered.map(p => {
+    const cat = CATEGORIES.find(c => c.id === p.category);
+    const catColor = cat ? cat.accent : '#e8a42a';
+    const complexityDots = Array.from({length:4}, (_,i) => `<div class="cb-dot${i < p.complexity ? ' filled' : ''}"></div>`).join('');
+    const confColor = p.confidence >= 90 ? 'green' : p.confidence >= 80 ? 'amber' : 'blue';
+    const valColor = p.value === 'High' ? 'green' : p.value === 'Medium' ? 'amber' : 'blue';
+    const sel = state.selectedPrompt && state.selectedPrompt.id === p.id ? ' selected' : '';
+    return `<tr class="${sel}" data-id="${p.id}">
+      <td style="font-weight:600;color:var(--text0)">${esc(p.title)}</td>
+      <td class="mono" style="color:${catColor};font-size:10px">${esc(cat ? cat.name : p.category)}</td>
+      <td class="muted" style="font-size:11px">${esc(p.department)}</td>
+      <td class="mono dim">${esc(p.npdStage)}</td>
+      <td class="dim" style="max-width:160px">${esc(p.useCase)}</td>
+      <td class="mono dim">${esc(p.outputType)}</td>
+      <td><div class="complexity-bar">${complexityDots}</div></td>
+      <td class="mono dim">${esc(p.time)}</td>
+      <td><span class="tag ${confColor}">${p.confidence}%</span></td>
+      <td><span class="tag ${valColor}">${esc(p.value)}</span></td>
+    </tr>`;
+  }).join('');
+
+  body.querySelectorAll('tr').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const id = parseInt(tr.dataset.id);
+      const prompt = PROMPTS.find(p => p.id === id);
+      state.selectedPrompt = prompt;
+      body.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
+      tr.classList.add('selected');
+      renderDetail(prompt);
+    });
+  });
+}
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  DETAIL PANEL RENDERING
+// ═══════════════════════════════════════════════════════════
+function renderDetail(p) {
+  document.getElementById('dpEmpty').style.display = 'none';
+  const c = document.getElementById('dpContent');
+  c.style.display = 'block';
+  const cat = CATEGORIES.find(ct => ct.id === p.category);
+  const promptHtml = esc(p.prompt).replace(/\{\{([^}]+)\}\}/g, '<span class="var-highlight">{{$1}}</span>');
+
+  c.innerHTML = `
+    <div class="dp-header">
+      <div class="dp-title">${esc(p.title)}</div>
+      <div class="dp-tags">
+        <span class="dp-tag cat">${esc(cat ? cat.name : p.category)}</span>
+        <span class="dp-tag dept">${esc(p.department)}</span>
+        <span class="dp-tag stage">${esc(p.npdStage)}</span>
+        <span class="dp-tag">${esc(p.outputType)}</span>
+        <span class="dp-tag">${esc(p.value)} VALUE</span>
+        <span class="dp-tag">${p.confidence}% CONF</span>
+      </div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Purpose</div>
+      <div class="dp-section-text">${esc(p.purpose)}</div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Prompt Template</div>
+      <div class="dp-prompt-block" style="position:relative">
+        <button class="dp-copy-btn" onclick="copyPrompt(${p.id})">&#x2398; Copy</button>
+        ${promptHtml}
+      </div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Variables (${p.variables.length})</div>
+      <div class="dp-var-list">
+        ${p.variables.map(v => `<div class="dp-var-item"><span class="dp-var-name">${esc(v.name)}</span><span class="dp-var-desc">${esc(v.desc)}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Expected Output</div>
+      <div class="dp-output-type">${esc(p.expectedOutput)}</div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Coaching Notes</div>
+      <div class="dp-coaching">${esc(p.coachingNotes)}</div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Failure Modes</div>
+      <div class="dp-failure">${esc(p.failureModes)}</div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-section-label">Follow-Up Prompts</div>
+      <div class="dp-followup-list">
+        ${p.followUps.map(f => `<div class="dp-followup">&raquo; ${esc(f)}</div>`).join('')}
+      </div>
+    </div>
+    <div class="dp-section">
+      <button class="dp-execute-btn" onclick="copyPrompt(${p.id})">&#x25B6; COPY PROMPT TO CLIPBOARD</button>
+    </div>
+  `;
+}
+
+function copyPrompt(id) {
+  const p = PROMPTS.find(pr => pr.id === id);
+  if (!p) return;
+  navigator.clipboard.writeText(p.prompt).then(() => showToast('PROMPT COPIED TO CLIPBOARD')).catch(() => showToast('COPY FAILED — USE MANUAL SELECTION'));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  TELEMETRY
+// ═══════════════════════════════════════════════════════════
+function updateTelemetry() {
+  const filtered = getFilteredPrompts();
+  const depts = new Set(PROMPTS.map(p => p.department));
+  const cats = new Set(PROMPTS.map(p => p.category));
+  const avgConf = filtered.length > 0 ? Math.round(filtered.reduce((s,p) => s + p.confidence, 0) / filtered.length) : 0;
+
+  document.getElementById('telTotalPrompts').textContent = PROMPTS.length;
+  document.getElementById('telCategories').textContent = cats.size;
+  document.getElementById('telDepartments').textContent = depts.size;
+  document.getElementById('telVisible').textContent = filtered.length;
+  document.getElementById('telConfidence').textContent = avgConf + '%';
+  document.getElementById('promptCountLabel').textContent = PROMPTS.length + ' PROMPTS LOADED';
+  document.getElementById('footerCount').textContent = PROMPTS.length;
+}
+</script>
+</body>
+</html>
