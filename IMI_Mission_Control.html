@@ -1,450 +1,2378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MISSION CONTROL — Industrial Magnetics Incorporated</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Rajdhani:wght@700&family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/otter-werx-dark.css">
-<link rel="stylesheet" href="styles/otter-werx-tables.css">
-<link rel="stylesheet" href="styles/otter-werx-twilight.css">
-<link rel="stylesheet" href="styles/otter-werx-daylight.css">
-<style>
-:root {
-  --bg0:#06080e;--bg1:#0c0f18;--bg2:#111522;--bg3:#161b2a;--bg4:#1e2a3c;
-  --bg-tile:#111522;--bg-tile-h:#161b2a;
-  --border:#1a1f30;--borderHi:#2a3050;--dim:#1a1f30;
-  --text0:#e0e4ef;--text1:#8891a8;--text2:#707888;
-  --cyan:#40e8d0;--cyanDim:#003d4d;--cyanBg:#40e8d00a;
-  --green:#3de84a;--greenDim:#003d22;--greenBg:#3de84a0a;
-  --amber:#e8a42a;--amberDim:#e8a42a55;--amberBg:#e8a42a12;
-  --red:#e84040;--redDim:#3d0f14;--redBg:#e8404012;
-  --purple:#a06ee8;--purpleDim:#2a1a44;
-  --blue:#4a9de8;--blueDim:#112244;--blueBg:#4a9de812;
-  --yellow:#ffd644;--teal:#00cca8;--orange:#e87040;
-  --mono:'Share Tech Mono','JetBrains Mono',monospace;
-  --sans:'Barlow Condensed','DM Sans',sans-serif;
-  --orbit:'Orbitron','Rajdhani',sans-serif;
-  --bebas:'Rajdhani','Barlow Condensed',sans-serif;
-  --body:'Inter','Barlow Condensed',-apple-system,sans-serif;
-  --scanline:rgba(255,255,255,0.012);--dotgrid:#ffffff06;
-  --logo-bg:rgba(74,159,232,0.09);--logo-border:rgba(74,159,232,0.28);--blue-corner:#7ac0f8;
-  --shadow:0 2px 12px rgba(0,0,0,0.5);--glow:0 0 20px #e8a42a22;
-}
-[data-theme="twilight"] {
-  --bg0:#3a4258;--bg1:#404a62;--bg2:#485270;--bg3:#50587e;--bg4:#58628a;
-  --bg-tile:#404a62;--bg-tile-h:#485270;
-  --border:#2e3a52;--borderHi:#3e4e6a;--dim:#2e3a52;
-  --text0:#d8dce8;--text1:#9099b8;--text2:#6a7490;
-  --cyan:#40e8d0;--cyanDim:rgba(64,232,208,.35);--cyanBg:rgba(64,232,208,.06);
-  --green:#3de84a;--greenDim:rgba(61,232,74,.35);--greenBg:rgba(61,232,74,.06);
-  --amber:#e8a42a;--amberDim:rgba(232,164,42,.5);--amberBg:rgba(232,164,42,.08);
-  --red:#e84040;--redDim:rgba(232,64,64,.4);--redBg:rgba(232,64,64,.08);
-  --purple:#a06ee8;--purpleDim:rgba(160,110,232,.4);
-  --blue:#4a9de8;--blueDim:rgba(74,157,232,.4);--blueBg:rgba(74,157,232,.08);
-  --logo-bg:rgba(74,157,232,.08);--logo-border:rgba(74,157,232,.25);--blue-corner:#5a8ec8;
-  --scanline:transparent;--dotgrid:transparent;
-  --shadow:0 2px 12px rgba(0,0,0,.4);--glow:0 0 20px rgba(232,164,42,.15);
-}
-[data-theme="daylight"] {
-  --bg0:#edf0f5;--bg1:#ffffff;--bg2:#f5f6fa;--bg3:#eceef4;--bg4:#e4e6ee;
-  --bg-tile:#f5f6fa;--bg-tile-h:#eceef4;
-  --border:#cdd2e0;--borderHi:#b0b8d0;--dim:#cdd2e0;
-  --text0:#1a1f30;--text1:#5a6480;--text2:#8892a8;
-  --cyan:#188a7a;--cyanDim:#188a7a44;--cyanBg:#188a7a0a;
-  --green:#1a8a26;--greenDim:#1a8a2644;--greenBg:#1a8a260a;
-  --amber:#b87a08;--amberDim:#b87a0844;--amberBg:#b87a0812;
-  --red:#d03030;--redDim:#d0303044;--redBg:#d0303010;
-  --purple:#6a40b0;--purpleDim:#6a40b044;
-  --blue:#2a70c0;--blueDim:#2a70c044;--blueBg:#2a70c010;
-  --logo-bg:rgba(42,112,192,.06);--logo-border:rgba(42,112,192,.2);--blue-corner:#4a80c0;
-  --scanline:transparent;--dotgrid:transparent;
-  --shadow:0 2px 12px rgba(0,0,0,.08);--glow:0 0 20px #b87a0808;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMI Prompt Execution System</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --bg-elev: #0f1218;
+      --bg-panel: #12161d;
+      --bg-panel-alt: #171c24;
+      --bg-input: #0b0e13;
+      --border: #242b35;
+      --border-strong: #39414d;
+      --text: #edf1f7;
+      --text-muted: #9ba6b8;
+      --text-dim: #6b7380;
+      --amber: #d89a28;
+      --amber-soft: rgba(216, 154, 40, 0.16);
+      --green: #4acf7c;
+      --red: #de5a5a;
+      --blue: #5aa0e6;
+      --purple: #a184f4;
+      --cyan: #53c7c7;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      --header-height: 68px;
+      --radius: 4px;
+      --mono: "JetBrains Mono", "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+      --sans: "Inter", "Segoe UI", "Arial", sans-serif;
+    }
 
-.theme-switcher{display:flex;gap:2px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:2px}
-.theme-btn{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.8px;padding:5px 10px;border:none;border-radius:4px;cursor:pointer;transition:all .25s;text-transform:uppercase;background:transparent;color:var(--text2)}
-.theme-btn:hover{color:var(--text1)}.theme-btn.active{background:var(--amber);color:var(--bg0)}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{background:var(--bg0);color:var(--text0);font-family:var(--sans);font-size:15px;line-height:1.5;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-body{background-image:radial-gradient(var(--dotgrid) 1px,transparent 1px);background-size:24px 24px}
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scanline) 2px,var(--scanline) 4px);pointer-events:none;z-index:9999}
-.top-glow{height:2px;background:linear-gradient(90deg,transparent 0%,var(--amberDim) 15%,var(--amber) 50%,var(--amberDim) 85%,transparent 100%);flex-shrink:0;box-shadow:0 0 20px rgba(232,164,42,0.35),0 0 60px rgba(232,164,42,0.10)}
-.header{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg0) 100%);border-bottom:1px solid var(--border);padding:0 28px;height:76px;display:flex;align-items:center;gap:22px;flex-shrink:0;position:relative;z-index:100;overflow:hidden}
-.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amberDim) 30%,var(--amberDim) 70%,transparent)}
-.logo-block{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--logo-bg);border:1px solid var(--logo-border);border-radius:2px;padding:6px 10px;flex-shrink:0;position:relative}
-.logo-block::before,.logo-block::after{content:'';position:absolute;width:6px;height:6px}
-.logo-block::before{top:-1px;left:-1px;border-top:1px solid var(--blue-corner);border-left:1px solid var(--blue-corner)}
-.logo-block::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--blue-corner);border-right:1px solid var(--blue-corner)}
-.logo-block img{height:42px;display:block;mix-blend-mode:multiply;filter:brightness(0.92) hue-rotate(180deg) saturate(1.4) contrast(0.9);border-radius:2px;opacity:0.95}
-.logo-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--text1);text-transform:uppercase;white-space:nowrap}
-.header-divider{width:1px;height:50px;background:linear-gradient(180deg,transparent,var(--borderHi),transparent);flex-shrink:0}
-.title-block{display:flex;flex-direction:column;gap:1px;flex-shrink:0}
-.title-company{font-family:var(--mono);font-size:9px;letter-spacing:0.24em;color:var(--amber);text-transform:uppercase;opacity:0.7;white-space:nowrap}
-.title-mc{font-family:'Rajdhani','Barlow Condensed',sans-serif;font-size:36px;font-weight:700;letter-spacing:0.10em;line-height:1;text-transform:uppercase;color:var(--text0);white-space:nowrap}
-.title-sub{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--text2);text-transform:uppercase;white-space:nowrap}
-.header-status{display:flex;flex-direction:column;gap:5px;border-left:1px solid var(--border);padding-left:20px;margin-left:4px;flex-shrink:0}
-.status-row{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2.5s ease-in-out infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
-.status-label{color:var(--green);letter-spacing:0.1em}
-.status-sub{color:var(--text2);letter-spacing:0.1em;font-size:11px}
-.header-right{margin-left:auto;display:flex;align-items:center;gap:16px;flex-shrink:0}
-.clock-block{text-align:right}
-.clock-time{font-family:var(--mono);font-size:30px;color:var(--amber);letter-spacing:0.08em;line-height:1;text-shadow:0 0 20px rgba(232,164,42,0.25)}
-.clock-date{font-family:var(--mono);font-size:9px;color:var(--text1);letter-spacing:0.18em;margin-top:3px;text-align:right}
-.refresh-btn{font-family:var(--orbit);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid var(--borderHi);color:var(--text1);padding:5px 12px;cursor:pointer;border-radius:1px;transition:all .12s}
-.refresh-btn:hover{border-color:var(--amber);color:var(--amber)}
-.telemetry-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:0 28px;height:30px;display:flex;align-items:center;gap:0;flex-shrink:0;overflow:hidden}
-.telem-item{display:flex;align-items:center;gap:10px;padding:0 18px;height:100%;border-right:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap}
-.telem-item:first-child{padding-left:0}
-.telem-label{color:var(--text2)}.telem-val{color:var(--text1)}.telem-val.go{color:var(--green)}.telem-val.amber{color:var(--amber)}
-.telem-spacer{flex:1}
-.telem-classify{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--text2);text-transform:uppercase}
-.main{flex:1;display:grid;grid-template-columns:1fr 240px;overflow:hidden;min-height:0}
-.launch-pad{padding:20px 24px;overflow-y:auto;display:flex;flex-direction:column;gap:22px}
-.section-hd{display:flex;align-items:center;margin-bottom:10px;position:relative}
-.section-hd::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:var(--border)}
-.section-hd-text{font-family:var(--orbit);font-size:0.68rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--text2);background:var(--bg0);padding:0 14px 0 0;position:relative;z-index:1;white-space:nowrap}
-.section-hd-count{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:0.12em;background:var(--bg0);padding:0 0 0 14px;position:relative;z-index:1;margin-left:auto;white-space:nowrap}
-.tile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-@media(max-width:1400px){.tile-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:1100px){.tile-grid{grid-template-columns:repeat(2,1fr)}}
-.tool-tile{background:var(--bg1);border:1px solid var(--border);padding:12px 14px 10px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .14s,background .14s,box-shadow .14s;display:flex;flex-direction:column;gap:8px;user-select:none}
-.tool-tile::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--tile-accent,var(--amber));opacity:0.4;transition:opacity .14s}
-.tool-tile::after{content:'';position:absolute;top:2px;bottom:0;left:0;width:2px;background:linear-gradient(180deg,var(--tile-accent,var(--amber)) 0%,transparent 50%);opacity:0.1;transition:opacity .14s}
-.br-tl{position:absolute;top:-1px;left:-1px;width:10px;height:10px;border-top:2px solid var(--tile-accent,var(--amber));border-left:2px solid var(--tile-accent,var(--amber));opacity:0.4;transition:all .14s}
-.br-br{position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);opacity:0.5;transition:all .14s}
-.tool-tile:hover{background:var(--bg2);border-color:var(--borderHi);box-shadow:0 0 0 1px var(--tile-accent,var(--amber)),inset 0 0 20px rgba(0,0,0,0.3),0 4px 16px rgba(0,0,0,0.35)}
-.tool-tile:hover::before{opacity:1}
-.tool-tile:hover::after{opacity:0.2}
-.tool-tile:hover .br-tl{opacity:1;width:14px;height:14px}
-.tool-tile:hover .br-br{border-color:var(--tile-accent,var(--amber));opacity:0.4;width:14px;height:14px}
-.tool-tile.placeholder{opacity:0.28;cursor:not-allowed}
-.tool-tile.placeholder:hover{box-shadow:none;border-color:var(--border);background:var(--bg1)}
-.live-badge{display:none;position:absolute;top:7px;right:10px;font-family:var(--mono);font-size:7px;letter-spacing:0.14em;color:var(--green);border:1px solid rgba(61,232,74,.2);padding:2px 6px;border-radius:1px;background:rgba(61,232,74,.05)}
-.tool-tile.live-open .live-badge{display:block}
-.tile-hd{display:flex;align-items:center;gap:10px}
-.tile-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);border:1px solid var(--border);flex-shrink:0;color:var(--tile-accent,var(--amber));transition:border-color .14s}
-.tile-meta{flex:1;min-width:0}
-.tile-cat{font-family:var(--mono);font-size:7px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tile-accent,var(--amber));opacity:0.55;margin-bottom:2px}
-.tile-name{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:0.02em;color:var(--text0);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tile-desc{font-size:11px;color:var(--text2);line-height:1.4;letter-spacing:0.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tool-tile:hover .tile-desc{color:var(--text1)}
-.tile-ft{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:7px;margin-top:2px}
-.tile-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:pulse 2.8s ease-in-out infinite;flex-shrink:0}
-.tile-dot.off{background:var(--text2);box-shadow:none;animation:none}
-.tile-path{font-family:var(--mono);font-size:7px;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;display:flex;align-items:center;gap:5px}
-.tile-launch{font-family:var(--orbit);font-size:7px;letter-spacing:0.14em;color:var(--tile-accent,var(--amber));background:transparent;border:1px solid var(--tile-accent,var(--amber));padding:3px 10px;text-transform:uppercase;flex-shrink:0;transition:all .12s;opacity:0.5}
-.tile-launch::after{content:' ▸';font-size:7px}
-.tool-tile:hover .tile-launch{background:var(--tile-accent,var(--amber));color:var(--bg0);opacity:1}
-.tool-tile.placeholder .tile-launch::after{content:' ○'}
-.map-links{display:flex;flex-direction:column;gap:5px;padding:10px 12px;overflow-y:auto;flex:1}
-.map-link{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .14s;text-decoration:none;position:relative;overflow:hidden}
-.map-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ml-accent,var(--cyan));opacity:0.5;transition:opacity .14s}
-.map-link:hover{border-color:var(--ml-accent,var(--cyan));background:var(--bg3)}
-.map-link:hover::before{opacity:1}
-.map-link-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--ml-accent,var(--cyan));flex-shrink:0}
-.map-link-body{flex:1;min-width:0}
-.map-link-title{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--text0);letter-spacing:0.02em}
-.map-link-sub{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:0.08em;margin-top:1px}
-.map-link-arr{font-size:10px;color:var(--ml-accent,var(--cyan));opacity:0.5;flex-shrink:0}
-.map-link.placeholder-link{opacity:0.35;cursor:default}
-.map-link.placeholder-link:hover{border-color:var(--border);background:var(--bg2)}
-.map-link.placeholder-link::before{opacity:0.2}
-.sidebar{background:var(--bg1);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.sb-section{border-bottom:1px solid var(--border);flex-shrink:0}
-.sb-section.grow{flex:1;overflow:hidden;display:flex;flex-direction:column}
-.sb-head{padding:7px 14px;font-family:var(--orbit);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text2);background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.win-list{padding:8px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;max-height:140px}
-.win-item{background:var(--bg2);border:1px solid var(--border);padding:7px 10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:border-color .12s}
-.win-item:hover{border-color:var(--amberDim)}
-.win-name{font-size:11px;font-weight:600;color:var(--text0);letter-spacing:0.02em}
-.win-status{font-family:var(--mono);font-size:9px;color:var(--green);margin-top:1px;letter-spacing:0.08em}
-.win-close{background:transparent;border:none;color:var(--text2);font-size:11px;cursor:pointer;transition:color .12s;padding:0 4px;flex-shrink:0}
-.win-close:hover{color:var(--red)}
-.no-wins{font-family:var(--mono);font-size:10px;color:var(--text2);text-align:center;padding:14px 12px;letter-spacing:0.1em;opacity:0.4}
-.qnotes-wrap{padding:10px 12px}
-.qn-label{font-family:var(--orbit);font-size:8px;color:var(--text2);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px}
-textarea.qn{width:100%;height:72px;background:var(--bg3);border:1px solid var(--border);color:var(--text0);font-family:var(--mono);font-size:10px;padding:7px;resize:none;outline:none;transition:border-color .12s;line-height:1.5}
-textarea.qn:focus{border-color:var(--amberDim)}
-.footer{background:var(--bg3);border-top:1px solid var(--border);padding:0 24px;height:30px;display:flex;align-items:center;gap:12px;flex-shrink:0}
-.footer-logo-box{background:var(--logo-bg);border:1px solid var(--logo-border);padding:3px 7px;display:flex;align-items:center;height:22px}
-.footer-logo-box img{height:14px;mix-blend-mode:multiply;filter:brightness(0.92) hue-rotate(180deg) saturate(1.4) contrast(0.9);opacity:0.8;display:block}
-.footer-text{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:0.14em}
-.footer-right{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:0.1em}
-.footer-right span{color:var(--amber)}
-::-webkit-scrollbar{width:3px;height:3px;background:var(--bg0)}
-::-webkit-scrollbar-thumb{background:var(--borderHi)}
-::-webkit-scrollbar-thumb:hover{background:var(--amberDim)}
-</style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background:
+        linear-gradient(180deg, rgba(216, 154, 40, 0.05), transparent 140px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, 20px 20px, 20px 20px, auto;
+      color: var(--text);
+      font-family: var(--sans);
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+      color: inherit;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      height: var(--header-height);
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.9fr) minmax(260px, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 0 16px;
+      background: rgba(8, 10, 14, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .header-block {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .system-badge {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border-strong);
+      background: linear-gradient(180deg, rgba(216, 154, 40, 0.18), rgba(216, 154, 40, 0.05));
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .system-meta {
+      min-width: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    .eyebrow {
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .system-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .system-subtitle {
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .telemetry-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .telemetry-card {
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+      min-height: 46px;
+      padding: 7px 10px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+    }
+
+    .telemetry-label {
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .telemetry-value {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .telemetry-value.accent {
+      color: var(--amber);
+    }
+
+    .telemetry-value.good {
+      color: var(--green);
+    }
+
+    .status-block {
+      margin-left: auto;
+      justify-content: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .status-pill,
+    .clock-box {
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+      padding: 8px 12px;
+      min-height: 46px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+    }
+
+    .status-pill {
+      min-width: 180px;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(74, 207, 124, 0.4);
+    }
+
+    .status-sub {
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .clock-box {
+      min-width: 140px;
+      text-align: right;
+    }
+
+    .clock-time {
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    .clock-date {
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .app-shell {
+      height: 100%;
+      padding-top: calc(var(--header-height) + 12px);
+    }
+
+    .workspace {
+      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      gap: 12px;
+      padding: 0 12px 12px;
+      min-height: 0;
+    }
+
+    .content-column {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .panel {
+      min-width: 0;
+      min-height: 0;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18, 22, 29, 0.98), rgba(13, 16, 22, 0.98));
+      box-shadow: var(--shadow);
+    }
+
+    .panel-head {
+      min-height: 38px;
+      border-bottom: 1px solid var(--border);
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .panel-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .panel-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .category-grid {
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .category-card {
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      cursor: pointer;
+      min-height: 98px;
+      text-align: left;
+      transition: border-color 0.12s ease, background 0.12s ease;
+    }
+
+    .category-card:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-panel-alt);
+    }
+
+    .category-card.active {
+      border-color: var(--amber);
+      background: linear-gradient(180deg, rgba(216, 154, 40, 0.13), rgba(216, 154, 40, 0.04));
+    }
+
+    .category-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .category-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .count-chip {
+      border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 2px 6px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .category-desc {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .filter-body {
+      padding: 10px;
+      display: grid;
+      grid-template-columns: minmax(240px, 2fr) repeat(5, minmax(120px, 1fr)) auto;
+      gap: 8px;
+      align-items: end;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .field-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .input,
+    .select,
+    .action-btn {
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      background: var(--bg-input);
+      color: var(--text);
+      padding: 0 10px;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .input:focus,
+    .select:focus {
+      outline: none;
+      border-color: var(--amber);
+      background: #0e1218;
+    }
+
+    .action-btn {
+      min-width: 118px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+    }
+
+    .action-btn:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(216, 154, 40, 0.08);
+    }
+
+    .action-btn.primary {
+      border-color: rgba(216, 154, 40, 0.5);
+      background: rgba(216, 154, 40, 0.09);
+      color: var(--amber);
+    }
+
+    .matrix-panel {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .table-wrap {
+      min-height: 0;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      height: 32px;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--border-strong);
+      background: #11161d;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    tbody tr {
+      height: 32px;
+      border-bottom: 1px solid rgba(57, 65, 77, 0.45);
+      cursor: pointer;
+      transition: background 0.1s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    tbody tr.selected {
+      background: rgba(216, 154, 40, 0.12);
+    }
+
+    tbody td {
+      height: 32px;
+      padding: 0 10px;
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    tbody td.mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    tbody td.score {
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .score-high {
+      color: var(--green);
+    }
+
+    .score-mid {
+      color: var(--amber);
+    }
+
+    .score-low {
+      color: var(--red);
+    }
+
+    .detail-column {
+      min-height: 0;
+      overflow: auto;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      padding-right: 2px;
+    }
+
+    .detail-card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18, 22, 29, 0.98), rgba(12, 15, 20, 0.98));
+      box-shadow: var(--shadow);
+    }
+
+    .detail-card-body {
+      padding: 12px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .detail-topline {
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .detail-title {
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 4px 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .detail-summary {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .detail-action-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .detail-note {
+      min-height: 16px;
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .detail-metadata {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .meta-box {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .meta-label {
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .section-label {
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .prompt-block {
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      padding: 12px;
+      color: #dbe4f4;
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .variable-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .variable-table th,
+    .variable-table td {
+      border-bottom: 1px solid rgba(57, 65, 77, 0.45);
+      padding: 8px 0;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .variable-table th {
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .variable-table td {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .variable-table td:first-child {
+      font-family: var(--mono);
+      width: 30%;
+    }
+
+    .detail-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-list li {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .empty-state {
+      padding: 16px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1440px) {
+      .header {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        grid-template-areas:
+          "system status"
+          "telemetry status";
+        height: auto;
+        padding: 12px 16px;
+      }
+
+      .header .system-block {
+        grid-area: system;
+      }
+
+      .header .telemetry-strip {
+        grid-area: telemetry;
+      }
+
+      .header .status-block {
+        grid-area: status;
+      }
+
+      .app-shell {
+        padding-top: 124px;
+      }
+
+      .workspace {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .detail-column {
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filter-body {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .category-grid,
+      .filter-body,
+      .detail-metadata {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .telemetry-strip {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .status-block {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .app-shell {
+        padding-top: 176px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="top-glow"></div>
-<div class="header">
-  <div class="logo-block">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBmRXhpZgAATU0AKgAAAAgABgESAAMAAAABAAEAAAMBAAUAAAABAAAAVgMDAAEAAAABAAAAAFEQAAEAAAABAQAAAFERAAQAAAABAAAOw1ESAAQAAAABAAAOwwAAAAAAAYagAACxj//bAEMAAgEBAgEBAgICAgICAgIDBQMDAwMDBgQEAwUHBgcHBwYHBwgJCwkICAoIBwcKDQoKCwwMDAwHCQ4PDQwOCwwMDP/bAEMBAgICAwMDBgMDBgwIBwgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDP/AABEIATUBcgMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AP38ooooAKKKKACkdxGpJ6CuE/aB/aL8F/st/DLUvGHjvxFp3hrQNLQvPd3coRR32qOrMewAJNfgb/wUr/4PAvFHirUtR8Lfs9aQvh7SFJiPiXVYRJezj+9DFnbH7FskY6UAf0C/EL4z+FPhPpMl94m8RaNoFnEu9pr+6SBQPX5iM/hXyb8Yv+DiP9kD4M3MtvffGPQ9TuIW2yR6PHJfsh9D5amv5I/jx+1d8SP2nvE0+q/EDxv4k8W3lxIZCdRvnljVj3WPOxf+AgV5/PHJBIVcOjejDBoA/q31P/g7g/ZAsrrZD4h8X3UYODInh25Ufqua7H4X/wDB0H+x38TdSjtE+It5pE0n/QT0e5tY147uyhRX8ie44xnikoA/uh+Bn7ZHww/ae0KLVfAHjrw54t067YiObT75JQxDYKbeucV6RaWyXZ3DBGc9OtfwgfD34z+LvhLO0nhfxLrfh6Vjkvp95Jbvn1BUgg/Sv0h/4J0f8HUXxz/ZIubDRfiDct8U/BsRWORb9gNTt4xx+7n74HZwc+tAH9WCjaoHTFLXzX/wT0/4KifCX/gpR8NU1/4e+IUnvIUH2/RroiPUNPY9njzyP9oZBr6UByKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBHQSLgjIqt5ckPB/eR9h3Uf1q1QRmgCmUgJz5cgOOwIpY42Y7UURp355NWgoFLQBWSxxL1+QHOPerNFFABRRRQAUUUUAFFFFABRRRQAUUUUAFIzhetLVC+kYTjb/D7/AMqALf2pPWis/JPc0UAalFFFABXjP7cf7bvgX9gX9n7XPiD491JbDS9LiPkQhgJtQnIOyCIHq7Hj2616r4l1y08L+H77Ur+5js7Kwge4uJ5G2rDGoLMxPYAA1/Ij/wAF8/8Agrnqv/BTX9qu+t9IvbmL4Y+DJnsvD1oHIS6wcPduM8s5HB7LigDzn/gqr/wV2+JP/BUr4zXWseJb+fTvClnIy6J4fglP2XT4s8EgffkI6sea+ULS1l1G7jiiR5ZpWCKqgszE8AAd6rk5NfXH/BCf4QaV8d/+CufwI8Pa3DFcaZ/wka6nNDKAyTmyhlvVRgeCrNbqpB6g470AfqZ/wSq/4NQvBlp8D9O+Jf7UN3dpdahajUP+EZiuzYwaRAV3A3cwIbzAMFlBCryDmvmb/grD4l/4Jv8AhC1vvBnwi8IeJfEHjPT0e2g13R9Xkg0q3kGQAXlLicA+iY9Gr7y/4PEf2xfFfwK/ZR8C/Dnw1qN1pVp8TL+5Ory28hjeW0tViJt9wwQrvKhIHUIR0Jz/ADYWrQGKaSd5HmAxEnXLerH0FAEE6IJG2kYDEBc5OPr0qCnKRnkkD2ptABRX6d/8Gun7A3wq/bi/bG8Xn4q6faeJNM8BeHDrFpoFz80GoStOkRklT/lpHEG5XpulQnIGD4p8cf2f4v8AgqF/wUA8daP+yp8HrPw/4e0dLq4ttMsJ2jiktLYsGvJTK/lwtJgbY02r8yKAWyWAPnX9mX9qLxz+yH8WNN8a+AfEOoeH9e0uQSRzW8hCyAH7jr0dD0IPFf1Yf8EPv+C4vhb/AIKl/DAaVrD2ug/FfQoFOqaRvAW+QAZurcHqhPVRkqfYg1/Irqem3Gj309rdwS29zayNDLFIpV4nU4ZSDyCCCCO1dn+zh+0Z4v8A2TvjPoXjzwPrFzofiTw9crc2s8TEBsfeRxn5kYZVl7gkUAf3eg5FFfKf/BJH/gpx4Z/4Kh/sl6T460Z4bXxBahbDxHo6yAyaVfKuWXGcmNxhkburDuCB9WUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVWurH7Q+7jPoe9WaKAKQ0tgPvr+VFXaKACiioL64W2tJZGYIsaFix6KAM5oA/Iv8A4O1P+CkU/wCzJ+ydafCHw3qUlt4q+KiMl40Mm2S10xDiU8cjzGKp9CSOlfy/sxY5JJPvX2L/AMF2v2z7r9uL/gpl8RfEYumudD0K9bw7ogD7o1tbVmTcvbDyeY+fRh6V8c0AFesfsO/tMX37G/7Xvw5+KOnxNPN4I1221OSANtN1Ar4mhz23xGRM/wC1Xk9FAH9PP/Bfb4Y+Ef8Agrv/AMEotD+NPws1TTfEg+HqnxRaqsy75LN49tzbyKMlJE4ZkODuh29TX8xl0zG5k3kFtxJx0zXR+FfjR4v8D+E9W0DRfFPiLSND15PL1LT7PUZoLW/X0ljVgrj/AHga5fl27kn9aAEqbzE+zFNn7zdnfntjpivVvgT+wl8Yv2mbpIvAfw38XeJjJja1np0hjYHuHICn86+qfA3/AAbCftkeO7dJE+GsGlq/QalqsFqw+oZuKAPlf9iv9sjxp+wX+0Lo3xJ8C3y2utaTvikhlG63v7eRdstvMv8AFG6kg9wcEYYAj0P9gr/gqT43/wCCcn7VWv8AxN+HFnp8K+IEura50a+zPay200nmLExG0kxkKQwxyvTBxX0dN/wab/tkWUbvJ4U8KFVUkCLxHbOWOOBjPevJvif/AMG9f7Xvwtgkmvfg3r9/DEMtJpjR3agf8ANAHyl8X/idqHxo+JmveLdWW0TVfEd/NqN2trAIYRLK5dtiD7oyTx+prl67f4l/s5ePfg1dSweK/B3iTw/LCcOL7T5YQp+pXH61xFAH07/wSy/4KeeOP+CWf7S9j468KyyX+kXW208Q6FLIRb61ZbstGeyyL1STGVb1Usrf17/sQ/tzfD7/AIKAfAbSPiF8PNXXUdJ1OMedbuVF1ps4+/bzoCdkinqOhGCCQQT/AA3AeW2MBs1+of8AwaifG34jeHP+Cp+geFvDl5fz+FPE9heJ4jsAx+yCCK3kkjmZfuqyyhMNjJ3Ff4jQB/VtRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV8/f8FS/wBow/spf8E+fi/46ikEV7oXhe9ksWJwDdPEY4B+MrIPxr6Br8uP+Dur4pS+Af8AgkdqulRSGP8A4THxFpulPhsFlSQ3RH/kvQB/Kld3D39zJLIzPJIxZmY5LE8kk1XoooAKKK+u/wDgj5/wSc8X/wDBV79pO38MaO8mk+ENE2XfijXTFlNNtixARM8NPJhgi+xY8KaAOR/4J6f8Exfip/wUt+KaeHPh1obTWtuQdS1e5BjsNMQ95JMdfRRkn6c1/Rf/AME5f+DXX4DfshaPp+seNtPi+KXjVAsklzqsWbG3cf8APKDpgEdWya+6P2O/2PPAH7D/AMENI8B/DrQ7XRNB0uIL8i/vruTGGmmfq8jHkk+tesUAZPhTwXpHgXRodO0fS9O0qxtxtjt7O2SCJB7KoAFauwei/lS0UAGB6Ck8tf7q/lXzz+1XrPxtsp0t/hzrnw/0h9SnNpZLqOh3Wp30rkZJUJcwxqFAZmLjaoBOeRn5o8df8E/v27Pi/cuNU/bM0fwtZMMiHw74EjtZEz1AkEwb8TQB97fEv4feFvHmgyQ+KdF0DV7AKd66paRTxKuOc+YCBX5af8FI/wBiz/gmVo+iXup/EO68DeDNSkDZfwvqAS9klHYRwbhnPYgCp/Ff/Bsv4v8AjvbxL8Vf2ufi/wCL2R95aEiAsD1X52fj09K6X4df8GlX7L/hnVIbvxKfG3jqSD7q6nqzwofqINmffPWgD+fT47/s3+AP2h/2obPwd+ybp/xI8e215J5EMOp2EaSckBdoj+6gycvIw+or+jL/AIN+/wDgiba/8EsvhDeeIPFRs9R+LfjGFBqlxD88Wk2+dy2cLYyeQC7d2AHQCvsf9mL9iP4V/sbeHTpfw08C+HPCVo6gSfYLNY5JSBjLPjcxPfJr1kDFABRRRQAUUUUAFFFFABRRRQAUUUUAedftEeL/AB54Q8ESXHw78Jad4x18vtWzvtWGnRKuPvFyrZ+mK/O79o/9pL/gp7Mtyvgr4L/CrRYgT5Mlvqh1GbGOpEm1Sa/VbA9BRgegoHc/nJ+N3xt/4K6QLJLqXhrx/pwyQ0mgCyjgxk8qi72Hb16V8wfED9u39vjwJvTxr4p/aJ0JtzO9xPZSeTBgHpIkOCCO2Op9s1/WrgegqrqOlW2rW5iure3uYz1SWMOp/A10U8Q4vWKfqv8AKzJaP49v+Hwf7TOgX+5v2ifiPbuMFRNfxxNjqPleMEdu3Fd94G/4Lyftg+EX3x/GzWdVZH3INTsorhFTByG+7k9PTvxzx/S98eP+CafwI/adtGi8cfCvwVr+4ELJPpkYkjz3VgAQfcV8LftI/wDBox+z18TrC6f4d6r4q+Fmozt5m6xumvLZm7Bo5STtH91WWu6njsK/4tBfJtf195m4S6SPgP4af8HW37Ung94jq+jfD/xnb26Hd59rJYy3BHXBQ4BPQc19XfAP/g8b8HSmOD4r/CTxX4Zb5TPqGjTJfWqDofkJ3f8Aj1fF37Vf/Bsr+1B+y1Zvd+DbXQfjN4dtAxLaU5sdWKjnc0ErFWOP7jsx9K+CNfGpeB/G914Y8U6BrfhLxFZYWfTtZtTZ3CN/d2Phs/gK9WhgMpxaUaVRwm+j/wCD/mZOdWO6uj+tD9lP/gsz+zh+2RHbR+C/iZoDalcAEabqUwsLxSei7JMAn2UmvqG3uVuow6EMrDIIOQRX8Rs2mwXEscjRL5kTB0cfKyMBgEEcjivpf9j3/gsf+0v+wrPaWvhLx9deJvC1uwz4f8SMby12ZPyo7fPGMY5VgazxvCuKormovnXlo/uKhiYvfQ/rgor8uv8Agnv/AMHPnwh/aVez8P8AxQtW+EPi64YRLLf3Ak0W8kyF+S5OPLySOJQAM/eNfpvousW3iLTYryzmhubWdQ8U0MgkjlUjIZWHBBB6ivnKtKdOXJUTT8zdNPVF6iiisxhRRRQAUUUUAFFFFABRRRQAV+Ln/B6/q72v7C3wqsRu8u58dCVsNwSlhdAZHf75r9o6/GP/AIPU9FWf9g/4Y37mQra+OBCqqOCz2F1gk9gAp+tAH8z9FFFAHW/BL4R698ffi34c8F+FrCXU/EPii/i07T7ZOsksjbVyewHUk8AAk8Cv7Nv+CVf/AATn8L/8Ey/2RvD3w90COCfU44/tev6oIQkmr6g4HmzMeu0HCop+6iKO2a/Gb/gzj/4J7weO/id4l/aC1+xWS28Ks+h+HDKmQbp0BuJ1z3WNggI/vuK/oxRdi4zmgBaKKKACvlb/AIKt/wDBUzwH/wAEs/2c7rxj4rK6lrl8XtvD2gRTBLjWrsKcL0OyJeC8hBCjoGYqrfRfxF+IOl/CrwJq3iTW7qKy0fQ7WS9vbiRsLDFGpZ2P0ANfxn/8Fhf+Ckevf8FN/wBsvxB44v3mg8O2szaf4b08tlLCxRjsGOm9/vse5Y9sUAfuZ/wbX/E34o/8FJPir8W/2qfi7rFxqUkkw8G+EdOTcmm6JCClzeJbQkkICDZrv5Zism9mOa/YBIwqAcHAxX51/wDBq1p+lWv/AARP+Fr6aYzcT3esyahtxn7R/at0Pm9/LWIfQCv0WoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKADA9BXiv7WX/BP/4Pftw+DpNF+KPgHw74styjLDPc2oW8syerQ3C4libnqjA/WvaqKAP53P8Ago//AMGmfjv4Lw33ij9mXxRe+LtFgVpG8H63JGNQt0zuItpziKb0CMEfA+85r8nr6/1TwD4rvvDXjXTbzwv4n02YwXVhf2r2jwuCfkIc5BHvjrxmv7g2XII9a+SP+Cl//BGv4Of8FPfA8lv400aPTfFttCU03xNp8Sx6hZnsGPSWPP8AA+fYg816+X51icJJcsrx7Nu3y7GU6MZH8os8CXMTRyKro4wVIyDX1N+wV/wW0+L/APwS+WBdH1Cbxh8P4JYxc+EdXuHe1CFwCbaXl7V8MSCn7sn7yNXnP/BRv/gmj8af+CV/xTj0rxvZLr3g6/n8vTPEtrD/AKLeRjgDflRHJjqshz3BI5ryGvuqdbCZvh5qK1tbVapvZ/0zjalSkj+sf/gmz/wV0+EH/BTzwAuoeAdWey8R2UatrHhjVSINW0ljwS0YyJI84xLGShyASrZUfVNfxOeD/iB4r+DPjOw8XeAde1Dwr4v0aVZ7LUbCXyZsrzsZh95DyCpyp7giv37/AOCIn/ByLoP7Z39n/C74zGy8HfFyHEFvdyFbew8Rkd0ycRzEclOjZ+X0HwmbZRVwNS0tYvZ/p6nZSqqaP1oopkUwlQEEc+9PryTUKKKKACiiigAooooAK/LL/g73+HL+NP8Agkne6oibv+ET8TabqTHGdod2tc/+TFfqbXyp/wAFs/gdJ+0L/wAEsvjh4aggNxdyeFrm+tYwMl57ZftEQHvviWgD+K6nwKXmUKCSTgAdTTXXY2K9D/ZL8Dj4l/tS/Djw8yCSPW/E2nWUinnKSXMat/46TQB/YR/wRP8A2VLf9kD/AIJofCrwoluLe/k0iLVNSAXBe6uF82Qn8Wr6wrM8I6PH4d8MWGnxACGwt0tkx02ooUfoK06ACiiigD8rv+Ds79syb9nX/gnEfBmmXP2fWPinqK6ZlHKv9kixJP05GfkH0Jr+VjzAsu4DOecGv2i/4PM/izP4w/bK8F+EhMsdl4P8P+e0ZbHmT3L7gQPXYB+VfiznjFAH7Pf8Gsv/AAWh0X9krxjqPwO+JuowaZ4N8Y3iXnh/UpGCW+kX7KEeKT+7HMFjOeiupz984/pU02/g1WyiuYJY5oZ0EkbxsGV1IyCCOowa/gQhmaBwynDDofSv1g/4I3f8HO/jf9hWzsfAnxRtrrx58NYAIraXzM6poycDEbsf3kYAzsb3wRmgD+pmivDf2Nf+Ch3wj/b08Eprfw08Z6Rr6GMSTWKzhL6zz2lhJ3rj1xj0Jr3ASqf4l/OgB1FFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7Qv7O/g79qb4V6r4N8daJY+IPDusRGK4tbmMMBwcOh6q4zkMORX8vX/BZb/gir4s/4JK/FD/hKvDn9peI/glrs7CK9ClpNJlcnEE46AgYCv0cLjg8V/WDXJfGL4P8Ahv49/DfWfCfi7SbTXfDuu2r2l7Y3MYeOeNgQRg9+eD1BrbD4ipQqKrTdmhSimrM/i5t7hLqCOWM7o5FDKcYyCMisvxF4TXWLy2vba4m07VLJ1kt7uAkSRkHI6EHjtyCD+IP1L/wWY/4JNeJ/+CRP7S9s9lcalqvwZ8WSudC1KVWlWzJLM1nMeAsqAZDD76c4JDCvm+ORZY1dGDowypByCPUV+nYHG4fNcPKNSPk1+q6+jPOnCVOV0ftN/wAEA/8Ag4Zn8T6jpfwL+P2qGDxBERa+G/E9820aqgACQTtkjzPR9xz35r9xrW5W6hV1ZSr8qQcgiv4itW0eLWIUD70khYSQyxttkhcdGU9iK/eT/g3F/wCC3s/xwt9P+AHxh1eFfH2lQbPDWrTvtHiC3RT+6YseZ0UZ/wBpR6g18VneRzwUueGsH+Hk/wDM66NZT0e5+y9FIrBxkEEeopa8A3CiiigAooooAKzvFGiQ+JPDeoadcKHgv7aS3kUjIZXUqRj6GtGmum5SMkZ9KAP4Z/2+/wBmy6/ZC/bO+JPw3uYXhHhPXbi0t9wILWxcvbt/wKFoz+Nan/BMaaKD/goZ8F2mZVjHi/TslugPnrj9cV+p/wDweSfsEv4J+MvhD486LZv/AGb4otl0LXnROEu4tzQytgdXjLKScfcQV+Nv7O/jsfC349+CfEzOY08Pa9Zak7A4IWGdJD+imgD+8W3/ANV261JWF8OfE8fjXwFousxMjxatZQ3iMpyCJEVhz+NbtABSN2+tLSEZoA/kl/4OrvE8/iD/AILG+N4pZXdLDTdOt41J4QCAdPzr83q/Sr/g7B8Ky+G/+Cxfi+V0xHqej6bdRtj72YMH9RX5q0AFFFFAHUfC/wCMnin4J+KbfW/COv6t4c1a1YPFd6fcvBKjDoQykGv0a/ZP/wCDsn9qD9n9Ley8UXnh/wCKGlQ4XbrtqUuwo/6eIdrs3u+6vy9ooA/o4+Df/B7J8OdXhhTx/wDB3xXocgAEkuh6lDqKt6kJKIcfQsfrX0N4I/4O4v2PPFSp9u1zxx4bLAZGo+HZH2/+A7S/pX8oNFAH9jPhH/g45/Yy8b2TT2fxt0eFI8bzeaRqVqEJ6AmS3UZ/Gu30L/gt7+yZ4jC/Zv2gvhgu/oLjWEtj+PmbcV/FosziIpubYTkrnjPrioqAP7idA/4KY/s7+KboQWHx1+D9xcE48keMNPEv/fBl3fpXqXg/4r+FviFCJdA8SaBrkRGQ+n6hDcqR65RjX8Gc2tT3McKOVJgG1Xx8xHYE98ds9Kdpfie/0W6jns726tJ4jlJIZmjdT6gg8UAf30mRR/EOPelDqe4/Ov4hPg7/AMFT/wBpH4CTRHwn8cvijpEEGNlr/wAJFdT2gx0/cSu0R/Fa+0/2bv8Ag7x/ar+D9zBF4tl8EfE6wTAk/tfSFsrplH92W0MSg+7Rt9KAP6qaK/Gj9lH/AIPM/gp8TGt7D4qeC/E/w11CQhXvbQjWNLX3LIFnX6eU31r9Qv2aP20/hV+1/wCD49d+G3j3w14wsGA3nTr5JZICf4ZEzvRv9lgD7UAeq0U3zV3AZGT096dQAUUUUAFFFFABRRTJJ0jALMq59TigB9BOKYsyumQwI9RVW7u0k+T5toIycHBHpQBbRw44IP0OadWXp00iMFKx5bgkd/fA4FalABRRRQB4t+3b+xT4M/b6/Zs8SfDjxxYC80vXLYrDKFHm2FwoJiuIj1Do2CPpg8E1/JD+0Z+y54z/AGF/2lvFfwh8c28o1LwvKGsrwxlY9Rsm/wBTOh7qy4wOdpDKTla/tGdA6FT0IxX5b/8ABy5/wS9H7WX7NMfxV8H6a03xH+FcL3QEUYMmraaeZ7c4GWIA3p7ggYDGvTyjHvCYmNS/u7P0/wCBuZ1Yc0bH87HQ1Nomvah4Z1mx1nQ9QuNK1nTJo7vT9QtX2TWsqMro6MOmGVT+FUdM1GLV9PiuYSxjlGV3DBHsRVjPNfrEowrU7PWMl96Z5mqZ/UF/wQg/4KyWX/BTn9lhG1eW0tvid4HdNL8V2S/KZJMEJeoP+ec20n2dXXsCfu1GDrkEEHuK/ji/4J9/tzeJf+CY/wC2z4a+Lugpd32hk/2b4t0qInbqeluV80Y/vqFV0Y/deJM8Zr+vz4W/EfRfi58OtD8U+Hr+DU9E8Q2UWo2F1C2UuIJVDo49ipBr8jzLAzwmIlRlt0fddD1Kc1KNzoqKKK4CwooooAKKKKAPCf8Agoz+xZoP7fv7IPjT4aa6ihddsm+xTkAmzukG6GUe6viv4rvj78EPEH7N/wAZvEPgbxRYzafrnhm+ksbuKRSvzKcbhn+Fhgj2Ir+67xn4u0rwJ4X1DVtZv7XTdL06Bri6ubiQRxQRqMlmY8AAV/JX/wAHHP7bXwb/AG4v22f7f+E2mSltMtf7P1bXcbI9dlQ4WRExnCgY3Hk0Afv3/wAG6P7Y8X7YP/BLjwBdSXSTa34Ng/4RrVVLZkEtsAqu3pvTY30NfeVfywf8Grf/AAUcX9jb9ribwL4o1GOx8C/FN0skkuH2xWuqDiBh2HmD5CfXZX9TVrL58KvkENyCOhoAlooooA/m1/4PT/gg/hz9qr4aePYYj9m8R6JLp88uMAzQScL7/Iwr8Ta/qv8A+Ds/9kxvj/8A8Ez7jxbaWrz6n8MNTj1VSq5K20pEU3v3jP4Gv5UXXaxHpQAlFFFABRRQDg0ABGKKkmk81s7VHHOO/vUdABRRRQAUUUUAFFFFABXUfDD4u+J/gn4utdf8IeINY8NazZNuhvdNu3tp05zjchBxxyOhrl6KAP2Y/wCCc/8Awd5/E74K3um6B8ctKj+IvhyBVhfWbYJbavCOm5gAI5cDHGFPBJLGv3s/Yn/4KL/CX/goJ4Bi8Q/DLxfp2uQld1xZbxHfWJ/uywn51P1GK/h7r0H9nb9pnxx+yn8SbDxZ8P8AxLqfhfXtPcPHc2cxTeAc7XA4dT3VgRQB/d0rCRcjkGlr8dv+CL3/AAdB+GP2uZdL+HPxol07wh8QZFSCz1Ufu9O1p8YwSeIpD6E4JPFfsFaXkd5Cjo6OHG4FTkEeooAnooooAKzNaheTlN2P0rTrOuZzK7AFsDoOxoAgt3aK1EZJz0Ix7f41JDbM7ggdQA2Bwf8AD/JogtzcNgA8dzx9K0YYFgUhe/WgBIoRGuOcj+LuakoooAKKKKACqt/ZRalYzW80aTQzoY5EYZV1IwQR6EVaooA/k+/4LZ/sGn/gnx/wUA8RaNYWktv4O8eM/iPw8RHiKISMfPtwfVHHHsa+UDX9I/8Awc5/sMyftU/sET+LtH01rzxT8J7pdetBH/rZ7YcTxA9TkEHH+yTX812iaj/a2lQXHAZ1w4AI2uOGHPowI/Cv0XhbMfa0Pq0370dvT/gf5HBiadnzLqWs8V+4v/Box/wUIuviB8LvFP7Pfii7jXVPAUsup+HOwk0+SQmW3QHosUjqyj+7NjotfhyK9L/Yh/a21D9hj9t74WfEyzuZIbHSNZW01WJTxc2U4CTofrGGx6HB7VtxTgvbYT2qesNfW9k/8xYadpW7n9kqsGXI6UtZvhfXLTxN4csNSsJ47mx1C3S5t5ozlZY3UMrA+hBB/GtKvzQ9AKKKKACmTMViYjggZp9fOf8AwVb/AGuov2HP+Cf3xQ+JHmIt7oeiyrpobo97NiC2X6GaRM+2aAPw9/4Olv8AgtLqPxg+K2pfs9fDzWZIPCfhebyfE91avtOp3qnm23DrHH0Yd3yD92vxTdyxyfvVp+KdcvvFGu3mq6jczXt9qM8lxcXMrFpLiRm3O7E8liTkk9c1lE5NAFy11O4sLqCWKaWOS2cPEwYgxsDkEehB9K/qi/4Nu/8Agtlp/wDwUA+B9l8M/HOqxRfGHwVZBJDMQreIrOP5Vuk/vSKMCQDn+LoTt/lj0Hw1qHijU7ey0yxutRvruQRQW1tEZZp3PRVRcsxPoBX1r+zx/wAEzv21PhB4s0P4j+Afgr8ZtC1bQbiO+0/ULbQri3uYmB4KxsA7A9Cu0hgSDkGgD+zRHEi5ByDS18O/8Em/+Cql9+1r8PbPwt8Y/DGr/CT42aV5dpf6F4g06bSP7ccg4uLJZ1QvuKsWiXJT/dK19xUAcX+0H8JbD48/A/xZ4L1OKOax8U6VcaZMrjIAljZN31BII9wK/hW+KHg2b4d/EnX9AuFKTaNqE9m4PYxyMv8ASv7uPiv8RdJ+EPw51vxRrl2ljo/h+ylv7ydjxHFEhdj+QPHev4Wfj/4/X4p/HLxf4kQBY9d1i6vUA6BZJWYfoaAOOp6t5aZHU9/Smt2+lLv/AHZXA65zQAjMXbJ5JpKKKAJYoTPKqL95yFGTgZNRUUUAFFFFABRRRQAUUUUAFFFFABRRRQBNa3clnOssTtHIhyrKcFT6g9jX7hf8G/f/AAcoX/wy1fRfg38fdbkvfDU7JZaF4ou2y+lsSFWG5c9Yj0Dnle/HI/DenRytC2VODQB/fbpWq2+uWMFzbTRXFvcRiSOSNtyupGQQRwQQauMwXqcV/Of/AMGz3/Bf+f4aeIdF/Z7+NGvbvDuoutn4R8Q303/ILmY4SxnduPJdiFjcn5Gwp+VgU/ohe9SaMJ5mXYHAyOccE46kZoAkfUgsmBgjoM96ht3DXRC8qTg0yGBrrJAzxkZPArRhtlhAwOe9ACpCsRJUAE9afRRQAUUUUAFFFFABRRRQBkeNfC9p448Harot/ELix1a0ls7iM9JI5EKMPxBNfxr/ALS/wOu/2Wv2o/iN8M7/AMtbjwb4gurKEKMF7ffvjfHoQ+Ae+PY1/Z86h0IPQ1/Mp/wdgfCJfgT/AMFR9F8WxCSHSfiT4fguLgB9sK3ER+zsxB43YjVmPoa9rIcasNjIyk9Ho/mZVoc0LI/Po9ayPHekvrPhe6jjMvmxr5qLGTl2XkLgdc+nrjuBWweaBX6jXoxq05UpbNW+882Ls7n9QH/BuT+1s/7Wn/BKv4e3d1c/adV8HxP4Yv2Y5ctbYEZPt5TRj/gJr7wr8CP+DMb49HRPHXxs+EMzNFCWi8Q2EUjH5FVvJYKDyQVZWz3xX771+L1KbhNwlunY9ZO6uFFFFQMK/I3/AIPHPiMPCn/BNfw3oX2treLxT4xtYLhF6zxQ29xOFx3/AHkcX061+uVfij/wey6VPN+xh8JL1Y2Ntb+M3idx0DPYzlQfwRqAP5sa9L/ZL/Zc8VftmftCeGfhx4MsTe674mu1tosg+XApPzyuR0RFySfavNK/df8A4Mrv2ZtN8S/Ef4pfFS9tYp7zw9FBoenyOuTbtMDJKV9yoUfhQB+rX/BKf/gjP8Kv+CXHwv0+20DRrLWPHd1ABrHiu8hWS+upCPnSJjzFDnoiY4GWyea+x0to41wqgD2p6II1wBgUtAGH4x+H2hfEXw9c6P4h0TSte0i92/aLHUbVLq2n2uHXfHICrYZVYZHBUHqBXjvjn4Twfs3eE7rXfDvxa1/wFomjQRyS23ii+PiHQkWInc8v22T7YimI7QlveQoCqNtOGDwf8FB/+Cknwv8A+CbPwcuPFXxD1yO1lYFdO0uEh73VJQMhIo+p92PA7mv5a/8AgrX/AMFyvil/wVJ8ZT2l7dz+F/h1azFtP8N2kxEbAHiS4YY818dj8o7DvQB9P/8ABef/AIOL9b/bS+HknwY8AHTtN8L+Zs8T6ppdzLcW2vSxudsdtJJFE/2bKhvmQEtxlgu4/j6Tk0rMXYk8k0lABRRS7vlxQAlFAOKCc0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAFqxuY7Z2Z0kZsfIUk2FT69Dmv6Y/+DYX/gtVP+2f8Nj8EPiTqCt8R/A+nRjR9TnnzL4m09Mj5t2SbmABQx6uhVuqua/mSr0L9mb9obxF+yt8cvDXj/wnfS6fr/he9jvrWaM7clSMo3qjLlSDwQxzQB/dpaR+XGDkncM5NTV4L/wTj/bf8P8A/BQv9knwn8TvD7JGms2gS+sw2Tp92mFmhPfhunqpU9696oAKKKKACiiigAooooAKKKKACvw8/wCDz/4Z+d8PPgf40t0tkuNN1TUdLeadlSOLzYYmiclsj5WVm9yoA5r9w6/J7/g780We4/4J0eEdQtZvs91a+PLCCOXYH8sTW9yjHB4PArfCu1aD81tvv0FLZn8+FFFHev2k8g+uP+Dcv4yP8If+C2fgy1Ia3tfF2n3GkSguSt07wN5Z9sMoGP8AYz3r+raJt0YPrX8cX7A/j7/hWH/BQX4K695R/wCJb4ntZFnVGzCzTxR4LDgBld+vBKjuBX9jsX+qX6V+U8QYb2OOmr35tfv/AK/pnpUJXgh1FFFeKbBXxB/wcF/sKah+31/wTS8a+GtCtluvFPh9U8RaJF1aa4tss0S/7UkRkjHu4r7fpk0fmxMuAQwxg0AfwI3+nXGn38lrcRSQXMLmOSKRSrxsDgqQeQQe1f1I/wDBo9+yD4p/Zt/4J+6z4j8S2T6a/wAStZXVrK3lUrL9mjj8tHYHkBuo9q+o/iB/wQ0/Ze+KXx9b4l618JPDt14pluReTSDelvcTZz5kkCkRuxPOSK+sNH0uDQtLgtLWCK2trZBHFFEoVI1AwAAOAAKALtfJv/BXX/gqp4O/4JT/ALMt14v10rqPifUybPw3oiPiXU7rGct3WJBy7fQDkivoz4u/E/Rfgt8Mtd8WeI9Qi0rQvDtlLqF9dynCwwxqWY+5wOB3OB3r+NP/AIK7/wDBSjxD/wAFP/2w9f8AHepy3Vt4etnNh4b0t3ymm2CH5Fx03ty7t3Zj2wAAebftoftv/ET9vf43an48+I2v3OsatqDnyYWci20+LPywwx9EQcdOuMmvJryaOeXdFGYxtAILZyccmq9fRP7Af/BMP4vf8FH/AIgpofw58N3F1YRSBdQ1u4Qx6bpinvLL0zjkIMsewoA+fEtpJbd5VRjHGQGYDhc5xn8jXrf7MX7CHxf/AGzNbFl8NfAHiLxYxk8tp7W2Ito2zyGmbCAjPI3Zr+ib/gm9/wAGmPwi/Zfgh1v4uXsfxg8TsyyrbT2zWmkWRGcAQb280jP3pDg44Va/VfwR8OtC+G3h+30rQNH03RtPtkCR29nbrDGgAwAAoAoA/mj/AGbf+DOL4+fE22trzx34o8H+AreYB2gDvf3Kr6EKFVW/EivtD4T/APBlf8HdAhik8X/Ejxtr8/HmRWqQ2kX4EAtX7ULEqHIAHGKdQB+Yfhj/AINJf2QvD0Ci40HxfqcoHL3GvSEH8Atb1/8A8Gq/7HV5brGPBGtRYGC0esyqx/HFfo9RQB+TXxC/4M7v2XPFELjRLzx74clYcOmqi52n/ddcV8n/ALQv/BlBrOnQT3Hwv+LVpqGzJjtPEFn5Tyeg8yL5R9SK/oVrw346/EX4t/BP7RrOheE7H4m6AGLy6ZYXAsNbtkzk+V5mYbkgcBD5RwPvseKAP5OP2uv+CGX7SP7Fdvf3fizwBf3mk2JJOp6ODfWkiDq25BuAA5O5QPevkCW3e3JDrtIOCD1Ff2t/s0/8FSvgh+1zr954S03Xxovji3JgvvBnii1Ol61bvjmNraXHmf8AbMuMc96+fv8AgpN/wbY/Aj9vnSLzVdG0yH4ZeOZSZxrOiwKkdzJg8TwcI65PJG1vQigD+SGivqb/AIKQ/wDBI34wf8ExPHr6d470OSfw/cyFdO8R2KtJpuoAZIAfHySYGSjYPpkc18s0AFFFFABRTkTzHAGBn1r9Fv8AgjF/wb6ePP8AgqBdp4s12a68FfCazm2Tau8GbnWCCQ0dmrDBxjBkOVB4AY5AAPzpEbMMgE04W8hIGxsnpx1r+iH9rb42fsHf8EEdDfwR4E+F3hr4qfGawjVLmG5kW9lsZMfevbp9/lkk7vJQZHfYMV+Sv7bv/BZ34uftuw3mnagPDXg/wzdEgaN4d0mCyhVP7jSBfNcf7zGgD5GdSjEEEEcEHtTaUsWbJ5NJQAUUUUAfsl/waKf8FGJPgd+1FqHwQ1y+ePw58SV83TBI/wC7ttRjUkAZ6eYuV46kL6V/TSvKjPXFfwW/Bj4pap8Evit4f8XaLPJb6r4dv4b+2kRtpDxuGHPvjH41/b1+xJ+0jY/tc/sq+AviNp8qSW/i3Rbe/baQQkjIBIvthwwoA9ZooooAKKKKACiiigAooooAK/Jz/g8H1mW0/wCCaXhuyt5Uhurzx3p8kbt0jEcNyxduD8q8EnHAzX6x1+IX/B6V8WpfDXwT+CnhizCTXOsa3fXr25TzBIscMUYVl7hvNcYrSi17SPNtdbb/ACE9j8TDSd6XHNHev2w8gk8JeJovD3xq+HhA3Xg8T6dNDhiDHtuEy/oeDtwf72e1f2x6Vc/bNNt5f+esav8AmM1/En4K1Kxi/aO+HkEqRy3Uut2aIcMXg3XMYVwPuEAhsg89MdK/tq0WFrbSLWNuWjhVT9QBX5fxNU5sfLVOyS0/Xz/4B6OHXuFuiiivnzcKKKKACiiigD5E/wCC5P7OfjH9qv8A4Jb/ABa8GeBRNP4kv9OiubSzhYh9QEFxFO8AxyWZI22gfebA71/Gff6Be6Zq01jdW01veQSGKWGSMq8bjqpGMg1/fU6h1wQCD2NeVan+xF8HdZ+Ko8c3nwq+Hd34vEom/tqbw9aPf+YOj+aY92/P8Wc+9AH85P8AwRR/4NkfGP7aWq6b48+Ndjq3gb4W/Lc2tlIv2fVfEqkbl8tWG6GAjB8xlywI2Ag71/pS+An7Ovgv9mP4Y6Z4O8B+HNI8L+HdJjEdvZ2FssSD1Zscs56lmJYnkk13AjVTkAA/SnUAIFCjA4FLRRQAUUUUAFFFFABSMgfqAaWigD5V/wCCiv8AwSP+E3/BRzwc8fiTSv7B8YWsZ/szxZo6rbatp7jlf3gGZIw2CY3yOOMHBr8tPEH7d/7Zv/BvD8RrHwz8aI7j49/AiecW+l+I3kf7WkI6Kty25o5Qv/LGfcDjCOBzX761yXxe+DXhv47/AA91Twp4u0TTvEPh3WYGt7ywvYhJDOp9RjgjqCMEEAgg0AfOP7OX7ZH7N3/BbX9nDVdK0ifQ/HGiarbeRrfhjWYFS+08sOk0DHchB+7LGSMjKPkZr8Bf+C83/BvP4j/4Jq61cfEL4dx33ij4K6hNhpSpkvPCsjthYboj78TE4ScAc4R8MVL+sf8ABWP/AIIj/FT/AII2/F6P4/fsz654ii8EadP9pc6fIzah4ZyclJh0mtjwMsCOgYdCftb/AII+f8HFXgL/AIKO+ER8HPj9Z6Lonj/VrVtMdrxF/sbxajKVdNr8RysuQYmyG6qTyAAfzGSIY2wcZ/lTa/Sj/g4U/wCCJ9x/wTO+NA8X+C7Se5+DfjC4b+zWJaRtDuDljZyN3XHMbE5Kgg5K5P5sKu44oA+wP+CKX/BNO8/4Kh/tt6H4Kk8628JaSv8AaviW8jODHZow/dKezyH5B7biORX7n/8ABwR/wVI0v/gkH+yboHwW+DcNl4e8deJNM+yaaNPQRr4W0tR5ZuEVcbZnIKxnsVduoXPKf8GcH7M9p8Of2FfFPxMngRNU8c63LbpcMuGS1tQEC5/u79zfjX4e/wDBY79ru+/bY/4KM/FDxvcXclxYSatJp+lIzZWCytz5UKgdB8qAnHUkmgD5s1zXLvxNq91f393cXt7eytPcTzyGSSaRjlmZjySTySaz6KKAClLE9+lJRQAUUUUAFf0//wDBnT+00/xU/YC8Q+Ab25828+HmtslurHL/AGadRIuP9lWyBX8wFfsb/wAGZnxsk8Jft3eOPBLTusHi3wwblI92AXtpVOR74koA/pvopE+4PpS0AFFFFABRRRQAUUUUAIzbFJPav5lf+Dvj9oV/iX/wUp8HeCNJu5Y28BaDDHN5KmUxTXLGdmKjriNlBHcA1/S14m1u18MeH7/Ur6Zbey0+3e5nlbpHGilmY+wAJr+L39tj46Sftl/8FAvH3xN+1Tsmt6/ezxqCdsVtGVjhjBIweDyAT8pHTNduXYeVbEQhHuvXdbEVJWi2YXWgdTRR0r9jPKOq/ZO+EEXxV/bk+E1uzz/arvxRpltbQqBtkZLgStnr/CD6cr3yK/tEiOYxiv5Of+CD3w3b4zf8FifhJpotnli8MTzeIpnZcooghcj68/ljvnj+saH/AFS/SvyziOVN46Sprbf16/5HpUL8iuOooorwjYKKKKACiiigAooooA+bv+ClX/BTb4ef8EvPgX/wmvj5rydby5FlpunWShrnUZypbYmeAAoJLHgAV8FeAv8Ag8M+E+vahJBq3wk+JOj+S+15Ge2mUe4wfm/AmvbP+Div/gkt4l/4Ki/s4+Hf+EF1CztvGfgG/fUbCyvTi21NJECPExwwDcKVJGOCO9fzpfG/9n7x5+ytrY0r4m+D9d8D6kWKt/adsY7eZxwdk4HlSf8AAWPHavaybA4XFTcMRU5X02V/v67GVWcoq8Vc/pB+DH/Bzf8AsmfFu5jt7rxlqfg+5kGSviDSprONOQOXKkYywH4j1r7R+EP7Qngj4+aGmo+C/FWh+JrKRQ4l068ScAH1CnK/iBX8YlL4O8Z+Nfgf4pj8SfDjxdr/AIR162KtG2n3r28bbV2gbV4zgADII46c5r1cdwnUpw58PLm8rWfy119DKGKTdpH9t9FfzbfsDf8AB2p8WfgXfWmg/tAeGm8b+HYtsMmuWSCHUoQT95iP3U3XJ6E+or90f2KP+CjPwk/b/wDAEXiD4Y+KrLW4wgN1Ys4iv7BiB8s0J+ZcE4yMr6E18nUpzpy5Zpp+eh0pp6o94ooByKKgYUUUUAFFFFAGfruh2fibRrvT762t72yvYXgngnjEkUyMCrKyngggkEHrX83/APwcPf8ABvNd/sparf8Axz+Bunzt4GMv2zW9DswfN8Nybv8AXwgcmDccnHKfTmv6UKo6zo1rr+m3Fle28N1a3cbQzQzIHSVGGGVgeCCO1AH83n/BM7/gsP4Z/b7/AGZdS/ZH/asv47u38RWh0/w14wvmDSQTgAW6Tu3SRGwVlJ5xhvU/k/8AtYfs1a/+x/8AtEeJ/h34nh8nVfDN41u7gfJcR9Y5kPdXQqwI9a/Sn/g46/4IRz/sH+Prn4w/C+xmf4Wa7cGW/srdST4ZunYkAY6W7H7p/gPy9MV+dHxx/ah8T/tXaV4RtvE0Vpf654V086WNaYH7Xe2qnMS3DHhvKGQrHnBx2FAH9P3/AAQFhj0D/ggb4YuNO2rcDRNUugV4ImxIc/XIFfyh/EqWNvG2qrFI0qi7lLuwwZH3nJr+pT/g1P8AiVp3xV/4JJ2/hjzftZ8M6vf6TeA8ZSQ7lGPQq1fzO/tn/Bu+/Z8/az+IvgrUkZbzw14gvLGQMMZ2SsAfpjFAHl1FFFABRRRQAUUUUAFfff8AwbK+Pm8C/wDBY74XIrbRrhutLbnG4PCz4/8AIdfAlfZn/BCnVovC/wDwVj+A/kBZbu519BI+OI1a3l+Ue/PJoA/svT7opaRPuD6UtABRRRQAUUUUAFFFV72dLa1lkkYRoilmYnAAHegD88v+DmL9u5f2L/8AgnB4h0/T7sweKPiN/wAU/pqo+JFRxmeQeypx/wACr+Xz4SaRLpnhJHmxuu5DcLxghWCgfntz+NfZP/BxB/wUFl/4KBf8FJJ9E0Cea48GfDOU6PYGOUqk0kb5uJ8jlcuNoP8Asjua+XulfacI4HmnLFS6aL9TkxU9OUKTvS54rK8X65N4f0gzQQrNISw+bO1MIzZOO2Vx1HWvuK1WNKDqT2RxpXdkfrd/wZsfs9Xfiz9ob4ufFnUrKRE0axh0S0M8RR0lmIckZ6Hylwe3PHFf0LbcDjivgL/g27/ZRk/Ze/4JkeEbi9tPses/EB5PFF3Ew+aFJwBbxZ/urCqFfZq+/q/GMRPnqyle929T1oqysFFFFZDCiiigAooooAKKKKADA9BXKfFr4KeE/jv4NuvD/jDw7o3iXR71DHNaajapcROp6jDA11dFAH4l/wDBS3/g0m8NeL7TUfF37NmunwJ4gB88+GLyRm0m9YZO2J+WhPJwG3JzjCjmvxE+Mvgjx5+yx8W7jwH8VPBureEPEtm2ySKeJsTZYhXjAB8yNscOjMCa/tvr52/4KE/8EzvhR/wUp+ENx4V+JWgQ3ciK503WLZVi1PRpWHEkE2CRzjKNlG/iU8Y9LAZticI/3UtO3T/gfIznSjLc/kYIrU+E/wAQPEfwA+Ilr4v8Ba/qvhDxRYtvgv8ATLhoHznPzAcOPZgRXv8A/wAFJf8AglB8SP8Aglz8Tl0vxQbjxJ4N1aUx+H/FdtbstnfKq5EUo5MNyACWRz8xyULKOPmyv0yjUwuYUFJpST6PW3+TPPalCR+6H/BKf/g6O0j4gahp3gH9pGG18LeIZVS3tPGEGE0nUnJxi4HAtnPHzD5D321+x+ha7a+ItKgvbC4gvLO6jWWGeGQSRTIRkMrDggjoRxX8UGM19pf8Evv+C4PxR/4Jv6jZ6BPJcePPhW0mJ/D17cEzaYp6vYytny8dfKb92e2wndXyWZ8Kzpp1MI+Zduvy7/1udNPEp6SP6nqK8S/Yl/b7+GP/AAUE+Fkfiz4a+JLTVrVAqXtk37u+0uYjmK4hPzRsPyI5BIINe218e007M6wooopAFFFFAHN/FP4YaF8Zfh9rHhjxLplrrGha5avZ3tncRh4543BBUg+xr+SH/gur/wAEltZ/4JW/tBS2WkQXVx8MPFkj3OhamwLHGdxs5G6Bo88f3lweSDX9gVeFf8FCv2FPB/8AwUO/Zg8R/DfxhbqbbVIC1jeKgM2mXSjMc8Z7ENjPqMigD8GP+DO79uSy+EX7THiv4N63epbWPxEtxf6SJH2qb+AYaMZ6s8XQD/nmayv+Dvv9gyf4Jfth6T8Z9Ks2Xw58ULZYL6RIyUg1O3RVdSRwPMiCOM/eIk9DX53ftHfAX4kf8Et/207rw/qD3egeNPAGqJeabqEOVEwR90NzGejI4APoQSDnmv6Jf2cP2mvhT/wcyf8ABMXXfhr4pubDRviTb2KDUrI4a40TUo1PkalbA4Z4WbJ4OSrvGSM0AfywUV6d+1r+yx4w/Yy+PniT4b+OdLk0rxH4Zu2tpkbmO5QH5J4m/jjkUhlYdQfwHmNABRRRQAUUUUAFfbn/AAQJsU8cf8FbfgZayLturLWzLHIBkSIlvL8rcduxr4jr9I/+DU/4YN8Q/wDgr94Uu9m6PwxpN9qzMeilVWMf+jKAP62EOVH0paF6CigAooooAKKKKACvzW/4OUP+Cpo/YC/ZFm8LeGL7Z8TfibG+m6THCwM1lbkbZrnb2wrbVP8AeYe9fa37YP7V3g/9ir9nvxN8RvHGpRaZoPhyzaeRmPzzyYIjhjHVpHbCqo5JYV/I7+2J+1/4v/4KI/tY+JPi941X7O2psIdC00OHi0iwA/dRJ6fKcsepdnPevQy3L54yuqUNur7L+tiKk1BXZ5R4S8MnQEklkM1xd6gxluZ5SA4PXbwTzk9iR1OegO4BigUV+s4bD06FNUqSslseXKTk7sQ8muz/AOCfX7Jusft7/wDBQzwJ8LLUTvp2o6pDd6vKgci2sYf3szbSxUAQjoQNz49q808deJJfC2hG5ithclnEZ3Z2xZBwzYHTIAxxnPWv3l/4NB/+Cc0/wd+AGt/tAeKLV18QfEwNZaF9oj/fRaZG58ybJ/57SqMf7MKno9fJcWZgoxWFhu9X6f8ABOrDU9eZn7I+FPD9n4S8NWGl6fbxWljptvHa20MYwkMSKFRQOwCgD8K06KK+DO0KKKKACiiigAooooAKKKKACiiigAooooA4f9oH4A+E/wBp/wCEeteBfHOi2mv+F/ENu1re2VymVkU9CD1VgcEMCCCAQQa/mC/4K+f8Eg/Ff/BK/wCKj3dqb3xF8HtcuWTRtcdcvpROStpdtjAYAcPn5gM8HIH9WtcV8dfgZ4X/AGkfhlqng7xjpFprfh3WYWgu7S5jDpIpGMjPRh1BHIIrtwGPq4SqqtJ+q6NdmROCkrM/jEByMjkGivrX/gsV/wAEivFf/BKL4mTalaRaj4j+DuuXLf2Rq6xl5dKYnP2a4x6DOG7gcV8j29zHdwrJE6yRuAQynIIr9Ry3NKONp81N69V1X9dzzqlNwdmdP8Ffj98Q/wBlP4qWPjz4XeKL7wv4q0/avmRSEwXsQbJhnjPyyRnnKsD1yMEA1/QJ/wAEi/8Ag5I8B/toWNl4J+KH2H4d/FaFVhkjnk8vTNWfoJLeRj8u4/8ALNjkHgFutfzr1XvtNS+eJ9zxzQNuikQ4ZD6g15ec8OwxTdai+Wf4P/L1NKVdx0ex/blHOlwiujK6uAVIOQQe4qav5iv+CY3/AAcgfFL9hjUrHwn8UYrv4i/DZGCRXDz7tS0mMKxOyR8mRQqMdhyRxg5OB/Qh+x1+3d8MP27/AIZweKfhp4q07X7F1BmgjkC3VkxH3JYj8yEe4x71+eYjDVaEuSrFpndGSauj2Wimq4ccEH6GoL68TT7KaeRlWOBDIzMcAADJJrAosFwvUgfjXk/x6/bj+EX7MMDP4/8AiN4O8KbBkrqOqRQuP+Ak5z+Ffz+f8Fg/+DqXx58aPFeteB/gJcP4M8G2cr2reIoznUdXVWKl4s/6mM9v4iD2r8evG/jzW/iTr8+q+INV1HWtTujulu765e4mkPu7kk/nQB+4H/By3+2H+xz/AMFAvg/Z6z4N+I+n33xc8JsI9Om0+wlni1a2J+a2klVdowTuVmOBgjuK/F74D/tB+Mf2W/ilpnjLwD4h1Hw14l0aQS2t9ZS7HHcqw6Oh6FGBUjqDXC0UAfe37dX/AAWN0z/gp9+z5Z2Pxl+G+nj4weGLdYdB8ceH5Ps5nj3jfb3du3DREb2BViVc5UAFgfguUYkNNooAKKKKACiiigAr93v+DKX9nhtV+Inxd+Jc8B8jT7O20K1lK/dkc+bIAfddtfhDX9Zn/BqV+zufgd/wSh8PaxcQ+XfeP76fXHcjBkhJ2RfkqmgD9L1XaoHpS0UUAFFFBOBQAVzPxS+KegfBvwHqniTxNq1homgaPbPdX1/dzCKG2jUZLMx4FZP7Qn7RPg79l34Wap4z8da9p/h7w7pELS3F3cyBRwM7VHVmPZRya/mI/wCC0v8AwXN8T/8ABTrxqfDHhoX/AIc+Dmh3C3EOkDi78SAONlxcKxUNGSAFRS2CRlSSMb4fDzrT5IClJJXZh/8ABbH/AILKa1/wVm/aFj0jw2dR0z4LeBbkz6VZoHSbVZQ203sqqQd7DdsTOUTcRliQfl7pRRX6nlGUxwNNwUuZvd2t/mebVqubuFHUUd6y9SN7r/ibSvDei6bJrOv67cRW9jYxxea9xIzhUG3/AHsfiOO5Hdi8VTw9J1ajskZxi5OyPVf+CUf7DHjD/gqZ+21oXw6RpoPDOnXD3/inULaEx/YtMR1EsYYgEF+I0VuSzgtnbkf2JfDjwTpfwy8BaN4d0Syg03RtCs4rCxtIV2x20EahI0UegUAfhXxv/wAEJf8Aglhbf8Ez/wBky3j1pYrz4neNdmqeK7/aCyylf3dorf8APKFSRgcFix719y1+P4rETrVHOcnL13t+J6sYpKwUUUVzlBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBxnx1+Bnhj9pH4Yat4O8Y6Vbaz4e1uB7a7tZ0DK6sMZGejDqCOQa/mF/4LB/8ABHbxN/wSo8cSatpdlf658GNVuXOn62kReTSGZiVtroKOuThZOjcd6/qtrlfi58IfDfx0+HuqeE/FukWWu+Hdct2tb2xu4hJFcRsMEEHv3BHIPNdmBx1bCVfa0Xr+a7ETgpKzP4tLO9h1C3WWCWOaJujowYH8qlr7U/4LW/8ABATxl/wTC8R6n8TvhdBf+JvgxdSE3OY2luPDW48R3K4y0GeFnHTID4JBf4f0bxBZ6/AZLS4jmC/eA4ZOSBlTyM4PUc1+kZPndPHRcWuWa6X381+vY4KtFw9C4RmovhF8bPiR+xX8QB4y+FvizWfDmrC5SRI9PTKykkkpIucGPttIP9alorszHLaOMp8lVbbPsRTqODuj9s/+CYn/AAdx+HfHFpp3hj9o3RX8G6tOI0TxTY2zHTbgt915o+WiBweVyDg8DFfsP4R+Inhb9or4VPqnhrXtI8Q+HtctZI4b7TbtZ4JkZSDh1JGRnkdQa/i61zRYPEGlTWdwGMM4wdpwRg5BHuCAfTiuw/ZU/a4+Of8AwT98W/2v8H/iDq2ixM4M2muyzWd2o6CWCQNFJ/wJeO2K+GzHhjEUPeoe+vx+47aeIi/i0O6/ax/4N7f2nv2ePi7r2iaZ8LvEvjLQLO7lXTdZ0aAXcN/b7j5b4U7lYrjKkDBz1614/L/wSQ/actgC/wAB/ikAfTw9cn+S1+0n7CP/AAeKaLqYs9B/aF+H+o+Gr/KwnxB4cgkurSVydqmS1Y+YmSrcxNJnBwgxX65/sy/tv/Cb9snw4NT+G3j/AMNeLUVVaa3tLsC8tcjIE1s+Jojz0dFNfNypzj8SaN7o/jj/AOHTP7TP/RCPip/4Tl1/8RR/w6Z/aZ/6IR8VP/Ccuv8A4iv7c8L/ALP50oRT2FQM/iL/AOHTP7TP/RCPip/4Tl1/8RQP+CTH7TR6fAj4qE/9i5df/EV/br5a+go8tfQUAfxIH/gkd+0757x/8KG+KO5Bk/8AEgnx+e3B/Cof+HTH7TP/AEQj4qf+E3df/EV/br5a+go8tfQUAfxE3P8AwSh/aXtYwzfAf4rkE4+XwzdsfyCVV/4dX/tK/wDRBvi5/wCEre//ABuv7gAgHaloA/iX8Ef8EiP2l/HXiyw0iL4HfFC1l1CdIFmuvDt1bwxbiBud3QKqjqSTX9jH7GnwQT9m79lf4feBUiSE+FtAtNPkRfuiVIl8zHtv3V6hTWkCDJIA9zQA6im+cgA+ZeenPWvkX9uD/gt5+zn+wFb38XjTx7Y6j4g08fvPD2gD+09UR84CSJGdkBOP+W7Rg9iaaTewH10XCDkgH3NfFn/BS7/guN8Gf+CbOj3Gn61rdn4k8fSxN9j8MadcK10Xx8vnNyIVJ/vc+gr8a/8AgoV/wdZ/G/8Aass9Q8NfBnw3L8KfDV0pRdSEwn1m6hYY3GYhY4CwK4EeWGT85r81bLwTPq2vy654jv7jXNbunM001xI0u+QnJZixJds55P5d69XL8mxWLlaEbLu9v+D8jKdaMdz2v/goT/wUm+M//BVz4kf2x431FNK8MWFyRp/huMyxWVlHkchRjzGxwWLZPqOteb5xSdsDilxgV+jZXlNLAwcYat2u+9jgqVXN6hQKAK574j+Mf+ET0X902L26ysHybguMbmPbgHj3I4IzXbicRChSlWqPRERi5OyKnifx7b6Pp+7TLmwMxjW4+zvC2ZRIynIIK4b5ixBySDnA61+4/wDwa9f8ERLrwOth+0j8WtMmOv6hEW8JabfITLZxMCDeShhkOwOEHZTnqa8D/wCDdP8A4IBXv7V3irTvjz8bNHmj8BW84udC0eeAQ/8ACQzKQVuHUAf6OD0/vkegr+kXS9Nh0awhtreNIbeBQkaIoVUUDAAA4AFflea5rUxs03pFbL9bXetj0qVJQRajjEa4HSnUUV5RqFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj32qSw3OFBUE4GRnPP1rYJxWbdSifJK9DgYPLe1AFTxFplr4o0aax1C3hurG+haC4t5oxJHPG42sjIwIZSMgg8YPIr8Rf8Agsb/AMGwel6tbaj8UP2b9FTSdZ02FrqXwdYRbLa7C/MUt0UZyVyvl8dSBkbVX9wo7d5XwBwODx2q/BaiNOfvEYJFVGTi1KO6A/h3sPFNxo2rPoniK0vNG16zkNtcW13btDIsq8EFSPlOexwc8Y6Z3q/qC/4Kt/8ABBb4Qf8ABTfRbnU7uwTwl8RViItfEmnxASSsBhVuEGBKvTk/MOx7V/O1+3D/AMEufjh/wS58Z6ha/EbRr/VvCLhn0/xJZxSXVndsCAF3gfuiR/C+MEDpzn7fKOJ7tUcX/wCBf5/5nHVw/WJ5DmlzmqOh+JLHxJFI1lOswiO1xtKsvpwQDj39j6Vdx719pTqQqRU4NNPqtUcjTWjFxWXZ6FeeF9dsdY8M6xqnhjW9LQLa3+m3L29xGVACESKQ4IAxkHOO/ArTwaM461licJRxEOStG6HGTi7o+q/2dv8Ag4l/bG/ZD0u2iuPHMHxQ0q3k2Cy8VWR1ErEMAMblXS5LHPd3989K+6P2ev8Ag9b0C6aKw+KvwY1rSrtG8qW58M6hHeKzZwSYJ/KKfQOxr8bap6joFjqzKbq0t5yhyN6Bua+VxnCNOTvhp8vk9fxOmGKa+JH9Nfwl/wCDn79kb4pTC3n8eXvhq8UgSxaxo9zCkBKliGlVWi42tnDnhT6V9GfDr/gqx+zf8V4Y30H43/DLUS/SOLxBbeYPqu7Ir+RTFYviDwLZ+I7MQzl0WLi3MeE+zLhQVAHBHy9wepxjiuSvwfOML0ql35q36v8A4f71UcUr6o/tb0T4++B/E0YfT/GHhq9Ruhh1KFwfyatKX4m+HLdSz69oyqOpN7Hx+tfxD3Hwn0WSFlit5bZzjEkc7ll57biR+YrHj+Ds0c6mbV7q5t+d8aDY544wSSOvrXnVuFsfBpJKXmnt99n9yZosTBn9tfin9q74Y+CIGk1j4geDtNjQZZrjVoIwPzavFfij/wAFt/2VPhHG51b47fDlpIwd0Fnq8V3N/wB8RFm/Sv5FYvhRpMIGyOTIuFn+ch/lXP7rkfc5OR1PGScVQT4G6aB893fMfZlH/stXLhXHK1rP5iWJgf0u/Gb/AIO6P2TfhlFKui6l4w8dXEfAj0fRXiUn/fuTEpHuDXxb+0N/wes+J/EE0th8JPg1pti0mVgvvEd9Jdyk9j9mt9gH/f41+RFv8LdEgkRzZ+Y8ZBBd2IOOxGcEexFbGnaRa6TEUtYIrdTjIjQLuxxk+p+tddDg+u3++mkvK7/yJlio9Ee6ftaf8FdP2rv22Y2tvEHxd8Q6P4evE2XWjaUf7GtjkncpS2AMqEYIWWR/c1866P8ADzTdJkkco128sYikE2HVvuk/KeOSobnoTxxgVv4oFfU4XI8HQlzxhd+f6HNKtOWjYmfalopM+leuZC4oqDUtSg0awkubmQRQQjLMe1S/AX4W+P8A9sv4oWfgz4YeEtZ8V67fDyglkrrDBuwd7vxtVepZtmADg8152PzTD4RfvZa9upcKcpbGH4t8cRaDGILUC91KZvKit4zuKse7Y6Dnp1P5kfrP/wAEKf8Ag231T45azofxp/aN0lrXw4iJc6N4Ymh8qfWcEmOe8GPliwVIXq6gZwp5+wf+CPX/AAbK+EP2ONVsviN8ZRZeP/iizrcwWrL5ul6A+AVCKxPnSJ0DsNowcA8Gv1jggW3TavSvznNs5rY2bTdoLZfq/M9ClSUF5lLQtDtPDek21hY28VpZWcawwQRIEjgRQFVFUcBQAAAOmK0KKK8Y1CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKRmCjmhmA61WvZwVAVgcH5sHkCgB09wkyFFbJ9qrQWwuFfqD1wKhiDTSLgEbuCpzgVoWdt9nXnrjrQAtpb/Z1wep9OlTUUUAFYXxA+HehfFPwvd6L4j0mw1vSb6MxXFnewLNDMp7FWBBrdooA/F3/gpL/wAGlfg74sLq/ib9n/VF+H3iG6HnPolyN+mzsrbwsT43wEkDodvA9K/Ef9rL9jj47f8ABPTxW+lfE3wDqGkhrkudSWDfp98p6eXNGPLySScn5icZGBg/2ssNwIPQ8VgePvhh4e+Kfhi40bxJoum65pV3GY5rW9t1mikU9QQwNdeHx2IoO9KbX9f1+PcmUIvdH8T/AIa8SW3inTftVt5ioHKMrgBkI7HGR0IPXvWhX9C/7b3/AAaf/Ar9oB7/AFL4Y3Wq/B7XLtlmaPS283TJpAWK5gY5QDOcRlRnHoK/K79rv/g3Y/a7/ZUuJrnSfDWl/FbQLbk3fhtt14yerW77WDH0QPX2uC4touCWJTUurWxxzwrv7p8cYFLj61yPivWvE3wh1m80fxjoHiPw5rcLKpttXsPJlg9d0TLC3T1/THOro3j/AEnxBqItbS68yYqWUFGTfjrjIGT/AIGvbwmdYTEWUJ2b6PR/cYypSjujYx70uKKK9UzDFFFFABRRRQAnXvRj3pJpkt4XkkdY40BZmY4CgdST6U6i/QBMUuK5DXfjBYW9hK2miS/nVC2fLZY4uQAXzg4yR0+mRmvcf2I/+Cd37S//AAUXsftXwx+HzXGhGXyG8Q3QFpp0TAkNiSVv3m0jBEauQeoFeFieI8DRfLzcz/u6/jsbRoTfQ88wPSub0LXPEvxI8d2nh/wZ4fm8UahejEFtp8UtzNKWHy/Kqggjgkc+mQc4/a39jT/gzbNrqVlrXx2+JVxqEsYXfovhdjBAAr7hGbhwG2ZAwEWPGBgjFfrr+yT/AME5fgv+w/4Yj0z4beANC8OBAA91HD5l3OQMbpJmy7H3Jr5nMOK6tWKjhlyee/6HRDDJO8tT8KP+CfX/AAaq/Fr9pd9O1/49ao3w98JE+a2hWbh9SvFLB9r4JWPjAGckADvkn94P2OP2B/hX+wn8OofDXwz8J6f4etY1VZriNA13ekfxzSn5nJOTzxz0r2iOJYhhRgU6vl61epWlz1ZNvzOlRSVkFFFFZDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKbK/loTVN77dHlAd3p17cUAPu7jfG6LuyDjdjjPpVLYXYKRnnA+YZA/n+dTC0aeVZQW6c4xzzn8DmrltCYlO7kk59cUALbWwhUepHNS0UUAFFFFABRRRQAUUUUAFRyQLKTuBOffipKKAOD+Lv7NHw8+Pmivp3jfwT4W8XWDggwavpkN5Hz6CRSAa+I/j9/wa2/si/GuW6uNL8Fav8AD6+vFKST+FdZms1ZT1UQyeZAAfQR1+jFFNNp3QH4dfF//gzJ07WYMeC/2g/EOnxRptS08ReGLbVBIMg4eSOSEE5UfN5bHr6mvm74k/8ABmn+0lbAnw/8VvhXryRxtErX09/YXE0bHJRitvLkZ7M5Uetf0rUVvPGV5/FNv5slQitkfy3+Iv8Ag1o/bV0OxNrZeHvhjqCwwG2hlsfEgR0QgD5Gm2EHgdccgVzFv/wa/ftyATRz/D3wlOkweUEeJdLjMcxGBKrK4O8HnPX+Y/q3oraWZ4qTTdR6f1tsL2cex/KVpP8AwaUftoeJF2XuleCdOVjub7b4rikGcsc/uw/OXY/ifU16X4d/4Myv2k7/AMTQi7+J3wl0/SQ8Zkn+3ajJfw7E+U+QLXyyVPyj99jHIPav6aqimtllwcYI6EHBFcntJXvcqyPwj+GH/Bl0JNLSHx98d7y9h83zZbfQfDK2pm4H3ppLo7zkA7mi3Z719Wfs6f8ABq5+y98DNXXUdf0/xb8TNQaAwE+KNX86IgnlfKhSJCD6EHGTzX6XiCQf8tX/ACFLHarG5b7zep5NXPEVZ6yk3/wNgUUtjxj4D/sFfBj9mOUn4ffCzwH4PuWURmbS9Et7eYr1+aRVDN+JPNeywadDbxhUQKqjAA6CpggBzjmlrEYUUUUAFFFFABRRRQAUUUUAFFFFABRRUFxdiGQA5x3oAnoqi14cnrRQBeooooAKKKKACiiigAooooAhvzttWxWekas+zBCuTkZ98UUUAaNrbiEHksT3NS0UUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABWdqOPtHIzgjHPSiigBqLlAct09aKKKAP/9k=" alt="Otter Werx">
-    <span class="logo-label">Otter Werx</span>
-  </div>
-  <div class="header-divider"></div>
-  <div class="title-block">
-    <div class="title-company">Industrial Magnetics Incorporated</div>
-    <div class="title-mc">Mission Control</div>
-    <div class="title-sub">NPD &middot; INTELLIGENCE &middot; OPS &middot; SALES &middot; ENGINEERING</div>
-  </div>
-  <div class="header-divider"></div>
-  <div class="header-status">
-    <div class="status-row"><div class="status-dot"></div><span class="status-label">NOMINAL</span></div>
-    <div class="status-row"><span class="status-sub" id="openCount">0 TOOLS ACTIVE</span></div>
-  </div>
-  <div class="header-right">
-    <button class="refresh-btn" onclick="refreshAll()">&#x27F3; REFRESH</button>
-    <div class="theme-switcher">
-      <button class="theme-btn active" onclick="setTheme('dark',this)">Dark</button>
-      <button class="theme-btn" onclick="setTheme('twilight',this)">Twilight</button>
-      <button class="theme-btn" onclick="setTheme('daylight',this)">Daylight</button>
-    </div>
-    <div class="clock-block">
-      <div class="clock-time" id="clock">--:--:--</div>
-      <div class="clock-date" id="clockDate">--- -- ----</div>
-    </div>
-  </div>
-</div>
-<div class="telemetry-bar">
-  <div class="telem-item"><span class="telem-label">REGISTERED</span><span class="telem-val" id="totalTools">&#x2014;</span></div>
-  <div class="telem-item"><span class="telem-label">ACTIVE</span><span class="telem-val amber" id="activeTools">0</span></div>
-  <div class="telem-item"><span class="telem-label">PENDING BUILD</span><span class="telem-val" id="pendingTools">&#x2014;</span></div>
-  <div class="telem-item"><span class="telem-label">LAST REFRESH</span><span class="telem-val" id="lastRefresh">&#x2014;</span></div>
-  <div class="telem-spacer"></div>
-  <div class="telem-classify">CLASSIFICATION: INTERNAL USE ONLY</div>
-</div>
-<div class="main">
-<div class="launch-pad">
-
-  <div>
-    <div class="section-hd"><span class="section-hd-text">Project Management</span><span class="section-hd-count">06 SYSTEMS</span></div>
-    <div class="tile-grid">
-      <div class="tool-tile" style="--tile-accent:#4a9fe8" onclick="launchTool('npd','./project_managment-IMI/IMI-NPD_Dashboard.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M16 28 L9 18 L12 18 L12 6 L20 6 L20 18 L23 18 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="16" y1="2" x2="16" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 8 Q16 4 24 8" stroke="currentColor" stroke-width="1" fill="none" opacity=".5"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Project Mgmt</div><div class="tile-name">NPD Dashboard</div></div></div>
-        <div class="tile-desc">Active portfolio &mdash; MoltenLava, SMaRT, Niron, FeatherLift, RoboMag. Phase gates SCOUT&rarr;ITERATE, health, burn rate.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-npd"></span>project_managment-IMI\IMI-NPD_Dashboard.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-      <div class="tool-tile" style="--tile-accent:#4acfe8" onclick="launchTool('editor','./project_managment-IMI/NPD_Project_Page.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="18" height="22" rx="1" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="10" x2="18" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="8" y1="14" x2="18" y2="14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="8" y1="18" x2="14" y2="18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M21 19 L27 13 L29 15 L23 21 Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Project Mgmt</div><div class="tile-name">Project Explorer</div></div></div>
-        <div class="tile-desc">Load/edit any project.json &mdash; 93-task WBS, 10-col Kanban, progress telemetry. v6.0.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-editor"></span>project_managment-IMI\NPD_Project_Page.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-      <div class="tool-tile" style="--tile-accent:#3ddc84" onclick="launchTool('tasks','./task_managment-IMI/IMI_Task_Tracker.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="3" y="3" width="26" height="26" rx="1" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="10" x2="29" y2="10" stroke="currentColor" stroke-width="1" opacity=".5"/><line x1="3" y1="17" x2="29" y2="17" stroke="currentColor" stroke-width="1" opacity=".5"/><line x1="12" y1="3" x2="12" y2="29" stroke="currentColor" stroke-width="1" opacity=".4"/><path d="M6 14 L9 17 L14 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Project Mgmt</div><div class="tile-name">Task Tracker</div></div></div>
-        <div class="tile-desc">Variable tasks, 10-col Kanban board, Eisenhower matrix prioritization.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-tasks"></span>task_managment-IMI\IMI_Task_Tracker.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-      <div class="tool-tile" style="--tile-accent:#9de84a" onclick="launchTool('registry','./project_managment-IMI/IMI_Project_Registry.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="3" y="6" width="26" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="26" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="22" width="26" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Project Mgmt</div><div class="tile-name">Project Registry</div></div></div>
-        <div class="tile-desc">Portfolio admin &mdash; search, filter, edit all PMS projects. Working days calculator.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-registry"></span>project_managment-IMI\IMI_Project_Registry.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-      <div class="tool-tile" style="--tile-accent:#e8a42a" onclick="launchTool('bizcase','./business_case_workbench/NPD_Business_Case_Workbench_v3.0.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M4 26 L4 8 L10 14 L16 6 L22 16 L28 10 L28 26 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Project Mgmt</div><div class="tile-name">Business Case Workbench</div></div></div>
-        <div class="tile-desc">Monte Carlo, Bass Diffusion, Real Options, AI Analyst. Wharton-tier NPD financials. v4.0.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-bizcase"></span>business_case_workbench\NPD_Business_Case_Workbench_v3.0.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-      <div class="tool-tile" style="--tile-accent:#e8a42a" onclick="launchTool('pipeline','./opportunity_development/IMI_Opportunity_Pipeline.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><circle cx="6" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="26" cy="16" r="3" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="16" x2="13" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="19" y1="16" x2="23" y2="16" stroke="currentColor" stroke-width="1.5"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Project Mgmt</div><div class="tile-name">Opportunity Pipeline</div></div></div>
-        <div class="tile-desc">CAPTURE &rarr; SCREEN &rarr; INVESTIGATE &rarr; GRADUATE. LLM prompt generation for analysis.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-pipeline"></span>opportunity_development\IMI_Opportunity_Pipeline.html</div><div class="tile-launch">LAUNCH</div></div>
+  <header class="header">
+    <div class="header-block system-block">
+      <div class="system-badge">IMI</div>
+      <div class="system-meta">
+        <div class="eyebrow">Industrial Magnetics Incorporated</div>
+        <div class="system-title">Prompt Execution System</div>
+        <div class="system-subtitle">Structured AI command interface for NPD, sales engineering, product management, and manufacturing</div>
       </div>
     </div>
-  </div>
 
-  <div>
-    <div class="section-hd"><span class="section-hd-text">Intelligence &amp; Competitive Analysis</span><span class="section-hd-count">01 SYSTEM</span></div>
-    <div class="tile-grid">
-      <div class="tool-tile" style="--tile-accent:#e87040" onclick="launchTool('ci','./osint_ci-imi/IMI-CI_Dashboard.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="4" x2="16" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="26" x2="16" y2="28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="26" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Intelligence</div><div class="tile-name">CI Dashboard</div></div></div>
-        <div class="tile-desc">29 competitors &mdash; Bunting, Eriez, MPI, Ohio Mag, Tecnomagnete. Battlecards, dossiers, patent tracking.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-ci"></span>osint_ci-imi\IMI-CI_Dashboard.html</div><div class="tile-launch">LAUNCH</div></div>
+    <div class="telemetry-strip">
+      <div class="telemetry-card">
+        <div class="telemetry-label">Prompt Count</div>
+        <div class="telemetry-value accent" id="headerPromptCount">00 / 00</div>
+      </div>
+      <div class="telemetry-card">
+        <div class="telemetry-label">Filtered Rows</div>
+        <div class="telemetry-value" id="headerFilteredCount">00</div>
+      </div>
+      <div class="telemetry-card">
+        <div class="telemetry-label">Active Filters</div>
+        <div class="telemetry-value" id="headerFilterCount">00</div>
       </div>
     </div>
-  </div>
 
-  <div>
-    <div class="section-hd"><span class="section-hd-text">Production, Operations &amp; Reference</span><span class="section-hd-count">03 SYSTEMS</span></div>
-    <div class="tile-grid">
-      <div class="tool-tile" style="--tile-accent:#40e8d0" onclick="launchTool('erp','./production_operations_processes/IMI_Production_Process_Reference.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="3" y="3" width="26" height="26" rx="1" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="11" x2="29" y2="11" stroke="currentColor" stroke-width="1" opacity=".6"/><line x1="11" y1="11" x2="11" y2="29" stroke="currentColor" stroke-width="1" opacity=".6"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Production &amp; Ops</div><div class="tile-name">Production Process Ref</div></div></div>
-        <div class="tile-desc">405 item classes &middot; 159 routings &middot; 6 value streams. Master table, VS, product families, tube circuits.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-erp"></span>production_operations_processes\IMI_Production_Process_Reference.html</div><div class="tile-launch">LAUNCH</div></div>
+    <div class="status-block">
+      <div class="status-pill">
+        <div class="status-line"><span class="status-dot"></span><span>Nominal</span></div>
+        <div class="status-sub" id="statusSubline">Selection ready | internal use only</div>
       </div>
-      <div class="tool-tile" style="--tile-accent:#a06ee8" onclick="launchTool('prodref','./imi_product_reference/IMI_Product_Reference.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><circle cx="12" cy="10" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M5 26 C5 20 19 20 19 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="8" x2="29" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="13" x2="27" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="18" x2="28" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Reference</div><div class="tile-name">IMI Product Reference</div></div></div>
-        <div class="tile-desc">Walker &middot; IMI full catalog. Lifting, grates, drums, electromagnets, eddy current. Opti-Series circuits.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-prodref"></span>imi_product_reference\IMI_Product_Reference.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-      <div class="tool-tile" style="--tile-accent:#4a9de8" onclick="launchTool('vendors','./vendor_reference/IMI_Vendor_Reference.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M4 8 L16 4 L28 8 L28 28 L4 28 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="12" y="18" width="8" height="10" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="14" x2="12" y2="14" stroke="currentColor" stroke-width="1.2"/><line x1="20" y1="14" x2="24" y2="14" stroke="currentColor" stroke-width="1.2"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Supply Chain</div><div class="tile-name">Vendor Reference</div></div></div>
-        <div class="tile-desc">1,619 active vendors &middot; $10.2M+ spend tracked &middot; rep contacts &middot; commodity mapping.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-vendors"></span>vendor_reference\IMI_Vendor_Reference.html</div><div class="tile-launch">LAUNCH</div></div>
+      <div class="clock-box">
+        <div class="clock-time" id="clockTime">--:--:--</div>
+        <div class="clock-date" id="clockDate">--- -- ----</div>
       </div>
     </div>
+  </header>
+
+  <div class="app-shell">
+    <main class="workspace">
+      <section class="content-column">
+        <section class="panel">
+          <div class="panel-head">
+            <div class="panel-title">Category Card Grid</div>
+            <div class="panel-meta" id="categoryMeta">Command domains</div>
+          </div>
+          <div class="category-grid" id="categoryGrid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div class="panel-title">Filter Strip</div>
+            <div class="panel-meta">Instant client-side filtration | no reload</div>
+          </div>
+          <div class="filter-body">
+            <div class="field">
+              <label class="field-label" for="searchInput">Search</label>
+              <input class="input" id="searchInput" type="search" placeholder="Search title, use case, purpose, output">
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="departmentFilter">Department</label>
+              <select class="select" id="departmentFilter"></select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="stageFilter">NPD Stage</label>
+              <select class="select" id="stageFilter"></select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="complexityFilter">Complexity</label>
+              <select class="select" id="complexityFilter"></select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="valueFilter">Value</label>
+              <select class="select" id="valueFilter">
+                <option value="0">All</option>
+                <option value="5">5 only</option>
+                <option value="4">4+</option>
+                <option value="3">3+</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="confidenceFilter">Confidence</label>
+              <select class="select" id="confidenceFilter">
+                <option value="0">All</option>
+                <option value="5">5 only</option>
+                <option value="4">4+</option>
+                <option value="3">3+</option>
+              </select>
+            </div>
+
+            <button class="action-btn" id="resetFiltersBtn" type="button">Reset Filters</button>
+          </div>
+        </section>
+
+        <section class="panel matrix-panel">
+          <div class="panel-head">
+            <div class="panel-title">Prompt Matrix</div>
+            <div class="panel-meta" id="matrixMeta">Dense execution catalog</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <colgroup>
+                <col style="width: 18%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 14%;">
+                <col style="width: 10%;">
+                <col style="width: 8%;">
+                <col style="width: 6%;">
+                <col style="width: 7%;">
+                <col style="width: 7%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Department</th>
+                  <th>NPD Stage</th>
+                  <th>Use Case</th>
+                  <th>Output Type</th>
+                  <th>Complexity</th>
+                  <th>Time</th>
+                  <th>Confidence</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="promptRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <aside class="detail-column">
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="detail-topline">Prompt Detail Panel</div>
+            <h1 class="detail-title" id="detailTitle">No prompt selected</h1>
+            <div class="tag-list" id="detailTags"></div>
+            <p class="detail-summary" id="detailPurpose">Select a prompt row to inspect the execution package.</p>
+            <div class="detail-action-row">
+              <button class="action-btn primary" id="copyPromptBtn" type="button">Copy Prompt</button>
+              <button class="action-btn" id="copyPackageBtn" type="button">Copy Package</button>
+            </div>
+            <div class="detail-note" id="detailNote"></div>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Selection Telemetry</div>
+            <div class="detail-metadata" id="detailMetadata"></div>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Prompt</div>
+            <pre class="prompt-block" id="detailPrompt"></pre>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Variables</div>
+            <div id="detailVariables"></div>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Expected Output</div>
+            <ul class="detail-list" id="detailExpectedOutput"></ul>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Coaching Notes</div>
+            <ul class="detail-list" id="detailCoachingNotes"></ul>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Failure Modes</div>
+            <ul class="detail-list" id="detailFailureModes"></ul>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Follow-Up Prompts</div>
+            <ul class="detail-list" id="detailFollowUps"></ul>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="detail-card-body">
+            <div class="section-label">Scalable Architecture</div>
+            <ul class="detail-list">
+              <li>Catalog layer: categories and prompts are isolated as structured objects and can be externalized to JSON, a CMS, or an internal API without changing rendering logic.</li>
+              <li>State layer: a single state object manages active category, filters, selection, and telemetry, which keeps interaction rules deterministic and testable.</li>
+              <li>View layer: category grid, filter strip, prompt matrix, and detail panel render independently from the same state to avoid layout coupling.</li>
+              <li>Execution layer: prompt copy actions package the selected instruction set and variables for downstream AI systems, copilots, or internal orchestration services.</li>
+            </ul>
+          </div>
+        </section>
+      </aside>
+    </main>
   </div>
 
-  <div>
-    <div class="section-hd"><span class="section-hd-text">Sales &amp; Marketing</span><span class="section-hd-count">01 SYSTEM</span></div>
-    <div class="tile-grid">
-      <div class="tool-tile" style="--tile-accent:#ffd644" onclick="launchTool('sales','./sales_marketing_reference/IMI_Sales_Marketing_Reference.html')">
-        <span class="br-tl"></span><span class="br-br"></span><div class="live-badge">OPEN</div>
-        <div class="tile-hd"><div class="tile-icon"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="22" r="3" stroke="currentColor" stroke-width="1.3"/><circle cx="26" cy="22" r="3" stroke="currentColor" stroke-width="1.3"/><line x1="13" y1="13" x2="8" y2="19" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="19" y1="13" x2="24" y2="19" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-        <div class="tile-meta"><div class="tile-cat">Sales &amp; Marketing</div><div class="tile-name">Sales &amp; Marketing Ref</div></div></div>
-        <div class="tile-desc">11,598 customers &middot; 99 reps &middot; 14 territories. Customer map, ship-to map, territory analysis. v2.1.</div>
-        <div class="tile-ft"><div class="tile-path"><span class="tile-dot" id="dot-sales"></span>sales_marketing_reference\IMI_Sales_Marketing_Reference.html</div><div class="tile-launch">LAUNCH</div></div>
-      </div>
-    </div>
-  </div>
+  <script>
+    const systemModel = {
+      meta: {
+        systemName: "IMI Prompt Execution System",
+        subLabel: "Structured AI command interface for internal engineering work",
+        organization: "Industrial Magnetics Incorporated",
+        version: "1.0.0"
+      },
+      schema: {
+        category: {
+          id: "string",
+          name: "string",
+          description: "string",
+          accent: "string"
+        },
+        prompt: {
+          id: "string",
+          title: "string",
+          categoryId: "string",
+          department: "string",
+          npdStage: "string",
+          useCase: "string",
+          outputType: "string",
+          complexity: "string",
+          estimatedTime: "string",
+          confidence: "number",
+          value: "number",
+          tags: "string[]",
+          purpose: "string",
+          prompt: "string",
+          variables: "Array<{name:string,type:string,required:boolean,note:string}>",
+          expectedOutput: "string[]",
+          coachingNotes: "string[]",
+          failureModes: "string[]",
+          followUpPrompts: "string[]"
+        }
+      },
+      categories: [
+        {
+          id: "npd",
+          name: "NPD Decision Support",
+          description: "Convert opportunity signals, customer inputs, and concept options into gate-ready direction.",
+          accent: "#d89a28"
+        },
+        {
+          id: "sales",
+          name: "Sales Engineering",
+          description: "Scope magnetic solutions fast enough for customer response without losing engineering rigor.",
+          accent: "#53c7c7"
+        },
+        {
+          id: "pm",
+          name: "Product Management",
+          description: "Standardize requirements, readiness reviews, and launch logic across active programs.",
+          accent: "#5aa0e6"
+        },
+        {
+          id: "mfg",
+          name: "Manufacturing Readiness",
+          description: "Surface build, routing, supplier, and process risk before decisions harden.",
+          accent: "#4acf7c"
+        },
+        {
+          id: "ci",
+          name: "Competitive Intelligence",
+          description: "Compress fragmented market signals into practical response plans and positioning guidance.",
+          accent: "#de5a5a"
+        },
+        {
+          id: "apps",
+          name: "Application Engineering",
+          description: "Translate handling, separation, workholding, and automation problems into usable technical briefs.",
+          accent: "#a184f4"
+        }
+      ],
+      prompts: [
+        {
+          id: "voc-requirement-stack",
+          title: "VOC to Requirement Stack",
+          categoryId: "npd",
+          department: "NPD",
+          npdStage: "Discover",
+          useCase: "Translate customer voice into explicit requirements",
+          outputType: "Requirements Matrix",
+          complexity: "Medium",
+          estimatedTime: "12m",
+          confidence: 4,
+          value: 5,
+          tags: ["VOC", "Requirements", "Front-End"],
+          purpose: "Convert mixed sales, application, and customer notes into a clear requirement stack with constraints, unknowns, and next-step questions.",
+          prompt: `Role: You are an IMI product development analyst supporting magnetic handling and separation opportunities.
 
-</div>
+Objective:
+Convert fragmented customer and application notes into a disciplined requirement stack that engineering can use immediately.
 
-<div class="sidebar">
-  <div class="sb-section">
-    <div class="sb-head"><span>&#9658; ACTIVE WINDOWS</span><span style="opacity:.35;font-size:11px">&#10697;</span></div>
-    <div class="win-list" id="winList"><div class="no-wins" id="noWins">NO TOOLS OPEN</div></div>
-  </div>
-  <div class="sb-section grow">
-    <div class="sb-head"><span>&#9658; MAP INTEL</span><span style="font-size:9px;color:var(--cyan);opacity:.6">SALES &amp; MARKETING</span></div>
-    <div class="map-links">
-      <a class="map-link" style="--ml-accent:#40e8d0" href="./sales_marketing_reference/IMI_Sales_Marketing_Reference.html" onclick="launchTool('sales','./sales_marketing_reference/IMI_Sales_Marketing_Reference.html');return false;">
-        <div class="map-link-icon"><svg width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M16 4 C10 4 6 9 6 14 C6 22 16 28 16 28 C16 28 26 22 26 14 C26 9 22 4 16 4Z" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="14" r="3" stroke="currentColor" stroke-width="1.3"/></svg></div>
-        <div class="map-link-body"><div class="map-link-title">Customer Map</div><div class="map-link-sub">11,598 CUSTOMERS &middot; ALL TERRITORIES</div></div>
-        <div class="map-link-arr">&#9658;</div>
-      </a>
-      <a class="map-link" style="--ml-accent:#3de84a" href="./sales_marketing_reference/IMI_Sales_Marketing_Reference.html" onclick="launchTool('sales','./sales_marketing_reference/IMI_Sales_Marketing_Reference.html');return false;">
-        <div class="map-link-icon"><svg width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M4 8 L4 26 L20 26 L28 20 L28 8 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 26 L20 14 L28 14" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="22" r="3" stroke="currentColor" stroke-width="1.3"/><circle cx="22" cy="22" r="3" stroke="currentColor" stroke-width="1.3"/></svg></div>
-        <div class="map-link-body"><div class="map-link-title">Ship-To Map</div><div class="map-link-sub">DELIVERY DESTINATIONS &middot; YTD</div></div>
-        <div class="map-link-arr">&#9658;</div>
-      </a>
-      <a class="map-link placeholder-link" style="--ml-accent:#e87040">
-        <div class="map-link-icon"><svg width="20" height="20" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="10" y1="16" x2="22" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="10" x2="16" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="map-link-body"><div class="map-link-title">Prospect Map</div><div class="map-link-sub">PLACEHOLDER &middot; IN DEVELOPMENT</div></div>
-        <div class="map-link-arr" style="opacity:.3">&#9675;</div>
-      </a>
-    </div>
-  </div>
-  <div class="sb-section">
-    <div class="qnotes-wrap">
-      <div class="qn-label">Scratch Pad</div>
-      <textarea class="qn" id="qnotes" placeholder="scratch pad..." oninput="try{localStorage.setItem('mc_notes',this.value)}catch(e){}"></textarea>
-    </div>
-  </div>
-</div>
-</div>
+Inputs:
+- Customer / application summary: {{application_summary}}
+- Material being handled or separated: {{material_profile}}
+- Throughput / cycle targets: {{throughput_targets}}
+- Environmental constraints: {{environment_constraints}}
+- Existing pain points: {{pain_points}}
+- Commercial priority: {{business_priority}}
 
-<div class="footer">
-  <div class="footer-logo-box"><img src="data:image/jpeg;base64,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" alt="Otter Werx"></div>
-  <span class="footer-text">Otter Werx NPD System &mdash; C. Pond &nbsp;2026 &mdash; Industrial Magnetics, Inc. &nbsp;&middot;&nbsp; Boyne City, MI &nbsp;&middot;&nbsp; Internal Use Only</span>
-  <div class="footer-right">LAST REFRESH: <span id="footerRefresh">&#x2014;</span></div>
-</div>
+Tasks:
+1. Separate explicit requirements from inferred requirements.
+2. Identify magnetic performance, mechanical integration, safety, sanitation, maintenance, and controls constraints.
+3. Flag missing information that blocks concept quality.
+4. Prioritize requirements as critical, important, or secondary.
+5. State the top three technical unknowns that must be resolved next.
 
-<script>
-function setTheme(t, btn) {
-  if(t === 'dark') document.body.removeAttribute('data-theme');
-  else document.body.setAttribute('data-theme', t);
-  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  try{localStorage.setItem('otter-werx-theme', t);}catch(e){}
-}
-(function(){
-  let saved = 'dark';
-  try{saved = localStorage.getItem('otter-werx-theme') || 'dark';}catch(e){}
-  if(saved !== 'dark') document.body.setAttribute('data-theme', saved);
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.theme-btn').forEach(b => {
-      if(b.textContent.trim().toLowerCase() === saved) b.classList.add('active');
-      else b.classList.remove('active');
-    });
-  });
-})();
-const tools = [
-  {id:'ci',name:'CI Dashboard',live:true},
-  {id:'npd',name:'NPD Dashboard',live:true},
-  {id:'editor',name:'NPD Project Explorer',live:true},
-  {id:'tasks',name:'Task Tracker',live:true},
-  {id:'bizcase',name:'Business Case Workbench',live:true},
-  {id:'pipeline',name:'Opportunity Pipeline',live:true},
-  {id:'registry',name:'Project Registry',live:true},
-  {id:'vendors',name:'Vendor Reference',live:true},
-  {id:'erp',name:'Production Process Ref',live:true},
-  {id:'prodref',name:'IMI Product Reference',live:true},
-  {id:'sales',name:'Sales & Marketing Ref',live:true},
-];
-const openTools = {};
-function launchTool(id, path) {
-  if(!path) return;
-  const win = window.open(path, id);
-  openTools[id] = win;
-  updateWindowList(); updateTelemetry();
-}
-function updateWindowList() {
-  const list = document.getElementById('winList');
-  const entries = Object.entries(openTools).filter(([id,w]) => w && !w.closed);
-  if(!entries.length) { list.innerHTML = '<div class="no-wins" id="noWins">NO TOOLS OPEN</div>'; return; }
-  list.innerHTML = entries.map(([id,w]) => {
-    const t = tools.find(x => x.id === id) || {name:id};
-    return '<div class="win-item" onclick="openTools[\'' + id + '\'] && openTools[\'' + id + '\'].focus()"><div><div class="win-name">' + t.name + '</div><div class="win-status">OPEN</div></div><button class="win-close" onclick="event.stopPropagation();closeWin(\'' + id + '\')">&#x2715;</button></div>';
-  }).join('');
-}
-function closeWin(id) {
-  if(openTools[id]) { try{openTools[id].close();}catch(e){} delete openTools[id]; }
-  updateWindowList(); updateTelemetry();
-}
-function updateTelemetry() {
-  const live = tools.filter(t => t.live).length;
-  const open = Object.values(openTools).filter(w => w && !w.closed).length;
-  document.getElementById('totalTools').textContent = live;
-  document.getElementById('activeTools').textContent = open;
-  document.getElementById('openCount').textContent = open + ' TOOLS ACTIVE';
-  const now = new Date();
-  const ts = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
-  document.getElementById('lastRefresh').textContent = ts;
-  document.getElementById('footerRefresh').textContent = ts;
-}
-function refreshAll() { updateTelemetry(); updateWindowList(); }
-(function(){
-  let v = ''; try{v = localStorage.getItem('mc_notes') || '';}catch(e){}
-  const el = document.getElementById('qnotes'); if(el) el.value = v;
-})();
-(function(){
-  const DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  const MONS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-  function tick(){
-    const n=new Date();
-    const el=document.getElementById('clock'); const dl=document.getElementById('clockDate');
-    if(el) el.textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');
-    if(dl) dl.textContent=DAYS[n.getDay()]+' '+String(n.getDate()).padStart(2,'0')+' '+MONS[n.getMonth()]+' '+n.getFullYear();
-  }
-  tick(); setInterval(tick,1000);
-})();
-document.addEventListener('DOMContentLoaded',()=>{updateTelemetry();document.getElementById('pendingTools').textContent='0';});
-</script>
+Output:
+- Requirement stack table
+- Open question list
+- Assumption register
+- Gate recommendation: continue, clarify, or hold`,
+          variables: [
+            { name: "application_summary", type: "text", required: true, note: "Narrative description of customer need and process context." },
+            { name: "material_profile", type: "text", required: true, note: "Material type, size range, temperature, contamination, or ferrous content." },
+            { name: "throughput_targets", type: "text", required: false, note: "Cycle rate, line speed, load count, or shift demand." },
+            { name: "environment_constraints", type: "text", required: false, note: "Washdown, food zone, heat, dust, corrosion, or automation context." },
+            { name: "pain_points", type: "text", required: true, note: "Current failure points, scrap, downtime, ergonomic issues, or missed sales." },
+            { name: "business_priority", type: "text", required: false, note: "Urgency, revenue significance, or strategic account weight." }
+          ],
+          expectedOutput: [
+            "Ranked requirements table with rationale",
+            "Explicit assumptions and unresolved gaps",
+            "Questions required before concept generation",
+            "Clear recommendation for the next NPD action"
+          ],
+          coachingNotes: [
+            "Use this before concept work to keep downstream prompts from inventing requirements.",
+            "If the user supplies weak inputs, expand the open-question list rather than filling gaps with generic assumptions."
+          ],
+          failureModes: [
+            "Confusing customer preferences with hard engineering constraints",
+            "Omitting sanitation, maintenance, or operator safety conditions",
+            "Treating missing throughput data as non-critical"
+          ],
+          followUpPrompts: [
+            "Concept Down-Select Review",
+            "Market Opportunity Framing Brief",
+            "Manufacturing Routing Risk Review"
+          ]
+        },
+        {
+          id: "concept-down-select",
+          title: "Concept Down-Select Review",
+          categoryId: "npd",
+          department: "NPD",
+          npdStage: "Screen",
+          useCase: "Compare competing concepts objectively",
+          outputType: "Decision Memo",
+          complexity: "High",
+          estimatedTime: "18m",
+          confidence: 4,
+          value: 5,
+          tags: ["Concept", "Gate", "Scoring"],
+          purpose: "Score multiple concepts against weighted criteria so teams can choose a direction without circular discussion.",
+          prompt: `Role: You are an IMI design review facilitator.
+
+Objective:
+Compare concept options for a magnetic product or system and recommend the strongest path with transparent scoring.
+
+Inputs:
+- Problem statement: {{problem_statement}}
+- Concept options: {{concept_options}}
+- Weighted criteria: {{weighted_criteria}}
+- Business constraints: {{business_constraints}}
+- Manufacturing constraints: {{manufacturing_constraints}}
+
+Tasks:
+1. Evaluate each concept against performance, manufacturability, serviceability, risk, cost, and speed-to-market.
+2. Show trade-offs instead of a single numeric winner.
+3. Identify which assumptions materially affect the ranking.
+4. State what prototype or test would most reduce uncertainty.
+
+Output:
+- Weighted comparison matrix
+- Decision narrative
+- Critical assumptions
+- Recommended next experiment`,
+          variables: [
+            { name: "problem_statement", type: "text", required: true, note: "Core problem the concept set is trying to solve." },
+            { name: "concept_options", type: "array", required: true, note: "Short description of each concept option under review." },
+            { name: "weighted_criteria", type: "array", required: true, note: "Criteria and relative weightings used by the team." },
+            { name: "business_constraints", type: "text", required: false, note: "Cost, schedule, margin, channel, or portfolio constraints." },
+            { name: "manufacturing_constraints", type: "text", required: false, note: "Routing, tooling, supplier, or line-capability limits." }
+          ],
+          expectedOutput: [
+            "Weighted matrix with clear trade-offs",
+            "Recommendation with identified decision sensitivities",
+            "List of evidence still needed before committing"
+          ],
+          coachingNotes: [
+            "Use weighted criteria from the team if available; do not invent weights unless asked.",
+            "Make risk and manufacturability visible even when performance scores are strong."
+          ],
+          failureModes: [
+            "Choosing the most novel concept without proving execution path",
+            "Hiding trade-offs behind a single total score",
+            "Ignoring margin or supplier constraints during ranking"
+          ],
+          followUpPrompts: [
+            "Launch Readiness Gate Pack",
+            "Supplier Change Impact Check",
+            "Robotic End-of-Arm Magnet Sizing"
+          ]
+        },
+        {
+          id: "market-opportunity-brief",
+          title: "Market Opportunity Framing Brief",
+          categoryId: "npd",
+          department: "Product Management",
+          npdStage: "Scope",
+          useCase: "Frame opportunity before deeper investment",
+          outputType: "Opportunity Brief",
+          complexity: "Medium",
+          estimatedTime: "10m",
+          confidence: 3,
+          value: 4,
+          tags: ["Opportunity", "Market", "Portfolio"],
+          purpose: "Create a concise opportunity brief that ties customer problem, segment fit, business value, and execution risk together.",
+          prompt: `Role: You are an IMI product strategist.
+
+Objective:
+Decide whether an opportunity deserves deeper product development attention.
+
+Inputs:
+- Target segment: {{target_segment}}
+- Customer problem: {{customer_problem}}
+- Existing IMI product overlap: {{existing_overlap}}
+- Revenue / margin potential: {{commercial_potential}}
+- Strategic rationale: {{strategic_rationale}}
+- Known execution risk: {{execution_risk}}
+
+Tasks:
+1. Clarify why the opportunity matters now.
+2. Determine whether this is adjacency, extension, or net-new platform work.
+3. Identify the strongest reasons to advance and the strongest reasons to reject.
+4. Recommend the next evaluation checkpoint.
+
+Output:
+- Opportunity framing summary
+- Strategic fit statement
+- Kill criteria
+- Recommended next checkpoint`,
+          variables: [
+            { name: "target_segment", type: "text", required: true, note: "Industry, account type, process family, or channel." },
+            { name: "customer_problem", type: "text", required: true, note: "Problem statement in operational terms." },
+            { name: "existing_overlap", type: "text", required: false, note: "Current IMI or Walker offerings that partially overlap." },
+            { name: "commercial_potential", type: "text", required: false, note: "Revenue, margin, quantity, or strategic account upside." },
+            { name: "strategic_rationale", type: "text", required: false, note: "Why this matters to portfolio direction." },
+            { name: "execution_risk", type: "text", required: false, note: "Technology, channel, supply, certification, or service risk." }
+          ],
+          expectedOutput: [
+            "Tight opportunity statement",
+            "Advance vs reject logic",
+            "Checkpoint recommendation"
+          ],
+          coachingNotes: [
+            "Keep this brief decisive; it is a gate tool, not a market report.",
+            "If data is weak, make that explicit and lower confidence."
+          ],
+          failureModes: [
+            "Inflating opportunity value with no segment evidence",
+            "Confusing one-off custom work with scalable product opportunity"
+          ],
+          followUpPrompts: [
+            "VOC to Requirement Stack",
+            "Competitor Battlecard Extract"
+          ]
+        },
+        {
+          id: "separator-fit",
+          title: "Separator Application Fit",
+          categoryId: "sales",
+          department: "Sales Engineering",
+          npdStage: "Discover",
+          useCase: "Qualify magnetic separation application",
+          outputType: "Technical Fit Memo",
+          complexity: "Medium",
+          estimatedTime: "09m",
+          confidence: 4,
+          value: 5,
+          tags: ["Separation", "Qualification", "Sales"],
+          purpose: "Assess whether a customer separation application maps cleanly to existing IMI capability or requires further engineering.",
+          prompt: `Role: You are an IMI sales engineer.
+
+Objective:
+Determine technical fit for a magnetic separation application and identify what must be clarified before proposing equipment.
+
+Inputs:
+- Process description: {{process_description}}
+- Material stream details: {{material_stream}}
+- Contaminant type and target removal: {{contaminant_target}}
+- Installation constraints: {{installation_constraints}}
+- Existing line issues: {{line_issues}}
+
+Tasks:
+1. Determine likely separator families that fit the problem.
+2. Identify the key material and installation unknowns that affect solution quality.
+3. Clarify whether the request can be handled with standard product, configured product, or custom engineering.
+4. Recommend the next customer questions and supporting data to request.
+
+Output:
+- Fit assessment
+- Candidate product direction
+- Missing application data
+- Next-step question set`,
+          variables: [
+            { name: "process_description", type: "text", required: true, note: "Where the separator sits in the customer process." },
+            { name: "material_stream", type: "text", required: true, note: "Bulk material, particle size, moisture, temperature, and flow behavior." },
+            { name: "contaminant_target", type: "text", required: true, note: "Ferrous type, size, quantity, and required capture level." },
+            { name: "installation_constraints", type: "text", required: false, note: "Footprint, orientation, access, utilities, sanitation, or explosion protection." },
+            { name: "line_issues", type: "text", required: false, note: "Plugging, carryover, maintenance, cleaning, or throughput loss." }
+          ],
+          expectedOutput: [
+            "Standard vs configured vs custom recommendation",
+            "Short list of candidate separator approaches",
+            "Clarification questions tied to technical risk"
+          ],
+          coachingNotes: [
+            "Stay within the evidence provided; do not spec field strength or dimensions without data.",
+            "Use this prompt early to shorten the sales cycle without overcommitting."
+          ],
+          failureModes: [
+            "Over-prescribing hardware without stream data",
+            "Ignoring line access and cleaning constraints"
+          ],
+          followUpPrompts: [
+            "Customer Proposal Technical Draft",
+            "Food Processing Sanitary Design Review"
+          ]
+        },
+        {
+          id: "proposal-technical-draft",
+          title: "Customer Proposal Technical Draft",
+          categoryId: "sales",
+          department: "Sales Engineering",
+          npdStage: "Develop",
+          useCase: "Draft disciplined proposal language",
+          outputType: "Proposal Draft",
+          complexity: "Medium",
+          estimatedTime: "14m",
+          confidence: 4,
+          value: 5,
+          tags: ["Proposal", "Customer", "Technical"],
+          purpose: "Generate structured proposal language that explains fit, scope, assumptions, exclusions, and next actions without sounding generic.",
+          prompt: `Role: You are an IMI sales engineer writing a technical proposal draft.
+
+Objective:
+Create proposal language that is specific, credible, and bounded by the actual known scope.
+
+Inputs:
+- Customer name / account context: {{account_context}}
+- Proposed solution summary: {{solution_summary}}
+- Scope boundaries: {{scope_boundaries}}
+- Customer success criteria: {{success_criteria}}
+- Key assumptions: {{assumptions}}
+- Key exclusions: {{exclusions}}
+
+Tasks:
+1. Explain the problem and proposed magnetic solution in business and technical terms.
+2. Keep assumptions and exclusions explicit.
+3. State what data or site confirmation is still needed.
+4. Avoid sales fluff and unsupported claims.
+
+Output:
+- Executive summary
+- Technical scope
+- Assumptions and exclusions
+- Next-step actions`,
+          variables: [
+            { name: "account_context", type: "text", required: true, note: "Customer, industry, urgency, and commercial context." },
+            { name: "solution_summary", type: "text", required: true, note: "Short summary of proposed IMI solution." },
+            { name: "scope_boundaries", type: "text", required: true, note: "What is and is not covered by the proposal." },
+            { name: "success_criteria", type: "text", required: false, note: "Technical or commercial outcomes the customer expects." },
+            { name: "assumptions", type: "text", required: true, note: "Assumptions that affect configuration, performance, or pricing." },
+            { name: "exclusions", type: "text", required: true, note: "Items intentionally excluded from scope." }
+          ],
+          expectedOutput: [
+            "Draft proposal sections that can be refined directly",
+            "Visible assumption and exclusion discipline",
+            "Short next-step action list"
+          ],
+          coachingNotes: [
+            "Use this only after technical fit is at least directionally clear.",
+            "State unknowns plainly; that protects both credibility and margin."
+          ],
+          failureModes: [
+            "Promising performance with weak application evidence",
+            "Burying exclusions in dense prose"
+          ],
+          followUpPrompts: [
+            "Separator Application Fit",
+            "Supplier Change Impact Check"
+          ]
+        },
+        {
+          id: "launch-readiness-pack",
+          title: "Launch Readiness Gate Pack",
+          categoryId: "pm",
+          department: "Product Management",
+          npdStage: "Launch",
+          useCase: "Assess readiness to release product",
+          outputType: "Gate Pack",
+          complexity: "High",
+          estimatedTime: "20m",
+          confidence: 4,
+          value: 5,
+          tags: ["Launch", "Readiness", "Gate"],
+          purpose: "Consolidate readiness across product, operations, sales, quality, service, and documentation into a release recommendation.",
+          prompt: `Role: You are an IMI launch gate coordinator.
+
+Objective:
+Determine whether a product is ready for launch and identify the gating items that still block release quality.
+
+Inputs:
+- Product summary: {{product_summary}}
+- Validation status: {{validation_status}}
+- Manufacturing readiness: {{manufacturing_readiness}}
+- Supply readiness: {{supply_readiness}}
+- Documentation readiness: {{documentation_readiness}}
+- Commercial readiness: {{commercial_readiness}}
+- Open critical issues: {{critical_issues}}
+
+Tasks:
+1. Evaluate readiness by function instead of as a single lump status.
+2. Separate hard launch blockers from watch items.
+3. Recommend go, conditional go, or no-go with rationale.
+4. Identify the minimum actions required to move the decision.
+
+Output:
+- Function-by-function readiness table
+- Blocker register
+- Decision recommendation
+- Immediate action plan`,
+          variables: [
+            { name: "product_summary", type: "text", required: true, note: "Product or system being launched." },
+            { name: "validation_status", type: "text", required: true, note: "Prototype, test, field validation, and performance evidence." },
+            { name: "manufacturing_readiness", type: "text", required: true, note: "Routing, work instructions, fixtures, labor, and line capability." },
+            { name: "supply_readiness", type: "text", required: true, note: "Approved suppliers, lead times, risk items, and alternates." },
+            { name: "documentation_readiness", type: "text", required: false, note: "Drawings, manuals, ERP data, and quality documents." },
+            { name: "commercial_readiness", type: "text", required: false, note: "Pricing, sales tools, service readiness, and positioning." },
+            { name: "critical_issues", type: "text", required: false, note: "Open issues with material customer or operational impact." }
+          ],
+          expectedOutput: [
+            "Clear go / conditional go / no-go recommendation",
+            "Blockers separated from watch items",
+            "Action list tied to launch movement"
+          ],
+          coachingNotes: [
+            "Use the weakest functional area to govern the decision, not the loudest stakeholder.",
+            "Force explicit evidence, not confidence statements."
+          ],
+          failureModes: [
+            "Treating documentation gaps as minor when they block execution",
+            "Overriding unresolved supply risk due to launch pressure"
+          ],
+          followUpPrompts: [
+            "Manufacturing Routing Risk Review",
+            "Supplier Change Impact Check"
+          ]
+        },
+        {
+          id: "requirements-change-impact",
+          title: "Requirements Change Impact",
+          categoryId: "pm",
+          department: "Product Management",
+          npdStage: "Develop",
+          useCase: "Assess scope change consequences",
+          outputType: "Impact Memo",
+          complexity: "Medium",
+          estimatedTime: "11m",
+          confidence: 4,
+          value: 4,
+          tags: ["Change", "Scope", "Requirements"],
+          purpose: "Show schedule, cost, complexity, and validation impact when requirements move during development.",
+          prompt: `Role: You are an IMI product manager facilitating controlled scope change.
+
+Objective:
+Explain the real impact of a requirements change before the team absorbs it silently.
+
+Inputs:
+- Current requirement baseline: {{current_baseline}}
+- Proposed change: {{proposed_change}}
+- Reason for change: {{change_reason}}
+- Program timing: {{program_timing}}
+- Affected functions: {{affected_functions}}
+
+Tasks:
+1. Determine what the change affects technically and organizationally.
+2. Distinguish direct impact from likely second-order impact.
+3. State whether the change should be accepted now, deferred, or rejected.
+4. Identify the validation or documentation updates required.
+
+Output:
+- Impact summary
+- Decision recommendation
+- Affected workstreams
+- Required follow-through`,
+          variables: [
+            { name: "current_baseline", type: "text", required: true, note: "Current approved requirement set." },
+            { name: "proposed_change", type: "text", required: true, note: "Specific requirement change being requested." },
+            { name: "change_reason", type: "text", required: true, note: "Why the change is being requested now." },
+            { name: "program_timing", type: "text", required: false, note: "Current phase, timing pressure, or release commitments." },
+            { name: "affected_functions", type: "text", required: false, note: "Engineering, manufacturing, sourcing, quality, service, sales, etc." }
+          ],
+          expectedOutput: [
+            "Change impact summary",
+            "Accept / defer / reject recommendation",
+            "Required downstream updates"
+          ],
+          coachingNotes: [
+            "This prompt is designed to stop hidden scope growth.",
+            "Make second-order effects visible; they are usually what gets missed."
+          ],
+          failureModes: [
+            "Assuming low engineering effort means low business impact",
+            "Ignoring documentation or validation rework"
+          ],
+          followUpPrompts: [
+            "Launch Readiness Gate Pack",
+            "Concept Down-Select Review"
+          ]
+        },
+        {
+          id: "dfm-review",
+          title: "Magnet Assembly DFM Review",
+          categoryId: "mfg",
+          department: "Manufacturing",
+          npdStage: "Develop",
+          useCase: "Pre-release manufacturability screen",
+          outputType: "DFM Review",
+          complexity: "High",
+          estimatedTime: "16m",
+          confidence: 5,
+          value: 5,
+          tags: ["DFM", "Assembly", "Build"],
+          purpose: "Evaluate whether a magnetic assembly design is ready to build repeatedly without hidden process pain.",
+          prompt: `Role: You are an IMI manufacturing engineer reviewing a magnetic assembly design for build readiness.
+
+Objective:
+Identify manufacturability risks before release.
+
+Inputs:
+- Product / assembly summary: {{assembly_summary}}
+- Key components and materials: {{components_and_materials}}
+- Assembly sequence: {{assembly_sequence}}
+- Critical tolerances / interfaces: {{critical_interfaces}}
+- Safety or handling concerns: {{handling_concerns}}
+- Production volume expectation: {{production_volume}}
+
+Tasks:
+1. Review part accessibility, alignment, fastening, bonding, handling, fixturing, and inspection feasibility.
+2. Flag design choices that will increase variation, labor, or rework.
+3. Separate major blockers from improvement opportunities.
+4. Recommend specific design or process actions.
+
+Output:
+- DFM issue list by severity
+- Likely manufacturing pain points
+- Inspection and fixturing implications
+- Recommended corrective actions`,
+          variables: [
+            { name: "assembly_summary", type: "text", required: true, note: "What is being assembled and why." },
+            { name: "components_and_materials", type: "text", required: true, note: "Core components, magnet types, steel parts, adhesives, covers, etc." },
+            { name: "assembly_sequence", type: "text", required: false, note: "Expected build sequence or process flow." },
+            { name: "critical_interfaces", type: "text", required: true, note: "Fits, gaps, welds, adhesive bonds, magnetic alignment, or critical datums." },
+            { name: "handling_concerns", type: "text", required: false, note: "Pinch points, heavy lifts, magnet safety, or difficult access." },
+            { name: "production_volume", type: "text", required: false, note: "Prototype, low volume, or sustained production expectation." }
+          ],
+          expectedOutput: [
+            "Major vs minor DFM issues",
+            "Concrete design/process recommendations",
+            "Inspection and fixturing implications"
+          ],
+          coachingNotes: [
+            "Use plain manufacturing language and avoid generic DFM filler.",
+            "Magnet handling and operator safety should be treated as first-order concerns."
+          ],
+          failureModes: [
+            "Ignoring operator access because the CAD package technically fits",
+            "Missing adhesive cure, alignment, or inspection traps"
+          ],
+          followUpPrompts: [
+            "Manufacturing Routing Risk Review",
+            "Launch Readiness Gate Pack"
+          ]
+        },
+        {
+          id: "routing-risk-review",
+          title: "Manufacturing Routing Risk Review",
+          categoryId: "mfg",
+          department: "Manufacturing",
+          npdStage: "Validate",
+          useCase: "Evaluate process flow and capacity risk",
+          outputType: "Routing Risk Memo",
+          complexity: "Medium",
+          estimatedTime: "13m",
+          confidence: 4,
+          value: 5,
+          tags: ["Routing", "Capacity", "Flow"],
+          purpose: "Surface routing bottlenecks, process handoff risks, and capacity exposure before production ramps.",
+          prompt: `Role: You are an IMI operations analyst reviewing a routing plan.
+
+Objective:
+Evaluate whether the proposed manufacturing routing is stable, realistic, and scalable.
+
+Inputs:
+- Routing steps: {{routing_steps}}
+- Work centers involved: {{work_centers}}
+- Expected volume / takt: {{volume_takt}}
+- Special tooling or fixtures: {{tooling_requirements}}
+- Known bottlenecks: {{known_bottlenecks}}
+
+Tasks:
+1. Identify high-risk routing steps, handoffs, and rework loops.
+2. Flag mismatches between required capability and available work-center reality.
+3. Call out where staffing, tooling, or supplier timing can break the flow.
+4. Recommend mitigations that materially reduce risk.
+
+Output:
+- Routing risk summary
+- High-risk step list
+- Capacity / tooling exposure
+- Mitigation actions`,
+          variables: [
+            { name: "routing_steps", type: "array", required: true, note: "Ordered routing sequence." },
+            { name: "work_centers", type: "text", required: true, note: "Internal or external operations touched by the routing." },
+            { name: "volume_takt", type: "text", required: false, note: "Expected demand, takt, or build pacing." },
+            { name: "tooling_requirements", type: "text", required: false, note: "Fixtures, jigs, dies, lifts, or other specialized aids." },
+            { name: "known_bottlenecks", type: "text", required: false, note: "Pain points already suspected by the team." }
+          ],
+          expectedOutput: [
+            "Routing risk by step",
+            "Specific bottleneck and mitigation logic",
+            "Recommended readiness actions"
+          ],
+          coachingNotes: [
+            "Keep the response practical: supervisors should be able to act on it.",
+            "If routing data is weak, state that confidence is constrained."
+          ],
+          failureModes: [
+            "Treating every step equally instead of finding the real constraint",
+            "Ignoring external operations or supplier-driven latency"
+          ],
+          followUpPrompts: [
+            "Supplier Change Impact Check",
+            "Launch Readiness Gate Pack"
+          ]
+        },
+        {
+          id: "supplier-impact-check",
+          title: "Supplier Change Impact Check",
+          categoryId: "mfg",
+          department: "Supply Chain",
+          npdStage: "Validate",
+          useCase: "Evaluate supplier or material substitution impact",
+          outputType: "Impact Check",
+          complexity: "Medium",
+          estimatedTime: "08m",
+          confidence: 4,
+          value: 4,
+          tags: ["Supplier", "Change", "Risk"],
+          purpose: "Assess whether a supplier, material, or process source change can be absorbed safely or needs deeper validation.",
+          prompt: `Role: You are an IMI sourcing and engineering risk reviewer.
+
+Objective:
+Determine the impact of a supplier, material, or process source change on product quality and execution.
+
+Inputs:
+- Current source / material: {{current_source}}
+- Proposed source / material: {{proposed_source}}
+- Reason for change: {{change_driver}}
+- Affected parts or assemblies: {{affected_items}}
+- Known qualification data: {{qualification_data}}
+
+Tasks:
+1. Identify performance, quality, lead-time, cost, and documentation implications.
+2. Separate low-risk substitutions from changes that demand validation or customer communication.
+3. Identify which approvals or tests are required.
+
+Output:
+- Impact classification
+- Required validation
+- Documentation / ERP updates
+- Recommended decision`,
+          variables: [
+            { name: "current_source", type: "text", required: true, note: "Current supplier, material, or process source." },
+            { name: "proposed_source", type: "text", required: true, note: "Candidate replacement source." },
+            { name: "change_driver", type: "text", required: true, note: "Shortage, cost, quality, obsolescence, or strategic reason." },
+            { name: "affected_items", type: "text", required: true, note: "Parts, assemblies, or families impacted." },
+            { name: "qualification_data", type: "text", required: false, note: "Existing test, quality, or historical supplier data." }
+          ],
+          expectedOutput: [
+            "Impact classification with rationale",
+            "Validation and approval needs",
+            "Decision recommendation"
+          ],
+          coachingNotes: [
+            "This should be fast and strict; ambiguity should raise validation need, not reduce it.",
+            "Capture customer-facing impact if field behavior could change."
+          ],
+          failureModes: [
+            "Treating dimensional equivalence as full equivalence",
+            "Ignoring documentation, ERP, or quality-system updates"
+          ],
+          followUpPrompts: [
+            "Launch Readiness Gate Pack",
+            "Magnet Assembly DFM Review"
+          ]
+        },
+        {
+          id: "battlecard-extract",
+          title: "Competitor Battlecard Extract",
+          categoryId: "ci",
+          department: "Competitive Intelligence",
+          npdStage: "Scope",
+          useCase: "Summarize competitive threat and response",
+          outputType: "Battlecard",
+          complexity: "Medium",
+          estimatedTime: "09m",
+          confidence: 3,
+          value: 4,
+          tags: ["Competitor", "Battlecard", "Positioning"],
+          purpose: "Convert raw competitor notes into a concise battlecard with positioning angles, response points, and unknowns.",
+          prompt: `Role: You are an IMI competitive intelligence analyst.
+
+Objective:
+Turn fragmented competitor notes into a usable battlecard for engineering, sales, and product teams.
+
+Inputs:
+- Competitor name: {{competitor_name}}
+- Product / capability observed: {{observed_capability}}
+- Claimed strengths: {{claimed_strengths}}
+- Known weaknesses: {{known_weaknesses}}
+- Market context: {{market_context}}
+
+Tasks:
+1. Distill the core threat or comparison point.
+2. Identify where IMI can credibly differentiate.
+3. Flag claims that need verification.
+4. Recommend how engineering and sales should respond.
+
+Output:
+- Competitor snapshot
+- IMI response angles
+- Proof points needed
+- Watch items`,
+          variables: [
+            { name: "competitor_name", type: "text", required: true, note: "Competitor being summarized." },
+            { name: "observed_capability", type: "text", required: true, note: "Product, feature, service, or process capability observed." },
+            { name: "claimed_strengths", type: "text", required: false, note: "Claims from marketing, sales, or field observations." },
+            { name: "known_weaknesses", type: "text", required: false, note: "Any evidence of performance or execution gaps." },
+            { name: "market_context", type: "text", required: false, note: "Segment, customer account, or market situation." }
+          ],
+          expectedOutput: [
+            "Tight competitor snapshot",
+            "Credible IMI response angles",
+            "Verification gaps to investigate"
+          ],
+          coachingNotes: [
+            "Keep differentiation evidence-based.",
+            "If the source data is weak, explicitly mark unverified items."
+          ],
+          failureModes: [
+            "Repeating competitor claims as fact",
+            "Writing generic positioning that a sales team cannot use"
+          ],
+          followUpPrompts: [
+            "Win/Loss Signal Synthesis",
+            "Market Opportunity Framing Brief"
+          ]
+        },
+        {
+          id: "win-loss-synthesis",
+          title: "Win/Loss Signal Synthesis",
+          categoryId: "ci",
+          department: "Competitive Intelligence",
+          npdStage: "Launch",
+          useCase: "Find actionable patterns from deal outcomes",
+          outputType: "Signal Summary",
+          complexity: "Medium",
+          estimatedTime: "12m",
+          confidence: 3,
+          value: 4,
+          tags: ["Win/Loss", "Signals", "Commercial"],
+          purpose: "Collapse scattered win/loss notes into a focused signal summary with product, pricing, service, and messaging implications.",
+          prompt: `Role: You are an IMI commercial intelligence analyst.
+
+Objective:
+Find repeatable patterns in recent wins and losses that require action.
+
+Inputs:
+- Recent wins: {{recent_wins}}
+- Recent losses: {{recent_losses}}
+- Common competitor names: {{competitor_set}}
+- Pricing / lead-time notes: {{commercial_notes}}
+- Product feedback snippets: {{product_feedback}}
+
+Tasks:
+1. Cluster patterns by product fit, technical capability, response speed, price, and service.
+2. Separate anecdotal noise from repeated signals.
+3. Recommend actions for product, sales engineering, and leadership.
+
+Output:
+- Top repeated signals
+- Functional action recommendations
+- Confidence statement by signal`,
+          variables: [
+            { name: "recent_wins", type: "array", required: true, note: "Recent opportunities won with context." },
+            { name: "recent_losses", type: "array", required: true, note: "Recent opportunities lost with context." },
+            { name: "competitor_set", type: "array", required: false, note: "Competitors frequently appearing in outcomes." },
+            { name: "commercial_notes", type: "text", required: false, note: "Pricing, timing, terms, or delivery observations." },
+            { name: "product_feedback", type: "text", required: false, note: "Field comments on product fit or gaps." }
+          ],
+          expectedOutput: [
+            "Repeated win/loss signal clusters",
+            "Function-specific actions",
+            "Signal confidence rating"
+          ],
+          coachingNotes: [
+            "Do not overreact to one deal unless it is strategically exceptional.",
+            "Use confidence language to prevent false certainty."
+          ],
+          failureModes: [
+            "Confusing a sales execution issue with a product gap",
+            "Reporting anecdotes as trends"
+          ],
+          followUpPrompts: [
+            "Competitor Battlecard Extract",
+            "Requirements Change Impact"
+          ]
+        },
+        {
+          id: "robotic-magnet-sizing",
+          title: "Robotic End-of-Arm Magnet Sizing",
+          categoryId: "apps",
+          department: "Application Engineering",
+          npdStage: "Develop",
+          useCase: "Frame EOAT magnet design direction",
+          outputType: "Sizing Brief",
+          complexity: "High",
+          estimatedTime: "15m",
+          confidence: 4,
+          value: 5,
+          tags: ["Automation", "EOAT", "Sizing"],
+          purpose: "Create an engineering brief for end-of-arm magnetic handling concepts with explicit assumptions and risk drivers.",
+          prompt: `Role: You are an IMI application engineer supporting robotic magnetic handling.
+
+Objective:
+Generate a first-pass sizing and design-direction brief for an end-of-arm magnetic tool.
+
+Inputs:
+- Part description and mass: {{part_description}}
+- Pick orientation and surface condition: {{pick_conditions}}
+- Robot motion profile: {{motion_profile}}
+- Cycle target: {{cycle_target}}
+- Safety factors or release constraints: {{safety_constraints}}
+- Packaging / integration limits: {{integration_limits}}
+
+Tasks:
+1. Identify the main variables governing magnetic holding and release reliability.
+2. State the assumptions needed for first-pass sizing.
+3. Highlight the highest technical risks for slip, double-pick, release, or orientation control.
+4. Recommend what data or tests are needed before committing to hardware.
+
+Output:
+- First-pass sizing logic
+- Assumption list
+- Technical risk summary
+- Test recommendation set`,
+          variables: [
+            { name: "part_description", type: "text", required: true, note: "Part geometry, material, mass, and condition." },
+            { name: "pick_conditions", type: "text", required: true, note: "Stacked, singulated, oily, painted, rough, warped, etc." },
+            { name: "motion_profile", type: "text", required: false, note: "Acceleration, jerk, orientation changes, and travel path." },
+            { name: "cycle_target", type: "text", required: false, note: "Required cycle rate or throughput." },
+            { name: "safety_constraints", type: "text", required: false, note: "Drop tolerance, release needs, fail-safe concerns." },
+            { name: "integration_limits", type: "text", required: false, note: "Tool envelope, utilities, robot payload, and mounting constraints." }
+          ],
+          expectedOutput: [
+            "Sizing brief with assumptions",
+            "Key variables and technical risks",
+            "Next tests or data required"
+          ],
+          coachingNotes: [
+            "Keep the output engineering-oriented; this is not proposal copy.",
+            "If material thickness or air gap is unknown, say so explicitly."
+          ],
+          failureModes: [
+            "Implying exact magnet sizing from incomplete part data",
+            "Ignoring release performance and double-pick risk"
+          ],
+          followUpPrompts: [
+            "VOC to Requirement Stack",
+            "Concept Down-Select Review"
+          ]
+        },
+        {
+          id: "sanitary-design-review",
+          title: "Food Processing Sanitary Design Review",
+          categoryId: "apps",
+          department: "Application Engineering",
+          npdStage: "Validate",
+          useCase: "Screen hygienic and cleanability risk",
+          outputType: "Sanitary Review",
+          complexity: "High",
+          estimatedTime: "17m",
+          confidence: 4,
+          value: 4,
+          tags: ["Food", "Sanitary", "Validation"],
+          purpose: "Review a magnetic handling or separation concept for sanitary design, cleanability, material, and maintenance exposure.",
+          prompt: `Role: You are an IMI application engineer reviewing a magnetic system intended for food processing environments.
+
+Objective:
+Identify sanitary design risks before finalizing the concept or quoting the system.
+
+Inputs:
+- Product / system description: {{system_description}}
+- Product contact or zone definition: {{zone_definition}}
+- Cleaning method: {{cleaning_method}}
+- Material / finish details: {{material_finish}}
+- Access and maintenance approach: {{maintenance_access}}
+- Regulatory or customer expectations: {{compliance_expectations}}
+
+Tasks:
+1. Identify likely hygienic design risks and cleanability traps.
+2. Flag material, seal, fastener, geometry, and drainage concerns.
+3. Distinguish what is acceptable, questionable, and unacceptable based on the information supplied.
+4. Recommend design changes or clarification questions.
+
+Output:
+- Sanitary risk summary
+- Cleanability concern list
+- Clarification questions
+- Design recommendations`,
+          variables: [
+            { name: "system_description", type: "text", required: true, note: "Magnetic product or system under review." },
+            { name: "zone_definition", type: "text", required: true, note: "Food contact, splash zone, non-product zone, etc." },
+            { name: "cleaning_method", type: "text", required: false, note: "Washdown, dry clean, chemical sanitation, CIP, COP, etc." },
+            { name: "material_finish", type: "text", required: false, note: "Material types, finishes, coatings, weld quality, seals." },
+            { name: "maintenance_access", type: "text", required: false, note: "How the unit is opened, cleaned, inspected, and serviced." },
+            { name: "compliance_expectations", type: "text", required: false, note: "Customer rules, industry practices, or third-party expectations." }
+          ],
+          expectedOutput: [
+            "Sanitary design risk summary",
+            "Acceptable / questionable / unacceptable distinctions",
+            "Recommended design changes or questions"
+          ],
+          coachingNotes: [
+            "The tool should be conservative when inputs are incomplete.",
+            "Make it obvious when claims depend on actual cleanability validation."
+          ],
+          failureModes: [
+            "Assuming stainless material alone means sanitary design",
+            "Ignoring maintenance access and reassembly contamination risk"
+          ],
+          followUpPrompts: [
+            "Separator Application Fit",
+            "Launch Readiness Gate Pack"
+          ]
+        }
+      ]
+    };
+
+    const state = {
+      activeCategory: "all",
+      search: "",
+      department: "All",
+      stage: "All",
+      complexity: "All",
+      minValue: 0,
+      minConfidence: 0,
+      selectedPromptId: systemModel.prompts[0].id
+    };
+
+    function getCategoryMap() {
+      return Object.fromEntries(systemModel.categories.map((category) => [category.id, category]));
+    }
+
+    const categoryMap = getCategoryMap();
+
+    function uniqueValues(key) {
+      return [...new Set(systemModel.prompts.map((prompt) => prompt[key]))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function populateSelect(selectId, values) {
+      const select = document.getElementById(selectId);
+      select.innerHTML = '<option value="All">All</option>' + values.map((value) => `<option value="${value}">${value}</option>`).join("");
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem("imi-prompt-execution-state", JSON.stringify(state));
+      } catch (error) {
+        // Ignore persistence issues for local static use.
+      }
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem("imi-prompt-execution-state");
+        if (!raw) {
+          return;
+        }
+        const saved = JSON.parse(raw);
+        Object.assign(state, saved);
+      } catch (error) {
+        // Ignore malformed state.
+      }
+    }
+
+    function scoreClass(score) {
+      if (score >= 4) {
+        return "score-high";
+      }
+      if (score === 3) {
+        return "score-mid";
+      }
+      return "score-low";
+    }
+
+    function getFilterBasePrompts() {
+      return systemModel.prompts.filter((prompt) => {
+        const searchText = state.search.trim().toLowerCase();
+        const searchHaystack = [
+          prompt.title,
+          prompt.useCase,
+          prompt.outputType,
+          prompt.purpose,
+          prompt.department,
+          prompt.npdStage,
+          categoryMap[prompt.categoryId].name
+        ].join(" ").toLowerCase();
+
+        const searchMatch = !searchText || searchHaystack.includes(searchText);
+        const departmentMatch = state.department === "All" || prompt.department === state.department;
+        const stageMatch = state.stage === "All" || prompt.npdStage === state.stage;
+        const complexityMatch = state.complexity === "All" || prompt.complexity === state.complexity;
+        const valueMatch = state.minValue === 0 || prompt.value >= state.minValue;
+        const confidenceMatch = state.minConfidence === 0 || prompt.confidence >= state.minConfidence;
+
+        return searchMatch && departmentMatch && stageMatch && complexityMatch && valueMatch && confidenceMatch;
+      });
+    }
+
+    function getFilteredPrompts() {
+      const basePrompts = getFilterBasePrompts();
+      if (state.activeCategory === "all") {
+        return basePrompts;
+      }
+      return basePrompts.filter((prompt) => prompt.categoryId === state.activeCategory);
+    }
+
+    function activeFilterCount() {
+      return [
+        state.activeCategory !== "all",
+        Boolean(state.search.trim()),
+        state.department !== "All",
+        state.stage !== "All",
+        state.complexity !== "All",
+        state.minValue !== 0,
+        state.minConfidence !== 0
+      ].filter(Boolean).length;
+    }
+
+    function renderCategories() {
+      const basePrompts = getFilterBasePrompts();
+      const counts = basePrompts.reduce((map, prompt) => {
+        map[prompt.categoryId] = (map[prompt.categoryId] || 0) + 1;
+        return map;
+      }, {});
+
+      const totalCount = basePrompts.length;
+
+      const allCard = `
+        <button class="category-card ${state.activeCategory === "all" ? "active" : ""}" data-category="all" type="button">
+          <div class="category-topline">
+            <div class="category-name">All Active Domains</div>
+            <div class="count-chip">${String(totalCount).padStart(2, "0")}</div>
+          </div>
+          <div class="category-desc">Cross-functional execution surface across IMI engineering, commercial, and operational prompts.</div>
+        </button>
+      `;
+
+      const cards = systemModel.categories.map((category) => {
+        const count = counts[category.id] || 0;
+        return `
+          <button class="category-card ${state.activeCategory === category.id ? "active" : ""}" data-category="${category.id}" type="button" style="border-left: 2px solid ${state.activeCategory === category.id ? category.accent : "transparent"}">
+            <div class="category-topline">
+              <div class="category-name">${category.name}</div>
+              <div class="count-chip">${String(count).padStart(2, "0")}</div>
+            </div>
+            <div class="category-desc">${category.description}</div>
+          </button>
+        `;
+      }).join("");
+
+      document.getElementById("categoryGrid").innerHTML = allCard + cards;
+      document.getElementById("categoryMeta").textContent = `${basePrompts.length} prompts visible before category selection`;
+
+      document.querySelectorAll("[data-category]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.activeCategory = button.dataset.category;
+          render();
+        });
+      });
+    }
+
+    function ensureSelection(filteredPrompts) {
+      if (!filteredPrompts.length) {
+        state.selectedPromptId = "";
+        return null;
+      }
+
+      const selected = filteredPrompts.find((prompt) => prompt.id === state.selectedPromptId);
+      if (selected) {
+        return selected;
+      }
+
+      state.selectedPromptId = filteredPrompts[0].id;
+      return filteredPrompts[0];
+    }
+
+    function renderMatrix(filteredPrompts) {
+      const rows = filteredPrompts.map((prompt) => {
+        const category = categoryMap[prompt.categoryId];
+        return `
+          <tr class="${prompt.id === state.selectedPromptId ? "selected" : ""}" data-prompt-id="${prompt.id}">
+            <td title="${prompt.title}">${prompt.title}</td>
+            <td class="mono" title="${category.name}">${category.name}</td>
+            <td class="mono" title="${prompt.department}">${prompt.department}</td>
+            <td class="mono" title="${prompt.npdStage}">${prompt.npdStage}</td>
+            <td title="${prompt.useCase}">${prompt.useCase}</td>
+            <td class="mono" title="${prompt.outputType}">${prompt.outputType}</td>
+            <td class="mono" title="${prompt.complexity}">${prompt.complexity}</td>
+            <td class="mono" title="${prompt.estimatedTime}">${prompt.estimatedTime}</td>
+            <td class="score ${scoreClass(prompt.confidence)}" title="${prompt.confidence}/5">${prompt.confidence}/5</td>
+            <td class="score ${scoreClass(prompt.value)}" title="${prompt.value}/5">${prompt.value}/5</td>
+          </tr>
+        `;
+      }).join("");
+
+      const tableBody = document.getElementById("promptRows");
+      if (!rows) {
+        tableBody.innerHTML = '<tr><td colspan="10" class="empty-state">No prompts match the active filter stack.</td></tr>';
+      } else {
+        tableBody.innerHTML = rows;
+      }
+
+      document.getElementById("matrixMeta").textContent = `${filteredPrompts.length} rows | category ${state.activeCategory === "all" ? "all" : categoryMap[state.activeCategory].name}`;
+
+      tableBody.querySelectorAll("[data-prompt-id]").forEach((row) => {
+        row.addEventListener("click", () => {
+          state.selectedPromptId = row.dataset.promptId;
+          render();
+        });
+      });
+    }
+
+    function renderMetadata(selectedPrompt) {
+      const metadata = [
+        { label: "Category", value: categoryMap[selectedPrompt.categoryId].name },
+        { label: "Department", value: selectedPrompt.department },
+        { label: "NPD Stage", value: selectedPrompt.npdStage },
+        { label: "Use Case", value: selectedPrompt.useCase },
+        { label: "Output Type", value: selectedPrompt.outputType },
+        { label: "Complexity", value: selectedPrompt.complexity },
+        { label: "Execution Time", value: selectedPrompt.estimatedTime },
+        { label: "Confidence", value: `${selectedPrompt.confidence}/5` },
+        { label: "Value", value: `${selectedPrompt.value}/5` }
+      ];
+
+      document.getElementById("detailMetadata").innerHTML = metadata.map((item) => `
+        <div class="meta-box">
+          <div class="meta-label">${item.label}</div>
+          <div class="meta-value">${item.value}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderVariables(selectedPrompt) {
+      const content = `
+        <table class="variable-table">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Usage Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${selectedPrompt.variables.map((variable) => `
+              <tr>
+                <td>${variable.name}</td>
+                <td>${variable.type}</td>
+                <td>${variable.required ? "Yes" : "No"}</td>
+                <td>${variable.note}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+
+      document.getElementById("detailVariables").innerHTML = content;
+    }
+
+    function renderList(elementId, items) {
+      document.getElementById(elementId).innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+    }
+
+    function renderDetail(selectedPrompt) {
+      if (!selectedPrompt) {
+        document.getElementById("detailTitle").textContent = "No prompt selected";
+        document.getElementById("detailTags").innerHTML = "";
+        document.getElementById("detailPurpose").textContent = "No prompt matches the current filter set.";
+        document.getElementById("detailPrompt").textContent = "";
+        document.getElementById("detailVariables").innerHTML = '<div class="empty-state">No variable package available.</div>';
+        renderList("detailExpectedOutput", ["Adjust filters or search to restore a matching prompt set."]);
+        renderList("detailCoachingNotes", ["Maintain the filter stack only if you are intentionally narrowing the execution surface."]);
+        renderList("detailFailureModes", ["No prompt selected means no execution package is available to send downstream."]);
+        renderList("detailFollowUps", ["Reset filters to restore the default command surface."]);
+        document.getElementById("detailMetadata").innerHTML = "";
+        return;
+      }
+
+      document.getElementById("detailTitle").textContent = selectedPrompt.title;
+      document.getElementById("detailTags").innerHTML = selectedPrompt.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+      document.getElementById("detailPurpose").textContent = selectedPrompt.purpose;
+      document.getElementById("detailPrompt").textContent = selectedPrompt.prompt;
+      renderMetadata(selectedPrompt);
+      renderVariables(selectedPrompt);
+      renderList("detailExpectedOutput", selectedPrompt.expectedOutput);
+      renderList("detailCoachingNotes", selectedPrompt.coachingNotes);
+      renderList("detailFailureModes", selectedPrompt.failureModes);
+      renderList("detailFollowUps", selectedPrompt.followUpPrompts);
+    }
+
+    function updateTelemetry(filteredPrompts, selectedPrompt) {
+      document.getElementById("headerPromptCount").textContent = `${String(filteredPrompts.length).padStart(2, "0")} / ${String(systemModel.prompts.length).padStart(2, "0")}`;
+      document.getElementById("headerFilteredCount").textContent = String(filteredPrompts.length).padStart(2, "0");
+      document.getElementById("headerFilterCount").textContent = String(activeFilterCount()).padStart(2, "0");
+      document.getElementById("statusSubline").textContent = selectedPrompt
+        ? `Selection ready | ${selectedPrompt.department} | ${selectedPrompt.npdStage}`
+        : "No prompt in current filter set | internal use only";
+    }
+
+    function syncInputState() {
+      document.getElementById("searchInput").value = state.search;
+      document.getElementById("departmentFilter").value = state.department;
+      document.getElementById("stageFilter").value = state.stage;
+      document.getElementById("complexityFilter").value = state.complexity;
+      document.getElementById("valueFilter").value = String(state.minValue);
+      document.getElementById("confidenceFilter").value = String(state.minConfidence);
+    }
+
+    function render() {
+      renderCategories();
+      const filteredPrompts = getFilteredPrompts();
+      const selectedPrompt = ensureSelection(filteredPrompts);
+      renderMatrix(filteredPrompts);
+      renderDetail(selectedPrompt);
+      updateTelemetry(filteredPrompts, selectedPrompt);
+      saveState();
+    }
+
+    function setCopyNote(message) {
+      document.getElementById("detailNote").textContent = message;
+      window.clearTimeout(setCopyNote.timer);
+      setCopyNote.timer = window.setTimeout(() => {
+        document.getElementById("detailNote").textContent = "";
+      }, 2400);
+    }
+
+    async function copyToClipboard(text, message) {
+      if (!text) {
+        setCopyNote("No prompt package available");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopyNote(message);
+      } catch (error) {
+        setCopyNote("Clipboard unavailable in this context");
+      }
+    }
+
+    function buildPromptPackage(prompt) {
+      if (!prompt) {
+        return "";
+      }
+
+      const variableBlock = prompt.variables.map((variable) => {
+        return `- ${variable.name} [${variable.type}] ${variable.required ? "required" : "optional"} :: ${variable.note}`;
+      }).join("\n");
+
+      return [
+        `TITLE: ${prompt.title}`,
+        `CATEGORY: ${categoryMap[prompt.categoryId].name}`,
+        `DEPARTMENT: ${prompt.department}`,
+        `NPD STAGE: ${prompt.npdStage}`,
+        `OUTPUT TYPE: ${prompt.outputType}`,
+        `COMPLEXITY: ${prompt.complexity}`,
+        `TIME: ${prompt.estimatedTime}`,
+        `CONFIDENCE: ${prompt.confidence}/5`,
+        `VALUE: ${prompt.value}/5`,
+        "",
+        "PURPOSE:",
+        prompt.purpose,
+        "",
+        "PROMPT:",
+        prompt.prompt,
+        "",
+        "VARIABLES:",
+        variableBlock
+      ].join("\n");
+    }
+
+    function attachEventHandlers() {
+      document.getElementById("searchInput").addEventListener("input", (event) => {
+        state.search = event.target.value;
+        render();
+      });
+
+      document.getElementById("departmentFilter").addEventListener("change", (event) => {
+        state.department = event.target.value;
+        render();
+      });
+
+      document.getElementById("stageFilter").addEventListener("change", (event) => {
+        state.stage = event.target.value;
+        render();
+      });
+
+      document.getElementById("complexityFilter").addEventListener("change", (event) => {
+        state.complexity = event.target.value;
+        render();
+      });
+
+      document.getElementById("valueFilter").addEventListener("change", (event) => {
+        state.minValue = Number(event.target.value);
+        render();
+      });
+
+      document.getElementById("confidenceFilter").addEventListener("change", (event) => {
+        state.minConfidence = Number(event.target.value);
+        render();
+      });
+
+      document.getElementById("resetFiltersBtn").addEventListener("click", () => {
+        state.activeCategory = "all";
+        state.search = "";
+        state.department = "All";
+        state.stage = "All";
+        state.complexity = "All";
+        state.minValue = 0;
+        state.minConfidence = 0;
+        syncInputState();
+        render();
+      });
+
+      document.getElementById("copyPromptBtn").addEventListener("click", () => {
+        const selectedPrompt = systemModel.prompts.find((prompt) => prompt.id === state.selectedPromptId);
+        copyToClipboard(selectedPrompt ? selectedPrompt.prompt : "", "Prompt copied");
+      });
+
+      document.getElementById("copyPackageBtn").addEventListener("click", () => {
+        const selectedPrompt = systemModel.prompts.find((prompt) => prompt.id === state.selectedPromptId);
+        copyToClipboard(buildPromptPackage(selectedPrompt), "Prompt package copied");
+      });
+    }
+
+    function tickClock() {
+      const now = new Date();
+      const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+      document.getElementById("clockTime").textContent = [
+        String(now.getHours()).padStart(2, "0"),
+        String(now.getMinutes()).padStart(2, "0"),
+        String(now.getSeconds()).padStart(2, "0")
+      ].join(":");
+
+      document.getElementById("clockDate").textContent = `${days[now.getDay()]} ${String(now.getDate()).padStart(2, "0")} ${months[now.getMonth()]} ${now.getFullYear()}`;
+    }
+
+    function init() {
+      loadState();
+      populateSelect("departmentFilter", uniqueValues("department"));
+      populateSelect("stageFilter", uniqueValues("npdStage"));
+      populateSelect("complexityFilter", uniqueValues("complexity"));
+      syncInputState();
+      attachEventHandlers();
+      render();
+      tickClock();
+      window.setInterval(tickClock, 1000);
+    }
+
+    init();
+  </script>
 </body>
 </html>
