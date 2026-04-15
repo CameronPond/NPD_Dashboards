@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imi.internal/schemas/prompt-system.schema.json",
+  "title": "IMI Prompt Execution System Schema",
+  "description": "Validation schema for prompt definitions in the IMI Prompt Execution System.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "category",
+    "subcategory",
+    "department",
+    "npd_stage",
+    "use_case",
+    "output_type",
+    "complexity",
+    "time_to_execute",
+    "confidence",
+    "value",
+    "purpose",
+    "prompt",
+    "variables",
+    "expected_output",
+    "coaching_notes",
+    "failure_modes",
+    "follow_up_prompts"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Globally unique stable prompt identifier.",
+      "pattern": "^prm_[a-z0-9]+(?:_[a-z0-9]+)*$",
+      "minLength": 6,
+      "maxLength": 128
+    },
+    "title": {
+      "type": "string",
+      "description": "Operator-facing prompt title shown in matrix and panel.",
+      "minLength": 5,
+      "maxLength": 120
+    },
+    "category": {
+      "type": "string",
+      "description": "Top-level functional grouping.",
+      "enum": [
+        "Competitive Intelligence",
+        "Customer Reactivation",
+        "Market Expansion",
+        "Process Mapping",
+        "Application Engineering"
+      ]
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Second-level grouping under category.",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "department": {
+      "type": "string",
+      "description": "Primary owning department.",
+      "enum": [
+        "Engineering",
+        "Sales",
+        "Product",
+        "Manufacturing",
+        "Quality",
+        "Operations",
+        "Executive"
+      ]
+    },
+    "npd_stage": {
+      "type": "string",
+      "description": "Stage in NPD lifecycle.",
+      "enum": [
+        "Discover",
+        "Define",
+        "Design",
+        "Develop",
+        "Validate",
+        "Launch",
+        "Sustain"
+      ]
+    },
+    "use_case": {
+      "type": "string",
+      "description": "Operational context where the prompt is executed.",
+      "minLength": 8,
+      "maxLength": 180
+    },
+    "output_type": {
+      "type": "string",
+      "description": "Expected output artifact type.",
+      "enum": [
+        "Technical Brief",
+        "Decision Memo",
+        "Risk Register",
+        "FMEA Draft",
+        "Test Plan",
+        "Specification",
+        "BOM Recommendation",
+        "Process Sheet",
+        "Sales Narrative",
+        "Competitive Summary",
+        "Action Plan"
+      ]
+    },
+    "complexity": {
+      "type": "string",
+      "description": "Execution complexity tier.",
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "time_to_execute": {
+      "type": "integer",
+      "description": "Expected execution time in minutes.",
+      "minimum": 1,
+      "maximum": 240
+    },
+    "confidence": {
+      "type": "integer",
+      "description": "Operator confidence score (1-5).",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "value": {
+      "type": "integer",
+      "description": "Business value score (1-5).",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Why this prompt exists and what decision it accelerates.",
+      "minLength": 20,
+      "maxLength": 800
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Prompt template body used for execution.",
+      "minLength": 40,
+      "maxLength": 12000
+    },
+    "variables": {
+      "type": "array",
+      "description": "Input variable definitions required by prompt.",
+      "minItems": 1,
+      "maxItems": 30,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/variable"
+      }
+    },
+    "expected_output": {
+      "type": "string",
+      "description": "Structured expectation for generated output.",
+      "minLength": 20,
+      "maxLength": 2000
+    },
+    "coaching_notes": {
+      "type": "string",
+      "description": "Execution guidance to improve output consistency.",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "failure_modes": {
+      "type": "array",
+      "description": "Known ways output can fail quality/fit criteria.",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 8,
+        "maxLength": 300
+      }
+    },
+    "follow_up_prompts": {
+      "type": "array",
+      "description": "Next-step prompts to continue workflow.",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 8,
+        "maxLength": 300
+      }
+    }
+  },
+  "$defs": {
+    "variable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "example"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Variable key used in template placeholders.",
+          "pattern": "^[a-z][a-z0-9_]{1,62}$",
+          "minLength": 2,
+          "maxLength": 63
+        },
+        "description": {
+          "type": "string",
+          "description": "What the operator should provide for this variable.",
+          "minLength": 8,
+          "maxLength": 300
+        },
+        "example": {
+          "type": "string",
+          "description": "Representative value for the variable.",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    }
+  }
+}
