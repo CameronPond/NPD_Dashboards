@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMI Prompt Execution System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="telemetry-header">
+    <div class="brand-block">
+      <div class="system-name">IMI Prompt Execution System</div>
+      <div class="system-sub">Industrial Magnetics Incorporated · Command Interface</div>
+    </div>
+    <div class="telemetry-block">
+      <div class="telemetry-item">
+        <span class="label">Total Prompts</span>
+        <span class="value" id="telemetryTotal">0</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="label">Visible</span>
+        <span class="value" id="telemetryVisible">0</span>
+      </div>
+      <div class="telemetry-item status-item">
+        <span class="label">System Status</span>
+        <span class="value status-ready" id="telemetryStatus">READY</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="left-column">
+      <section class="panel category-panel">
+        <div class="panel-head">
+          <h2>Categories</h2>
+        </div>
+        <div id="categoryGrid" class="category-grid"></div>
+      </section>
+
+      <section class="panel filter-panel">
+        <div class="panel-head">
+          <h2>Filter Strip</h2>
+          <button class="ghost-btn" id="clearFiltersBtn" type="button">Clear Filters</button>
+        </div>
+        <div class="filter-grid">
+          <label>
+            <span>Search</span>
+            <input id="searchInput" type="text" placeholder="Search title, use case, variables..." />
+          </label>
+          <label>
+            <span>Department</span>
+            <select id="departmentFilter"></select>
+          </label>
+          <label>
+            <span>NPD Stage</span>
+            <select id="stageFilter"></select>
+          </label>
+          <label>
+            <span>Complexity</span>
+            <select id="complexityFilter"></select>
+          </label>
+          <label>
+            <span>Value</span>
+            <select id="valueFilter"></select>
+          </label>
+          <label>
+            <span>Confidence</span>
+            <select id="confidenceFilter"></select>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel matrix-panel">
+        <div class="panel-head">
+          <h2>Prompt Matrix</h2>
+          <div id="matrixSummary" class="summary-text"></div>
+        </div>
+        <div class="matrix-wrap">
+          <table class="prompt-matrix">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Department</th>
+                <th>NPD Stage</th>
+                <th>Use Case</th>
+                <th>Output Type</th>
+                <th>Complexity</th>
+                <th>Time</th>
+                <th>Confidence</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody id="matrixBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <aside class="panel detail-panel" id="detailPanel"></aside>
+  </main>
+
+  <script src="app-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
