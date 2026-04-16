@@ -1,15 +1,17 @@
 :root {
-  --bg0: #0b0f14;
-  --bg1: #121923;
-  --bg2: #171f2b;
-  --bg3: #1d2635;
-  --line: #293449;
-  --line-hi: #3b4d6d;
-  --text: #e3e9f4;
-  --text-dim: #93a0b8;
-  --amber: #e6a33b;
-  --amber-soft: rgba(230, 163, 59, 0.16);
-  --ok: #33d17a;
+  --bg0: #0a0f15;
+  --bg1: #131b27;
+  --bg2: #1b2433;
+  --bg3: #222e40;
+  --line: #36465e;
+  --line-hi: #4d6486;
+  --text: #f3f7ff;
+  --text-dim: #c1cee2;
+  --text-soft: #9dafca;
+  --amber: #ffb347;
+  --amber-soft: rgba(255, 179, 71, 0.2);
+  --ok: #48e08e;
+  --surface-glow: rgba(93, 126, 172, 0.12);
   --mono: "JetBrains Mono", "Consolas", "Menlo", monospace;
   --sans: "Inter", "Segoe UI", "Roboto", system-ui, sans-serif;
 }
@@ -22,13 +24,15 @@ html, body {
   background: var(--bg0);
   color: var(--text);
   font-family: var(--sans);
+  font-size: 14px;
   min-height: 100%;
 }
 
 .telemetry-header {
   height: 68px;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--bg1), var(--bg0));
+  background: linear-gradient(180deg, #172132, #0b1017);
+  box-shadow: inset 0 -1px 0 var(--line-hi);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,14 +44,15 @@ html, body {
 }
 
 .brand-block .system-name {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  color: #ffffff;
 }
 
 .brand-block .system-sub {
   font-size: 11px;
-  color: var(--text-dim);
+  color: var(--text-soft);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -60,7 +65,7 @@ html, body {
 
 .telemetry-item {
   border: 1px solid var(--line);
-  background: var(--bg1);
+  background: #182131;
   min-width: 108px;
   padding: 6px 10px;
 }
@@ -68,7 +73,7 @@ html, body {
 .telemetry-item .label {
   display: block;
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-soft);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -78,6 +83,7 @@ html, body {
   margin-top: 3px;
   font-family: var(--mono);
   font-size: 15px;
+  color: #ffffff;
 }
 
 .status-ready { color: var(--ok); }
@@ -99,12 +105,13 @@ html, body {
 
 .panel {
   border: 1px solid var(--line);
-  background: var(--bg1);
+  background: linear-gradient(180deg, #172131, #141d2a);
+  box-shadow: inset 0 1px 0 var(--surface-glow);
 }
 
 .panel-head {
   border-bottom: 1px solid var(--line);
-  padding: 8px 10px;
+  padding: 9px 11px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -117,11 +124,12 @@ html, body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-dim);
+  font-weight: 700;
 }
 
 .summary-text {
   font-size: 11px;
-  color: var(--text-dim);
+  color: var(--text-soft);
 }
 
 .category-grid {
@@ -133,27 +141,33 @@ html, body {
 
 .category-card {
   border: 1px solid var(--line);
-  background: var(--bg2);
+  background: #1c2737;
   padding: 8px;
   cursor: pointer;
+  text-align: left;
 }
 
-.category-card:hover { border-color: var(--line-hi); }
+.category-card:hover {
+  border-color: #6784ad;
+  background: #233147;
+}
 
 .category-card.active {
   border-color: var(--amber);
-  background: var(--amber-soft);
+  background: linear-gradient(180deg, rgba(255, 179, 71, 0.27), rgba(255, 179, 71, 0.15));
+  box-shadow: 0 0 0 1px rgba(255, 179, 71, 0.28) inset;
 }
 
 .category-name {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   margin-bottom: 4px;
+  color: #ffffff;
 }
 
 .category-meta {
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-soft);
 }
 
 .category-desc {
@@ -178,28 +192,31 @@ html, body {
 
 .filter-grid span {
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-soft);
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 input, select {
   width: 100%;
-  border: 1px solid var(--line);
-  background: var(--bg2);
+  border: 1px solid #4a5f7f;
+  background: #1a2637;
   color: var(--text);
   padding: 6px 7px;
   font-size: 12px;
+  border-radius: 2px;
 }
 
 input:focus, select:focus {
   outline: none;
   border-color: var(--amber);
+  box-shadow: 0 0 0 1px rgba(255, 179, 71, 0.3);
 }
 
 .ghost-btn {
-  border: 1px solid var(--line-hi);
-  background: transparent;
+  border: 1px solid #5f789f;
+  background: #1a2637;
   color: var(--text-dim);
   font-size: 11px;
   padding: 4px 8px;
@@ -219,13 +236,13 @@ input:focus, select:focus {
 .prompt-matrix {
   width: 100%;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .prompt-matrix th,
 .prompt-matrix td {
   border-bottom: 1px solid var(--line);
-  padding: 5px 6px;
+  padding: 6px 7px;
   text-align: left;
   vertical-align: top;
 }
@@ -233,25 +250,34 @@ input:focus, select:focus {
 .prompt-matrix th {
   position: sticky;
   top: 0;
-  background: var(--bg2);
+  background: #27364d;
   font-size: 10px;
-  color: var(--text-dim);
+  color: #dbe7f8;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   z-index: 2;
+  border-bottom: 1px solid #5b769f;
 }
 
 .prompt-matrix tr {
   height: 32px;
   cursor: pointer;
+  background: #162131;
 }
 
-.prompt-matrix tr:hover { background: rgba(255, 255, 255, 0.03); }
-.prompt-matrix tr.active { background: var(--amber-soft); }
+.prompt-matrix tr:hover { background: #223248; }
+.prompt-matrix tr.active {
+  background: linear-gradient(180deg, rgba(255, 179, 71, 0.24), rgba(255, 179, 71, 0.14));
+  box-shadow: inset 3px 0 0 var(--amber);
+}
+
+.prompt-matrix td {
+  color: #e8f0fc;
+}
 
 .empty-row td {
   text-align: center;
-  color: var(--text-dim);
+  color: var(--text-soft);
   padding: 12px;
 }
 
@@ -263,7 +289,8 @@ input:focus, select:focus {
 
 .detail-title {
   margin: 0 0 8px;
-  font-size: 18px;
+  font-size: 19px;
+  color: #ffffff;
 }
 
 .tag-row {
@@ -277,9 +304,10 @@ input:focus, select:focus {
   border: 1px solid var(--line-hi);
   padding: 2px 6px;
   font-size: 10px;
-  color: var(--text-dim);
+  color: #e6eefc;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  background: #202d41;
 }
 
 .section {
@@ -294,13 +322,15 @@ input:focus, select:focus {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-dim);
+  font-weight: 700;
 }
 
 .section p,
 .section li {
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.45;
+  color: #e9f1fd;
 }
 
 .section ul { margin: 0; padding-left: 18px; }
@@ -308,9 +338,10 @@ input:focus, select:focus {
 .prompt-block {
   white-space: pre-wrap;
   font-family: var(--mono);
-  font-size: 11px;
-  background: var(--bg2);
-  border: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.5;
+  background: #1b2738;
+  border: 1px solid #4b617f;
   padding: 8px;
 }
 
